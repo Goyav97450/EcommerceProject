@@ -1,14 +1,36 @@
 package fr.adaming.model;
 
-public class Categorie {
+import java.io.Serializable;
+import java.util.List;
 
-	//Attributs
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "categories")
+public class Categorie implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	// Attributs
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_ca")
 	private long idCategorie;
 	private String nomCategorie;
 	private byte photo;
 	private String description;
-	
-	//Constructeur
+
+	// Transformation de l'association UML en Java
+	@OneToMany(mappedBy = "pr")
+	private List<Produit> listeProduits;
+
+	// Constructeurs
 	public Categorie(long idCategorie, String nomCategorie, byte photo, String description) {
 		super();
 		this.idCategorie = idCategorie;
@@ -28,7 +50,7 @@ public class Categorie {
 		super();
 	}
 
-	//Getters and Setters
+	// Getters and Setters
 	public long getIdCategorie() {
 		return idCategorie;
 	}
@@ -60,8 +82,20 @@ public class Categorie {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-	
-	
+
+	public List<Produit> getListeProduits() {
+		return listeProduits;
+	}
+
+	public void setListeProduits(List<Produit> listeProduits) {
+		this.listeProduits = listeProduits;
+	}
+
+	// toString
+	@Override
+	public String toString() {
+		return "Categorie [idCategorie=" + idCategorie + ", nomCategorie=" + nomCategorie + ", photo=" + photo
+				+ ", description=" + description + "]";
+	}
+
 }
