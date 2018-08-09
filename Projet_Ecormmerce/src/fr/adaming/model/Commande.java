@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="commandes")
@@ -21,6 +23,7 @@ public class Commande implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_co")
 	private Long idCommande;
+	@Temporal(TemporalType.DATE)
 	private Date dateCommande;
 	
 	//Transormation de l'association UML en JAVA
