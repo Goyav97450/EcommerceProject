@@ -5,7 +5,7 @@
 	<persistence-unit name="Projet_Ecormmerce"
 		transaction-type="JTA">
 		<!-- Déclarer le datasource -->
-		<jta-data-source>java:/DbeC</jta-data-source>
+		<jta-data-source>java:/DBeC</jta-data-source>
 
 		<!-- Enumérer les classes persistantes -->
 		<class>fr.adaming.model.Categorie</class>
