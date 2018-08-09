@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Accueil</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem value="Accueil" url="accueil.xhtml" />
+			<p:menuitem value="Login" url="login.xhtml" />
+			<p:menuitem value="Ajouter Produit" url="ajoutProduit.xhtml"/>
+		</p:breadCrumb>
+	</h:form>
+
+	<h:form>
+		<h:panelGrid columns="2">
+		Designation: <h:inputText value="#{prMB.pr.designation}"></h:inputText>
+		Description: <h:inputText value="#{prMB.pr.description}"></h:inputText>
+		Quantite: <h:inputText value="#{prMB.pr.quantite}"></h:inputText>
+		Prix: <h:inputText value="#{prMB.pr.prix}"></h:inputText>
+		Categorie: <h:inputText value="#{prMB.ca.idCategorie}"></h:inputText>
+		<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="false"
+           update="messages" sizeLimit="100000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+		
+			<h:commandButton value="Connexion" action="#{prMB.addProduit}"></h:commandButton>
+		</h:panelGrid>
+	</h:form>
+
+<h1 style="color: red; text-align: right">
+<h:messages/>
+</h1>
+
+</h:body>
+
+</html>
