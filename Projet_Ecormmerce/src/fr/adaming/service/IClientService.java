@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.adaming.dao;
+package fr.adaming.service;
 
 import java.util.List;
 
@@ -14,13 +14,12 @@ import fr.adaming.model.Produit;
 
 /**
  * @author Thibault
- * Interface Dao des méthodes relier aux clients
  * L'annotation @Local permet au conteneur EJB de comprendre que les classes implémentant cette interface
  * seront des EJB session avec une portée <i>locale</i>
  */
 @Local
-public interface IClientDao {
-	
+public interface IClientService {
+
 	/**<b>getAllCategorie</b>
 	 * Cette méthode permet à un Client de récupérer la liste des catégories depuis la DB
 	 * @return la liste des catégories présentent dans la DB
