@@ -10,29 +10,35 @@
 	<title>Accueil</title>
 </h:head>
 <h:body>
-	<h:form>
-		<p:breadCrumb>
-			<p:menuitem value="Accueil" url="accueil.xhtml" />
-			<p:menuitem value="Login" url="login.xhtml" />
+<h:form>
+		<p:menubar>
+			<p:menuitem value="Accueil" url="accueil.xhtml"/>
+			<p:menuitem value="Login" url="login.xhtml"/>
 			<p:menuitem value="Ajouter Produit" url="ajoutProduit.xhtml"/>
-		</p:breadCrumb>
+			<p:menuitem value="Supprimer Produit" url="deleteProduit.xhtml"/>
+			<p:menuitem value="Rechercher Produit" url="rechercherProduit.xhtml"/>
+		</p:menubar>
 	</h:form>
 
-	<h:form>
+	<h:form enctype="multipart/form-data">
 		<h:panelGrid columns="2">
 		Designation: <h:inputText value="#{prMB.pr.designation}"></h:inputText>
 		Description: <h:inputText value="#{prMB.pr.description}"></h:inputText>
 		Quantite: <h:inputText value="#{prMB.pr.quantite}"></h:inputText>
 		Prix: <h:inputText value="#{prMB.pr.prix}"></h:inputText>
 		Categorie: <h:inputText value="#{prMB.ca.idCategorie}"></h:inputText>
-		
+			<p:fileUpload value="#{uPF.uploadedFile}" mode="simple"
+				skinSimple="true" />
+			<p:commandButton value="Submit" ajax="false"
+				actionListener="#{uPF.upload}" disabled="true" />
+
 			<h:commandButton value="Connexion" action="#{prMB.addProduit}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>
 
-<h1 style="color: red; text-align: right">
-<h:messages/>
-</h1>
+	<h1 style="color: red; text-align: right">
+		<h:messages />
+	</h1>
 
 </h:body>
 

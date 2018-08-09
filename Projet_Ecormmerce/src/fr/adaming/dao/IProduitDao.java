@@ -31,4 +31,23 @@ public interface IProduitDao {
 	 */
 	public List<Produit> getAllProduit();
 
+	/**
+	 * <b>deleteProduit</b> Cette méthode permet à un admin de supprimer un
+	 * produit de la base de données
+	 * 
+	 * @param le
+	 *            produit qu'on veut supprimer de la base de données
+	 * @return un int généré par la requête pour confirmer la suppression
+	 */
+	public int deleteProduit(Produit pr);
+
+	/**
+	 * <b>getByIdProduit</b> Cette méthode permet à un admin de chercher un
+	 * produit spécifique dans la base de donnée par son identifiant
+	 * 
+	 * @param le
+	 *            produit qu'on recherche
+	 * @return le produit correspondant à notre paramètre de recherche
+	 */
+	public Produit getByIdProduit(Produit pr);
 }

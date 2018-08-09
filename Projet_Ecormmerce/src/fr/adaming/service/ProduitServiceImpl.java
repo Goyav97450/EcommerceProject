@@ -28,4 +28,15 @@ public class ProduitServiceImpl implements IProduitService {
 		return prDao.getAllProduit();
 	}
 
+	@Override
+	public int deleteProduitService(Produit pr) {
+		
+		return prDao.deleteProduit(pr);
+	}
+
+	@Override
+	public Produit getByIdProduitService(Produit pr) {
+		return prDao.getByIdProduit(pr);
+	}
+
 }
