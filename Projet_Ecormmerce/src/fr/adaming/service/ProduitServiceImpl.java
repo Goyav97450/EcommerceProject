@@ -39,4 +39,9 @@ public class ProduitServiceImpl implements IProduitService {
 		return prDao.getByIdProduit(pr);
 	}
 
+	@Override
+	public int updateProduitService(Produit pr) {
+		return prDao.updateProduit(pr);
+	}
+
 }

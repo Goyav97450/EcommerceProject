@@ -152,7 +152,7 @@ public class ProduitManagedBean implements Serializable {
 			listeProduit = newListeProduit;
 			return "accueilAdmin";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La supression a échoué."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression a échoué."));
 			return "deleteProduit";
 		}
 
@@ -167,8 +167,27 @@ public class ProduitManagedBean implements Serializable {
 			return "accueilAdmin";
 
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produit introuvable"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Categorie introuvable"));
 			return "rechercherProduit";
+		}
+
+	}
+
+	public String updateProduit() {
+		this.pr.setPhoto(file.getContents());
+		int verif = prService.updateProduitService(this.pr);
+
+		if (verif!=0) {
+			// récupérer la nouvelle liste de la BD
+			List<Produit> newListeProduit = prService.getAllProduitService();
+
+			// mettre à jour la liste dans l'attribut du MB
+			listeProduit = newListeProduit;
+			return "accueilAdmin";
+
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Modification echouée"));
+			return "updateProduit";
 		}
 
 	}

@@ -52,11 +52,11 @@ public class ProduitDaoImpl implements IProduitDao {
 		Query query = em.createQuery(reqListProduit);
 
 		List<Produit> listProduit = query.getResultList();
-		
-		for(Produit pr:listProduit){
+
+		for (Produit pr : listProduit) {
 			pr.setImage("data:image/png);base64," + Base64.encodeBase64String(pr.getPhoto()));
 		}
-		
+
 		return listProduit;
 	}
 
@@ -65,7 +65,7 @@ public class ProduitDaoImpl implements IProduitDao {
 		String req = "DELETE FROM Produit as pr WHERE pr.idProduit=:pIdp";
 
 		Query query = em.createQuery(req);
-		
+
 		query.setParameter("pIdp", pr.getIdProduit());
 
 		return query.executeUpdate();
@@ -74,8 +74,28 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public Produit getByIdProduit(Produit pr) {
-		
+
 		return em.find(Produit.class, pr.getIdProduit());
+	}
+
+	@Override
+	public int updateProduit(Produit pr) {
+		// Requête JPQL
+		String req = "UPDATE Produit pr SET pr.description=:pDes, pr.designation=:pDesi, pr.photo=:pPho, pr.prix=:pPrix, pr.quantite=:pQua WHERE pr.idProduit=:pIdp";
+
+		// Récupérer le query
+		Query query = em.createQuery(req);
+
+		// paramètres
+		query.setParameter("pDes", pr.getDescription());
+		query.setParameter("pDesi", pr.getDesignation());
+		query.setParameter("pPho", pr.getPhoto());
+		query.setParameter("pPrix", pr.getPrix());
+		query.setParameter("pQua", pr.getQuantite());
+		query.setParameter("pIdp", pr.getIdProduit());
+
+		int verif = query.executeUpdate();
+		return verif;
 	}
 
 }

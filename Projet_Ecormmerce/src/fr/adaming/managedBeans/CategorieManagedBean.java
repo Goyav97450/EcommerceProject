@@ -28,6 +28,7 @@ public class CategorieManagedBean implements Serializable {
 	private Categorie cat;
 	private UploadedFile file;
 	private List<Categorie> listeCategorie;
+	private boolean indice;
 
 	public CategorieManagedBean() {
 		this.cat = new Categorie();
@@ -45,7 +46,7 @@ public class CategorieManagedBean implements Serializable {
 	/**
 	 * @return the ca
 	 */
-	public Categorie getCa() {
+	public Categorie getCat() {
 		return cat;
 	}
 
@@ -53,7 +54,7 @@ public class CategorieManagedBean implements Serializable {
 	 * @param ca
 	 *            the ca to set
 	 */
-	public void setCa(Categorie cat) {
+	public void setCat(Categorie cat) {
 		this.cat = cat;
 	}
 
@@ -80,16 +81,32 @@ public class CategorieManagedBean implements Serializable {
 	}
 
 	/**
-	 * @param listeCategorie the listeCategorie to set
+	 * @param listeCategorie
+	 *            the listeCategorie to set
 	 */
 	public void setListeCategorie(List<Categorie> listeCategorie) {
 		this.listeCategorie = listeCategorie;
 	}
 
+	/**
+	 * @return the indice
+	 */
+	public boolean isIndice() {
+		return indice;
+	}
+
+	/**
+	 * @param indice
+	 *            the indice to set
+	 */
+	public void setIndice(boolean indice) {
+		this.indice = indice;
+	}
+
 	// Méthodes
 	public String addCategorie() {
 		this.cat.setPhoto(file.getContents());
-		int verif = caService.addCategorieService(cat);
+		int verif = caService.addCategorieService(this.cat);
 
 		if (verif != 0) {
 			// récupérer la nouvelle liste de la BD
@@ -100,9 +117,58 @@ public class CategorieManagedBean implements Serializable {
 			return "accueilAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout a échoué."));
-			return "accueilAdmin";
+			return "ajoutCategorie";
 		}
 
+	}
+
+	public String deleteCategorie() {
+
+		int verif = caService.deleteCategorieService(this.cat);
+
+		if (verif != 0) {
+			// récupérer la nouvelle liste de la BD
+			List<Categorie> newListeCategorie = caService.getAllCategorieService();
+
+			// mettre à jour la liste dans l'attribut du MB
+			listeCategorie = newListeCategorie;
+			return "accueilAdmin";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression a échoué."));
+			return "deleteCategorie";
+		}
+
+	}
+
+	public String rechercherCategorie() {
+		Categorie catFound = caService.getByIdCategorieService(this.cat);
+
+		if (catFound != null) {
+			this.cat = catFound;
+			this.indice = true;
+			return "accueilAdmin";
+
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produit introuvable"));
+			return "rechercherProduit";
+		}
+
+	}
+
+	public String updateCategorie() {
+		this.cat.setPhoto(file.getContents());
+		int verif = caService.updateCategorieService(this.cat);
+		if (verif != 0) {
+			// récupérer la nouvelle liste de la BD
+			List<Categorie> newListeCategorie = caService.getAllCategorieService();
+
+			// mettre à jour la liste dans l'attribut du MB
+			listeCategorie = newListeCategorie;
+			return "accueilAdmin";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La mise à jour a échoué."));
+			return "updateCategorie";
+		}
 	}
 
 }

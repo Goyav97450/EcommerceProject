@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Delete Produit</title>
+	<title>Rechercher Produit</title>
 </h:head>
 <h:body>
 	<h:form>
@@ -27,8 +27,8 @@
 
 	<h:form>
 		<h:panelGrid columns="2">
-		ID produit: <h:inputText value="#{prMB.pr.idProduit}"></h:inputText>
-			<h:commandButton value="Supprimer" action="#{prMB.deleteProduit}"></h:commandButton>
+		ID Categorie: <h:inputText value="#{cAMB.cat.idCategorie}"></h:inputText>
+			<h:commandButton value="Connexion" action="#{cAMB.rechercherCategorie}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>
 

@@ -50,4 +50,11 @@ public interface IProduitDao {
 	 * @return le produit correspondant à notre paramètre de recherche
 	 */
 	public Produit getByIdProduit(Produit pr);
+	
+	/**<b>updateProduit</b>
+	 * Cette méthode permet à un admin de mettre à jour un produit de la base de données
+	 * @param le produit qu'on veut mettre à jour dans la base de données
+	 * @return le produit qu'on a mis à jour dans la base, pour confirmer la mise à jour
+	 */
+	public int updateProduit(Produit pr);
 }

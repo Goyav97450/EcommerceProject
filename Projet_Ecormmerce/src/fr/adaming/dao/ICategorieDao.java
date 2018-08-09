@@ -40,7 +40,7 @@ public interface ICategorieDao {
 	 * @return la categorie qu'on a supprimé de la base, pour confirmer la
 	 *         suppression
 	 */
-	public Categorie deleteCategorie(Categorie pr);
+	public int deleteCategorie(Categorie ca);
 
 	/**
 	 * <b>updateCategorie</b> Cette méthode permet à un admin de mettre à jour
@@ -51,7 +51,7 @@ public interface ICategorieDao {
 	 * @return le produit qu'on a mis à jour dans la base, pour confirmer la
 	 *         mise à jour
 	 */
-	public Categorie updateCategorie(Categorie pr);
+	public int updateCategorie(Categorie ca);
 
 	/**
 	 * <b>getByIdCategorie</b> Cette méthode permet à un admin de chercher une
@@ -61,5 +61,5 @@ public interface ICategorieDao {
 	 *            produit qu'on recherche
 	 * @return le produit correspondant à notre paramètre de recherche
 	 */
-	public Categorie getByIdCategorie(Categorie pr);
+	public Categorie getByIdCategorie(Categorie ca);
 }

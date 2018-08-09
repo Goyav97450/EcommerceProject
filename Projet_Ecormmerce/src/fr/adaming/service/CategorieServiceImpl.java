@@ -24,6 +24,21 @@ public class CategorieServiceImpl implements ICategorieService{
 		public List<Categorie> getAllCategorieService() {
 			return caDao.getAllCategorie();
 		}
+
+		@Override
+		public int deleteCategorieService(Categorie ca) {
+			return caDao.deleteCategorie(ca);
+		}
+
+		@Override
+		public int updateCategorieService(Categorie ca) {
+			return caDao.updateCategorie(ca);
+		}
+
+		@Override
+		public Categorie getByIdCategorieService(Categorie ca) {
+			return caDao.getByIdCategorie(ca);
+		}
 		
 		
 	
