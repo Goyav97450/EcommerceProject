@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
@@ -32,7 +33,8 @@ public class ClientDaoImpl implements IClientDao{
 		//Création d'une requête JPQL
 		String req = "SELECT cat FROM Categorie cat";
 		
-		//Récupération d'une 
+		//Récupération d'une query
+		Query query = em.createQuery(req);
 		
 		return null;
 	}
