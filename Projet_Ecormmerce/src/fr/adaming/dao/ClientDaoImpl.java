@@ -36,7 +36,8 @@ public class ClientDaoImpl implements IClientDao{
 		//Récupération d'une query
 		Query query = em.createQuery(req);
 		
-		return null;
+		//Récupération de la liste		
+		return query.getResultList();
 	}
 
 	public List<Produit> getProdByCategorie(Categorie cat) {
