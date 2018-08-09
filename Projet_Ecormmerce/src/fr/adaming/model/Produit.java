@@ -23,9 +23,10 @@ public class Produit implements Serializable {
 
 	// Attributs
 	/**
-	 * Les attributs de la classe produit. 
-	 * @Id permet d'indiquer l'identifiant clé primaire du produit tel qu'il sera
-	 * dans la base de données. La colonne est renommée id_pr.
+	 * Les attributs de la classe produit.
+	 * 
+	 * @Id permet d'indiquer l'identifiant clé primaire du produit tel qu'il
+	 *     sera dans la base de données. La colonne est renommée id_pr.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,31 +36,40 @@ public class Produit implements Serializable {
 	private String description;
 	private double prix;
 	private int quantite;
-	
+
 	/**
 	 * 
-	 * @Transient evite que l'attribut selectionne ne soit integre a la base de donnees.
+	 * @Transient evite que l'attribut selectionne ne soit integre a la base de
+	 *            donnees.
+	 */
+	@Transient
+	private String image;
+
+	/**
+	 * 
+	 * @Transient evite que l'attribut selectionne ne soit integre a la base de
+	 *            donnees.
 	 */
 	@Transient
 	private boolean selectionne;
-	
+
 	/**
 	 * 
 	 * @Lob permet de confirmer que la photo est une blob dans la base SQL
 	 */
 	@Lob
-	private byte photo;
+	private byte[] photo;
 
 	// Transformation de l'association UML en Java
 	/**
-	 * On indique grâce à ManyToOne la relation entre la Classe Produit
-	 * et la classe Categorie.
+	 * On indique grâce à ManyToOne la relation entre la Classe Produit et la
+	 * classe Categorie.
 	 */
 	@ManyToOne
-	@JoinColumn(name = "ca_id", referencedColumnName = "id_ca")
+	@JoinColumn(name = "ca_id",referencedColumnName = "id_ca")
 	private Categorie ca;
-	
-	@OneToMany(mappedBy="pr")
+
+	@OneToMany(mappedBy = "pr")
 	private List<LigneCommande> listeLignes;
 
 	// Constructeurs
@@ -70,7 +80,7 @@ public class Produit implements Serializable {
 	 *            tous les paramètres de produit y compris son identifiant.
 	 */
 	public Produit(long idProduit, String designation, String description, double prix, int quantite,
-			boolean selectionne, byte photo) {
+			boolean selectionne, byte[] photo) {
 		super();
 		this.idProduit = idProduit;
 		this.designation = designation;
@@ -87,7 +97,8 @@ public class Produit implements Serializable {
 	 * @param regroupe
 	 *            tous les paramètres de produit, sauf son identifiant.
 	 */
-	public Produit(String designation, String description, double prix, int quantite, boolean selectionne, byte photo) {
+	public Produit(String designation, String description, double prix, int quantite, boolean selectionne,
+			byte[] photo) {
 		super();
 		this.designation = designation;
 		this.description = description;
@@ -223,21 +234,17 @@ public class Produit implements Serializable {
 	}
 
 	/**
-	 * Un getter pour l'image du produit
-	 * 
-	 * @return une image representant le produit
+	 * @return the photo
 	 */
-	public byte getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
 	/**
-	 * Un setter pour l'image du produit
-	 * 
-	 * @param l'image
-	 *            representant le produit
+	 * @param photo
+	 *            the photo to set
 	 */
-	public void setPhoto(byte photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 
@@ -260,18 +267,38 @@ public class Produit implements Serializable {
 		this.ca = ca;
 	}
 
-	/** Un getter pour la liste des lignes de commande
+	/**
+	 * Un getter pour la liste des lignes de commande
+	 * 
 	 * @return renvoie les lignes de commande contenant le produit
 	 */
 	public List<LigneCommande> getListeLignes() {
 		return listeLignes;
 	}
 
-	/** Un getter pour la liste des lignes de commande
-	 * @param La ligne de commande à modifier
+	/**
+	 * Un getter pour la liste des lignes de commande
+	 * 
+	 * @param La
+	 *            ligne de commande à modifier
 	 */
 	public void setListeLignes(List<LigneCommande> listeLignes) {
 		this.listeLignes = listeLignes;
+	}
+
+	/**
+	 * @return the image
+	 */
+	public String getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	// ToString

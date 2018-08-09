@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.commons.codec.binary.Base64;
+
 import fr.adaming.model.Produit;
 
 @Stateless
@@ -50,6 +52,11 @@ public class ProduitDaoImpl implements IProduitDao {
 		Query query = em.createQuery(reqListProduit);
 
 		List<Produit> listProduit = query.getResultList();
+		
+		for(Produit pr:listProduit){
+			pr.setImage("data:image/png);base64," + Base64.encodeBase64String(pr.getPhoto()));
+		}
+		
 		return listProduit;
 	}
 

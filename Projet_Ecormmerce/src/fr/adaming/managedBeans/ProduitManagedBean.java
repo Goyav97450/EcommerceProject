@@ -11,6 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.model.UploadedFile;
+
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IProduitService;
@@ -27,7 +29,8 @@ public class ProduitManagedBean implements Serializable {
 	private Produit pr;
 	private Categorie ca;
 	private List<Produit> listeProduit;
-	private boolean indice=false;
+	private boolean indice = false;
+	private UploadedFile file;
 
 	public ProduitManagedBean() {
 		this.pr = new Produit();
@@ -96,15 +99,31 @@ public class ProduitManagedBean implements Serializable {
 	}
 
 	/**
-	 * @param indice the indice to set
+	 * @param indice
+	 *            the indice to set
 	 */
 	public void setIndice(boolean indice) {
 		this.indice = indice;
 	}
 
+	/**
+	 * @return the file
+	 */
+	public UploadedFile getFile() {
+		return file;
+	}
+
+	/**
+	 * @param file
+	 *            the file to set
+	 */
+	public void setFile(UploadedFile file) {
+		this.file = file;
+	}
+
 	// Méthodes
 	public String addProduit() {
-
+		this.pr.setPhoto(file.getContents());
 		int verif = prService.addProduitService(this.pr, ca);
 
 		if (verif != 0) {
@@ -138,20 +157,20 @@ public class ProduitManagedBean implements Serializable {
 		}
 
 	}
-	
-	public String rechercherProduit(){
+
+	public String rechercherProduit() {
 		Produit prFound = prService.getByIdProduitService(this.pr);
-		
-		if(prFound!=null){
-			this.pr=prFound;
-			this.indice=true;
+
+		if (prFound != null) {
+			this.pr = prFound;
+			this.indice = true;
 			return "accueilAdmin";
-			
-		}else {
+
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produit introuvable"));
 			return "rechercherProduit";
 		}
-		
+
 	}
-	
+
 }
