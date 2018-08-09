@@ -41,13 +41,34 @@ public class ClientDaoImpl implements IClientDao{
 	}
 
 	public List<Produit> getProdByCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
-		return null;
+		//Création d'une requête JPQL
+		String req = "SELECT p FROM Produit  WHERE p.ca.idCategorie=:pCat";
+		
+		//Récupération d'une query
+		Query query = em.createQuery(req);
+		
+		//Paramétrage de la query
+		query.setParameter("pCat", cat.getIdCategorie());
+		
+		//Récupération de la liste		
+		return query.getResultList();
 	}
 
 	public List<Produit> getProdByKeyWord(String keyWord) {
-		// TODO Auto-generated method stub
-		return null;
+		//Création d'une requête JPQL
+		String req = "SELECT p FROM Produit  WHERE p.designation LIKE ?1 OR p.description LIKE ?2";
+		
+		//Récupération d'une query
+		Query query = em.createQuery(req);
+		
+		//Paramétrage de la query
+		//Passage de l'entrée en expression like
+		String rech = '%' + keyWord + '%';
+		query.setParameter(1, rech);
+		query.setParameter(2, rech);
+		
+		//Récupération de la liste		
+		return query.getResultList();
 	}
 
 	public int saveClient(Client cl) {
@@ -58,6 +79,21 @@ public class ClientDaoImpl implements IClientDao{
 	public int saveCommande(Commande co) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Categorie getCatByNom(String rech) {
+		//Création d'une requête JPQL
+		String req = "SELECT p FROM Produit  WHERE p.designation LIKE :pNom";
+		
+		//Récupération d'une query
+		Query query = em.createQuery(req);
+		
+		//Paramétrages
+		String nom = '%' + rech + '%';
+		query.setParameter("pNom", nom);
+		
+		return (Categorie) query.getSingleResult();
 	}
 
 	

@@ -54,4 +54,11 @@ public interface IClientDao {
 	 * @return un entier qui vaut 1 si l'ajout a fonctionné et 0 si l'ajout a échoué
 	 */
 	public int saveCommande(Commande co);
+	
+	/**<b>getCatByNom</b>
+	 * Cette méthode permet de récupérer un catégorie par son nom
+	 * @param Nom de la catégorie recherchée
+	 * @return la catégorie correspondant
+	 */
+	public Categorie getCatByNom(String rech);
 }

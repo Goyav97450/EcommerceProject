@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Affichage des produits</title>
+</h:head>
+
+<h:body>
+<h:form>
+<p:outputLabel for="type" value="Type de compte" />
+<p:selectOneRadio id="type" value="#{cptMB.type}">
+	<f:selectItem itemLabel="Mots Clés" itemValue="mot"/>
+	<f:selectItem itemLabel="Catégorie" itemValue="cat"/>
+</p:selectOneRadio>
+<h:inputText value="#{clMB.rech}"/>
+</h:form>
+<h:form id="form">
+    <p:dataTable var="prod" value="#{clMB.listeProd}" paginator="true" rows="10"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{clMB.prod}" id="prodTable" lazy="true">
+        
+        <p:column headerText="Id" sortBy="#{prod.idProduit}" filterBy="#{prod.idProduit}">
+            <h:outputText value="#{prod.idProduit}" />
+        </p:column>
+        <p:column headerText="Designation:" sortBy="#{prod.designation}" filterBy="#{prod.designation}">
+            <h:outputText value="#{prod.designation}" />
+        </p:column>
+        <p:column headerText="Description:" sortBy="#{prod.description}" filterBy="#{prod.description}">
+            <h:outputText value="#{prod.description}" />
+        </p:column>
+        <p:column headerText="Prix:" sortBy="#{prod.prix}" filterBy="#{prod.prix}">
+            <h:outputText value="#{prod.prix}" />
+        </p:column>
+        <p:column headerText="Quantité:" sortBy="#{prod.quantite}" filterBy="#{prod.quantite}">
+            <h:outputText value="#{prod.quantite}" />
+        </p:column>
+        <p:column headerText="Catégorie:" sortBy="#{prod.ca}" filterBy="#{prod.ca}">
+            <h:outputText value="#{prod.ca}" />
+        </p:column>
+    </p:dataTable>
+</h:form>
+</h:body>
+</html>

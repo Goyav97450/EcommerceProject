@@ -33,8 +33,8 @@ public class ClientServiceImpl implements IClientService{
 
 	@Override
 	public List<Produit> getProdByCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return clDao.getProdByCategorie(cat);
 	}
 
 	@Override
@@ -53,5 +53,11 @@ public class ClientServiceImpl implements IClientService{
 	public int saveCommande(Commande co) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Categorie getCatByNom(String rech) {
+		
+		return clDao.getCatByNom(rech);
 	}
 }

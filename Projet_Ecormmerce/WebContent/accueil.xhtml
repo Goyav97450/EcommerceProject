@@ -12,11 +12,35 @@
 <h:body>
 	<h:form>
 		<p:menubar>
-			<p:menuitem value="Accueil" url="accueil.xhtml"/>
-			<p:menuitem value="Login" url="login.xhtml"/>
+			<p:menuitem value="Accueil" url="accueil.xhtml" />
+			<p:menuitem value="Login" url="login.xhtml" />
+			<p:menuitem value="Afficher" url="affProd.xhtml" />
 		</p:menubar>
 	</h:form>
+	<p:dataTable var="cat" value="#{clMB.listeCat}">
+		<p:column headerText="Id">
+			<h:outputText value="#{cat.idCategorie}" />
+		</p:column>
 
+		<p:column headerText="Nom">
+			<h:outputText value="#{cat.nomCategorie}" />
+		</p:column>
+
+		<p:column headerText="Photo">
+			<p:graphicImage value="#{cat.photo}" />
+		</p:column>
+
+		<p:column headerText="Description">
+			<h:outputText value="#{cat.description}" />
+		</p:column>
+		
+		<p:column headerText="">
+			<p:commandLink value="Afficher les produits" action="affProd">
+				<f:setPropertyActionListener value="#{cat}"
+						target="#{clMB.cat}" />
+			</p:commandLink>
+		</p:column>
+	</p:dataTable>
 	<h1>Je suis dans l'accueil principal de l'appli</h1>
 </h:body>
 
