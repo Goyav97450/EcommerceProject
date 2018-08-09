@@ -1,15 +1,16 @@
-package fr.adaming.dao;
+package fr.adaming.service;
 
 import javax.ejb.Local;
 
 import fr.adaming.model.Admin;
 
 /**
- * @author Ewen Fondrillon
- * Interface Dao des méthodes reliées aux fonctionnalités Admin
+ * @author Ewen
+ * L'annotation @Local permet au conteneur EJB de comprendre que les classes implémentant cette interface
+ * seront des EJB session avec une portée <i>locale</i>
  */
 @Local
-public interface IAdminDao {
+public interface IAdminService {
 
 	/**<b>isExist</b>
 	 * Cette méthode permet de vérifier qu'un Admin existe bien dans la base de données
@@ -17,6 +18,6 @@ public interface IAdminDao {
 	 * @param l'Admin dont on cherche à confirmer l'existence
 	 * @return l'Admin dont l'existence est validée.
 	 */
-	public Admin isExist(Admin a);
-
+	public Admin isExistService(Admin a);
+	
 }
