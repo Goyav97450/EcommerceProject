@@ -8,6 +8,9 @@
 
 		<!-- Enumérer les classes persistantes -->
 		<class>fr.adaming.model.Categorie</class>
+		<class>fr.adaming.model.Client</class>
+		<class>fr.adaming.model.Commande</class>
+		
 
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
