@@ -1,10 +1,14 @@
 package fr.adaming.managedBeans;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
@@ -21,9 +25,20 @@ public class ProduitManagedBean implements Serializable {
 	// Attributs
 	private Produit pr;
 	private Categorie ca;
+	private List<Produit> listeProduit;
 
 	public ProduitManagedBean() {
 		this.pr = new Produit();
+		this.ca = new Categorie();
+	}
+
+	// méthode @PostConstruct
+	@PostConstruct
+	public void init() {
+
+		// récupérer la liste des produits
+		listeProduit = prService.getAllProduitService();
+
 	}
 
 	/**
@@ -49,10 +64,26 @@ public class ProduitManagedBean implements Serializable {
 	}
 
 	/**
-	 * @param ca the ca to set
+	 * @param ca
+	 *            the ca to set
 	 */
 	public void setCa(Categorie ca) {
 		this.ca = ca;
+	}
+
+	/**
+	 * @return the listeProduit
+	 */
+	public List<Produit> getListeProduit() {
+		return listeProduit;
+	}
+
+	/**
+	 * @param listeProduit
+	 *            the listeProduit to set
+	 */
+	public void setListeProduit(List<Produit> listeProduit) {
+		this.listeProduit = listeProduit;
 	}
 
 	// Méthodes
@@ -61,8 +92,14 @@ public class ProduitManagedBean implements Serializable {
 		int verif = prService.addProduitService(this.pr, ca);
 
 		if (verif != 0) {
+			// récupérer la nouvelle liste de la BD
+			List<Produit> newListeProduit = prService.getAllProduitService();
+
+			// mettre à jour la liste dans l'attribut du MB
+			listeProduit = newListeProduit;
 			return "accueilAdmin";
 		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout a échoué."));
 			return "accueilAdmin";
 		}
 

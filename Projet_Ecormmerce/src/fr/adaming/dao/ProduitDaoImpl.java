@@ -33,13 +33,24 @@ public class ProduitDaoImpl implements IProduitDao {
 		Query queryNew = em.createQuery(reqNewListProduit);
 
 		List<Produit> newListProduit = queryNew.getResultList();
-		
-		if(oldListProduit.size()!=newListProduit.size()){
+
+		if (oldListProduit.size() != newListProduit.size()) {
 			return 1;
-		}else {
+		} else {
 			return 0;
 		}
 
+	}
+
+	@Override
+	public List<Produit> getAllProduit() {
+		// Requete JPQL pour obtenir la liste des produits
+		String reqListProduit = "SELECT pr FROM Produit as pr";
+
+		Query query = em.createQuery(reqListProduit);
+
+		List<Produit> listProduit = query.getResultList();
+		return listProduit;
 	}
 
 }

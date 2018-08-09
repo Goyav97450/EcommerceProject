@@ -1,6 +1,8 @@
 package fr.adaming.service;
 
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import fr.adaming.model.Categorie;
@@ -24,4 +26,12 @@ public interface IProduitService {
 	 * @return un int généré par la requête pour confirmer l'ajout.
 	 */
 	public int addProduitService(Produit pr, Categorie ca);
+	
+	/**
+	 * <b>getAllProduit</b> Cette méthode permet à un admin de récupérer la
+	 * liste complète des produits.
+	 * 
+	 * @return la liste des produits existants en base de donnée
+	 */
+	public List<Produit> getAllProduitService();
 }

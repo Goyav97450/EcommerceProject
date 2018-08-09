@@ -25,8 +25,6 @@
 		Quantite: <h:inputText value="#{prMB.pr.quantite}"></h:inputText>
 		Prix: <h:inputText value="#{prMB.pr.prix}"></h:inputText>
 		Categorie: <h:inputText value="#{prMB.ca.idCategorie}"></h:inputText>
-		<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="false"
-           update="messages" sizeLimit="100000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 		
 			<h:commandButton value="Connexion" action="#{prMB.addProduit}"></h:commandButton>
 		</h:panelGrid>
