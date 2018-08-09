@@ -57,4 +57,22 @@ public class CategorieDaoImpl implements ICategorieDao {
 		return listCategorie;
 	}
 
+	@Override
+	public Categorie deleteCategorie(Categorie pr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Categorie updateCategorie(Categorie pr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Categorie getByIdCategorie(Categorie pr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -18,30 +18,31 @@
 			<p:menuitem value="S'enregistrer" url="enregistrement.xhtml" />
 		</p:menubar>
 	</h:form>
-	<p:dataTable var="cat" value="#{clMB.listeCat}">
+	<h:form>
+	<p:dataTable var="cat" value="#{cAMB.listeCategorie}">
 		<p:column headerText="Id">
 			<h:outputText value="#{cat.idCategorie}" />
+		</p:column>
+
+		<p:column headerText="Description">
+			<h:outputText value="#{cat.description}" />
 		</p:column>
 
 		<p:column headerText="Nom">
 			<h:outputText value="#{cat.nomCategorie}" />
 		</p:column>
 
-		<p:column headerText="Photo">
-			<p:graphicImage value="#{cat.photo}" />
-		</p:column>
-
-		<p:column headerText="Description">
-			<h:outputText value="#{cat.description}" />
+		<p:column headerText="Categorie">
+			<h:graphicImage value="#{cat.image}" width="100px" height="100px" />
 		</p:column>
 		
 		<p:column headerText="">
 			<p:commandLink value="Afficher les produits" action="affProd">
-				<f:setPropertyActionListener value="#{cat}"
-						target="#{clMB.cat}" />
+				<f:setPropertyActionListener value="#{cat}" target="#{clMB.cat}" />
 			</p:commandLink>
 		</p:column>
 	</p:dataTable>
+	</h:form>
 	<h1>Je suis dans l'accueil principal de l'appli</h1>
 </h:body>
 

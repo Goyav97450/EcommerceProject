@@ -25,12 +25,12 @@ public class CategorieManagedBean implements Serializable {
 	private ICategorieService caService;
 
 	// Attributs
-	private Categorie ca;
+	private Categorie cat;
 	private UploadedFile file;
 	private List<Categorie> listeCategorie;
 
 	public CategorieManagedBean() {
-		this.ca = new Categorie();
+		this.cat = new Categorie();
 	}
 
 	// méthode @PostConstruct
@@ -46,15 +46,15 @@ public class CategorieManagedBean implements Serializable {
 	 * @return the ca
 	 */
 	public Categorie getCa() {
-		return ca;
+		return cat;
 	}
 
 	/**
 	 * @param ca
 	 *            the ca to set
 	 */
-	public void setCa(Categorie ca) {
-		this.ca = ca;
+	public void setCa(Categorie cat) {
+		this.cat = cat;
 	}
 
 	/**
@@ -88,8 +88,8 @@ public class CategorieManagedBean implements Serializable {
 
 	// Méthodes
 	public String addCategorie() {
-		this.ca.setPhoto(file.getContents());
-		int verif = caService.addCategorieService(ca);
+		this.cat.setPhoto(file.getContents());
+		int verif = caService.addCategorieService(cat);
 
 		if (verif != 0) {
 			// récupérer la nouvelle liste de la BD

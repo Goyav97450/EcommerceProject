@@ -27,14 +27,14 @@ public class ProduitManagedBean implements Serializable {
 
 	// Attributs
 	private Produit pr;
-	private Categorie ca;
+	private Categorie cat;
 	private List<Produit> listeProduit;
 	private boolean indice = false;
 	private UploadedFile file;
 
 	public ProduitManagedBean() {
 		this.pr = new Produit();
-		this.ca = new Categorie();
+		this.cat = new Categorie();
 	}
 
 	// méthode @PostConstruct
@@ -65,15 +65,15 @@ public class ProduitManagedBean implements Serializable {
 	 * @return the ca
 	 */
 	public Categorie getCa() {
-		return ca;
+		return cat;
 	}
 
 	/**
 	 * @param ca
 	 *            the ca to set
 	 */
-	public void setCa(Categorie ca) {
-		this.ca = ca;
+	public void setCa(Categorie cat) {
+		this.cat = cat;
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class ProduitManagedBean implements Serializable {
 	// Méthodes
 	public String addProduit() {
 		this.pr.setPhoto(file.getContents());
-		int verif = prService.addProduitService(this.pr, ca);
+		int verif = prService.addProduitService(this.pr, cat);
 
 		if (verif != 0) {
 			// récupérer la nouvelle liste de la BD
