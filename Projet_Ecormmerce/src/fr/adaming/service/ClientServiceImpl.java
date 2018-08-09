@@ -39,14 +39,14 @@ public class ClientServiceImpl implements IClientService{
 
 	@Override
 	public List<Produit> getProdByKeyWord(String keyWord) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return clDao.getProdByKeyWord(keyWord);
 	}
 
 	@Override
 	public int saveClient(Client cl) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return clDao.saveClient(cl);
 	}
 
 	@Override

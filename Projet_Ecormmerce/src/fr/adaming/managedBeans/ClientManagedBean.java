@@ -82,6 +82,11 @@ public class ClientManagedBean implements Serializable{
 	 */
 	public ClientManagedBean() {
 		super();
+		cl = new Client();
+		co = new Commande();
+		prod = new Produit();
+		panier = new Panier();
+		cat = new Categorie();
 	}
 	
 	/**
@@ -240,23 +245,44 @@ public class ClientManagedBean implements Serializable{
 	 * Méthode pour afficher les produits selon le filtre
 	 * @return
 	 */
-	public String affProdByCat () {
+	public String affProd () {
 		
 		switch (type) {
 		case "mot":
+			//Appel de la méthode
 			listeProd = clService.getProdByKeyWord(rech);
 			ind = true;
 			break;
 		case "cat":
 			//Récupération de la catégorie à partir de la DB
 			cat = clService.getCatByNom(rech);
+			//Appel de la méthode
 			listeProd = clService.getProdByCategorie(cat);
 			ind = true;
 			break;
 		default:
+			//Envoie d'un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Vous n'avez pas sélectionné le type de recherche que vous voulez faire"));
 			ind=false;
 			break;
 		}	
 		return "affProd";
-	}	
+	}
+	
+	public String ajoutCl() {
+		//Appel de la méthode
+		int verif = clService.saveClient(cl);
+		
+		if (verif!=0) {
+			//Envoie d'un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'enregestriment s'est bien déroulé, merci"));
+			
+			return "ajoutCl";
+		} else {
+			//Envoie d'un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'enregestriment a échoué veuillez réessayer"));
+			
+			return "ajoutCl";
+		}
+	}
 }

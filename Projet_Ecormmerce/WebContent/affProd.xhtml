@@ -12,17 +12,18 @@
 
 <h:body>
 <h:form>
-<p:outputLabel for="type" value="Type de compte" />
-<p:selectOneRadio id="type" value="#{cptMB.type}">
+<p:outputLabel for="type" value="Rechercher par :" />
+<p:selectOneRadio id="type" value="#{clMB.type}" required="true">
 	<f:selectItem itemLabel="Mots Clés" itemValue="mot"/>
 	<f:selectItem itemLabel="Catégorie" itemValue="cat"/>
 </p:selectOneRadio>
 <h:inputText value="#{clMB.rech}"/>
+<h:commandButton value="Rechercher" action="#{clMB.affProd}"/>
 </h:form>
 <h:form id="form">
     <p:dataTable var="prod" value="#{clMB.listeProd}" paginator="true" rows="10"
                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{clMB.prod}" id="prodTable" lazy="true">
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{clMB.prod}" id="prodTable" lazy="true" rendered="#{clMB.ind}">
         
         <p:column headerText="Id" sortBy="#{prod.idProduit}" filterBy="#{prod.idProduit}">
             <h:outputText value="#{prod.idProduit}" />
@@ -44,5 +45,6 @@
         </p:column>
     </p:dataTable>
 </h:form>
+<h1 style="color: red; text-align: center;"><h:messages/></h1>
 </h:body>
 </html>
