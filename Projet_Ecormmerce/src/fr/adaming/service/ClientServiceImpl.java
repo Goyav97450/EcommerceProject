@@ -79,8 +79,14 @@ public class ClientServiceImpl implements IClientService{
 	}
 
 	@Override
-	public int supprProdPanier(Produit prod) {
-		// TODO Auto-generated method stub
+	public int supprProdPanier(Produit prod, Panier panier) {
+		
+		for(LigneCommande lc: panier.getListeCom()) {
+			if (lc.getPr().getIdProduit()==prod.getIdProduit()) {
+				panier.getListeCom().remove(lc);
+			}
+		}
+		
 		return 0;
 	}
 }

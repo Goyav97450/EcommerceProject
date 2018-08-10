@@ -76,5 +76,5 @@ public interface IClientService {
 	 * @param prod : le produit a supprimé
 	 * @return une entier qui vaut 1 si la suppression a réussi 0 sinon
 	 */
-	public int supprProdPanier (Produit prod);
+	public int supprProdPanier (Produit prod, Panier panier);
 }

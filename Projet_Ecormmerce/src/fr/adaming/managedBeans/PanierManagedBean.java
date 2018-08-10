@@ -6,9 +6,12 @@ package fr.adaming.managedBeans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import fr.adaming.model.Client;
@@ -18,13 +21,13 @@ import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IClientService;
 import fr.adaming.service.IProduitService;
-import fr.adaming.service.ProduitServiceImpl;
 
 /**
  * @author Thibault
  * ManagedBean des activités propres au panier
  */
 @ManagedBean(name="paMB")
+@RequestScoped
 public class PanierManagedBean {
 	/**
 	 * Transformation de l'association UML en JAVA
@@ -69,8 +72,13 @@ public class PanierManagedBean {
 		this.co = new Commande();
 		this.prod = new Produit();
 		this.lc = new LigneCommande();
+		this.panier = new Panier();
 	}
 	
+	@PostConstruct
+	public void init () {
+		
+	}
 	/**
 	 * @return the cl
 	 */
@@ -153,14 +161,21 @@ public class PanierManagedBean {
 	
 	//Autres méthodes
 	public String AjoutProdPanier() {
-		panier = (Panier) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("panierCl");
-		List<LigneCommande> oldList = panier.getListeCom();
+		Panier panierSession = (Panier) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("panierCl");
+		
 		List<LigneCommande> newList = new ArrayList<LigneCommande>();
 		
-		for (LigneCommande elem:oldList) {
-			newList.add(elem);
-		}
+		if (panierSession!=null) {
 		
+			if (panierSession.getListeCom()!=null) {
+				List<LigneCommande> oldList = panierSession.getListeCom();
+				
+				System.out.println(oldList.size());
+				for (LigneCommande elem:oldList) {
+					newList.add(elem);
+				}
+			}
+		}
 		Produit prodOut = pService.getByIdProduitService(this.prod);
 		lc = clService.ajoutProdPanier(prodOut, q);
 		
