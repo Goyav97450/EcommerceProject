@@ -11,6 +11,16 @@
 </h:head>
 
 <h:body>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Accueil" url="accueil.xhtml" />
+			<p:menuitem value="Login" url="login.xhtml" />
+			<p:menuitem value="Afficher" url="affProd.xhtml" />
+			<p:menuitem value="S'enregistrer" url="enregistrement.xhtml" />
+			<p:menuitem value="Ajouter des produits à votre panier" url="ajoutPanier.xhtml" />
+			<p:menuitem value="Votre panier" url="panier.xhtml" />
+		</p:menubar>
+	</h:form>
 <h:form>
 <p:outputLabel for="type" value="Rechercher par :" />
 <p:selectOneRadio id="type" value="#{clMB.type}" required="true">

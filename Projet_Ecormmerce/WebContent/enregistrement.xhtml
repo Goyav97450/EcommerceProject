@@ -12,6 +12,16 @@
 
 <h:body>
 	<h:form>
+		<p:menubar>
+			<p:menuitem value="Accueil" url="accueil.xhtml" />
+			<p:menuitem value="Login" url="login.xhtml" />
+			<p:menuitem value="Afficher" url="affProd.xhtml" />
+			<p:menuitem value="S'enregistrer" url="enregistrement.xhtml" />
+			<p:menuitem value="Ajouter des produits à votre panier" url="ajoutPanier.xhtml" />
+			<p:menuitem value="Votre panier" url="panier.xhtml" />
+		</p:menubar>
+	</h:form>
+	<h:form>
 		<h:panelGrid columns="2">
 		Nom :<h:inputText value="#{clMB.cl.nomClient}"/>
 		Adresse :<h:inputText value="#{clMB.cl.adresse}"/>

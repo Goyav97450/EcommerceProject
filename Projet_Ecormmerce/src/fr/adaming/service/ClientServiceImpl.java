@@ -84,6 +84,8 @@ public class ClientServiceImpl implements IClientService{
 		for(LigneCommande lc: panier.getListeCom()) {
 			if (lc.getPr().getIdProduit()==prod.getIdProduit()) {
 				panier.getListeCom().remove(lc);
+				
+				return 1;
 			}
 		}
 		

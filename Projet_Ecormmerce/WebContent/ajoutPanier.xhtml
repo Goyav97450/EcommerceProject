@@ -11,12 +11,22 @@
 </h:head>
 
 <h:body>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Accueil" url="accueil.xhtml" />
+			<p:menuitem value="Login" url="login.xhtml" />
+			<p:menuitem value="Afficher" url="affProd.xhtml" />
+			<p:menuitem value="S'enregistrer" url="enregistrement.xhtml" />
+			<p:menuitem value="Ajouter des produits à votre panier" url="ajoutPanier.xhtml" />
+			<p:menuitem value="Votre panier" url="panier.xhtml" />
+		</p:menubar>
+	</h:form>
 	<h:form enctype="multipart/form-data">
 		<h:panelGrid columns="2">
 		Produit: <h:inputText value="#{paMB.prod.idProduit}"/>
 		Quantité: <h:inputText value="#{paMB.q}"></h:inputText>
 
-			<h:commandButton value="Ajouter" action="#{paMB.AjoutProdPanier}"></h:commandButton>
+			<h:commandButton value="Ajouter" action="#{paMB.ajoutProdPanier}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>
 	<h1 style="color: red; text-align: center;"><h:messages/></h1>

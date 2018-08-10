@@ -160,7 +160,7 @@ public class PanierManagedBean {
 	}
 	
 	//Autres méthodes
-	public String AjoutProdPanier() {
+	public String ajoutProdPanier() {
 		Panier panierSession = (Panier) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("panierCl");
 		
 		List<LigneCommande> newList = new ArrayList<LigneCommande>();
@@ -189,9 +189,34 @@ public class PanierManagedBean {
 			return "panier";
 		} else {
 			//Envoie d'un message d'erreur
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'enregestriment a échoué veuillez réessayer"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout a échoué veuillez réessayer"));
 			
 			return "ajoutPanier";
+		}
+	}
+	
+	public String supprProdPanier () {
+		Panier panierSession = (Panier) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("panierCl");
+		
+		if (panierSession==null | panierSession.getListeCom()==null) {
+			//Envoie d'un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression a échoué veuillez réessayer"));
+			
+			return "panier";
+		} else {
+			int verif = clService.supprProdPanier(prod, panierSession);
+			
+			if (verif!=0) {
+				//Envoie d'un message de confirmation
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression a réussi, vous pouvez continuer vos achats"));
+				
+				return "panier";
+			} else {
+				//Envoie d'un message d'erreur
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression a échoué veuillez réessayer"));
+				
+				return "panier";
+			}
 		}
 	}
 }

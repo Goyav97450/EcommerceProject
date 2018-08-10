@@ -12,7 +12,28 @@
 
 <h:body>
 	<h:form>
+		<p:menubar>
+			<p:menuitem value="Accueil" url="accueil.xhtml" />
+			<p:menuitem value="Login" url="login.xhtml" />
+			<p:menuitem value="Afficher" url="affProd.xhtml" />
+			<p:menuitem value="S'enregistrer" url="enregistrement.xhtml" />
+			<p:menuitem value="Ajouter des produits à votre panier" url="ajoutPanier.xhtml" />
+			<p:menuitem value="Votre panier" url="panier.xhtml" />
+		</p:menubar>
+	</h:form>
+	<h:form enctype="multipart/form-data">
+		<h:panelGrid columns="2">
+		idProduit: <h:inputText value="#{paMB.prod.idProduit}"/>
+
+			<h:commandButton value="Supprimer" action="#{paMB.supprProdPanier}"></h:commandButton>
+		</h:panelGrid>
+	</h:form>
+	<h1 style="color: red; text-align: center;"><h:messages/></h1>
+	<h:form>
 	<p:dataTable var="lc" value="#{sessionScope.panierCl.listeCom}">
+		<p:column headerText="idProduit">
+			<h:outputText value="#{lc.pr.idProduit}" />
+		</p:column>
 		<p:column headerText="Produit">
 			<h:outputText value="#{lc.pr.designation}" />
 		</p:column>
