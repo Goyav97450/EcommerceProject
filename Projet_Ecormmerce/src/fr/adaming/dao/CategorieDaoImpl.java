@@ -68,27 +68,24 @@ public class CategorieDaoImpl implements ICategorieDao {
 		return query.executeUpdate();
 	}
 
-	@Override
-	public int updateCategorie(Categorie ca) {
-		// Requête JPQL
-		String req = "UPDATE Categorie ca SET ca.description=:pDes, ca.photo=:pPho, ca.nomCategorie=:pNom WHERE ca.idCategorie=:pIdca";
 
-		// Récupérer le query
-		Query query = em.createQuery(req);
-
-		// paramètres
-		query.setParameter("pDes", ca.getDescription());
-		query.setParameter("pPho", ca.getPhoto());
-		query.setParameter("pNom", ca.getNomCategorie());
-		query.setParameter("pIdca", ca.getIdCategorie());
-
-		int verif = query.executeUpdate();
-		return verif;
-	}
 
 	@Override
 	public Categorie getByIdCategorie(Categorie ca) {
 		return em.find(Categorie.class , ca.getIdCategorie());
+	}
+
+	@Override
+	public Categorie updateCategorie(Categorie ca) {
+		Categorie caDB=em.find(Categorie.class, ca.getIdCategorie());
+		
+		caDB = ca;
+		
+		em.merge(caDB);
+		
+		Categorie caOut=em.find(Categorie.class, caDB.getIdCategorie());
+		
+		return caOut;
 	}
 
 }

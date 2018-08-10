@@ -52,7 +52,7 @@ public interface ICategorieService {
 	 * @return le produit qu'on a mis à jour dans la base, pour confirmer la
 	 *         mise à jour
 	 */
-	public int updateCategorieService(Categorie ca);
+	public Categorie updateCategorieService(Categorie ca);
 
 	/**
 	 * <b>getByIdCategorie</b> Cette méthode permet à un admin de chercher une

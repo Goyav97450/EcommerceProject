@@ -31,7 +31,7 @@ public class CategorieServiceImpl implements ICategorieService{
 		}
 
 		@Override
-		public int updateCategorieService(Categorie ca) {
+		public Categorie updateCategorieService(Categorie ca) {
 			return caDao.updateCategorie(ca);
 		}
 

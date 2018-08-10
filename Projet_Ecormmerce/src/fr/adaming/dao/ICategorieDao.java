@@ -51,7 +51,7 @@ public interface ICategorieDao {
 	 * @return le produit qu'on a mis à jour dans la base, pour confirmer la
 	 *         mise à jour
 	 */
-	public int updateCategorie(Categorie ca);
+	public Categorie updateCategorie(Categorie ca);
 
 	/**
 	 * <b>getByIdCategorie</b> Cette méthode permet à un admin de chercher une

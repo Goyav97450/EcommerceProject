@@ -157,8 +157,8 @@ public class CategorieManagedBean implements Serializable {
 
 	public String updateCategorie() {
 		this.cat.setPhoto(file.getContents());
-		int verif = caService.updateCategorieService(this.cat);
-		if (verif != 0) {
+		Categorie caOut = caService.updateCategorieService(this.cat);
+		if (caOut!=null) {
 			// récupérer la nouvelle liste de la BD
 			List<Categorie> newListeCat = caService.getAllCategorieService();
 
