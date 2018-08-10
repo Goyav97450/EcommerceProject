@@ -10,6 +10,7 @@ import javax.ejb.Local;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
+import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 
@@ -68,7 +69,7 @@ public interface IClientService {
 	 * @param q : la quantité de produit à ajouter
 	 * @return un entier qui vaut 1 si l'ajout a fonctionné et 0 sinon
 	 */
-	public Panier ajoutProdPanier (Produit prod, int q, Panier panier);
+	public LigneCommande ajoutProdPanier (Produit prod, int q);
 	
 	/**<b>supprProdPanier</b>
 	 * Cette méthode permet de supprimer un produit du panier

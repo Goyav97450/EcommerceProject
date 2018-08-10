@@ -20,6 +20,8 @@ import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IClientService;
+import fr.adaming.service.IProduitService;
+import fr.adaming.service.ProduitServiceImpl;
 
 /**
  * @author Thibault
@@ -45,21 +47,9 @@ public class ClientManagedBean implements Serializable{
 	 */
 	private Commande co;
 	/**
-	 * Attribut commande qui servira à afficher le panier et y rajouter des produits
-	 */
-	private Panier panier;
-	/**
-	 * Attribut produit servant à l'affichage des produits
-	 */
-	private Produit prod;
-	/**
 	 * Attribut catégorie pour récupérer l'input client correspondant au choix de catégorie pour la recherche de produit
 	 */
 	private Categorie cat;
-	/**
-	 * Attribut lignedecommande qui va servir a remplir le panier et a passé commande.
-	 */
-	private LigneCommande lg;
 	/**
 	 * Attribut liste de catégories servant à afficher la liste des catégories
 	 */
@@ -72,10 +62,6 @@ public class ClientManagedBean implements Serializable{
 	 * Attribut qui servira a afficher ou non des tables
 	 */
 	private boolean ind;
-	/**
-	 * Attribut servant au client à choisir la quantité de produit à ajouter au panier
-	 */
-	private int q;
 	/**
 	 * Attribut correpsondant au nom de la catégorie ou le(s) mot(s) clé(s) utilisés par le client pour rechercher des produits
 	 */
@@ -91,8 +77,6 @@ public class ClientManagedBean implements Serializable{
 		super();
 		cl = new Client();
 		co = new Commande();
-		prod = new Produit();
-		panier = new Panier();
 		cat = new Categorie();
 	}
 	
@@ -148,33 +132,6 @@ public class ClientManagedBean implements Serializable{
 		this.cat = cat;
 	}
 
-	/**
-	 * @return affiche le panier et les données contenant dans le panier client
-	 */
-	public Panier getPanier() {
-		return panier;
-	}
-
-	/**
-	 * @param set le panier du MB nécessaire pour stocker les courses d'un client
-	 */
-	public void setPanier(Panier panier) {
-		this.panier = panier;
-	}
-
-	/**
-	 * @return le produit choisie
-	 */
-	public Produit getProd() {
-		return prod;
-	}
-
-	/**
-	 * @param set un produit depusi un input du client
-	 */
-	public void setProd(Produit prod) {
-		this.prod = prod;
-	}
 
 	/**
 	 * @return the type
@@ -190,19 +147,7 @@ public class ClientManagedBean implements Serializable{
 		this.type = type;
 	}
 
-	/**
-	 * @return permet de récupérer une ligne de commande
-	 */
-	public LigneCommande getLg() {
-		return lg;
-	}
 
-	/**
-	 * @param permet de créer une ligne de commande à partir des inputs clients
-	 */
-	public void setLg(LigneCommande lg) {
-		this.lg = lg;
-	}
 
 	/**
 	 * @return un boolean qui servira a afficher ou nom des données sur la vue
@@ -230,20 +175,6 @@ public class ClientManagedBean implements Serializable{
 	 */
 	public void setRech(String rech) {
 		this.rech = rech;
-	}
-
-	/**
-	 * @return affiche la quantité de produit d'une ligne d ecommande
-	 */
-	public int getQ() {
-		return q;
-	}
-
-	/**
-	 * @param permet de set la quantité de produit d'une ligne de commande
-	 */
-	public void setQ(int q) {
-		this.q = q;
 	}
 
 	/**
@@ -321,10 +252,4 @@ public class ClientManagedBean implements Serializable{
 		}
 	}
 	
-	public String AjoutProdPanier() {
-		
-		
-		
-		return "affPanier";
-	}
 }

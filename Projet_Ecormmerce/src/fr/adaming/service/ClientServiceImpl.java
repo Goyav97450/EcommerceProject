@@ -64,16 +64,18 @@ public class ClientServiceImpl implements IClientService{
 	}
 
 	@Override
-	public Panier ajoutProdPanier(Produit prod, int q, Panier panier) {
+	public LigneCommande ajoutProdPanier(Produit prod, int q) {
 		
 		LigneCommande LC = new LigneCommande();
-		LC.setPr(prod);
-		LC.setQuantite(q);
-		LC.setPrix(prod.getPrix()*q);
+		if (q<=prod.getQuantite()) {
+			LC.setPr(prod);
+			LC.setQuantite(q);
+			LC.setPrix(prod.getPrix()*q);
+			return LC;
+		} else {
+			return null;
+		}
 		
-		panier.getListeCom().add(LC);
-		
-		return panier;
 	}
 
 	@Override
