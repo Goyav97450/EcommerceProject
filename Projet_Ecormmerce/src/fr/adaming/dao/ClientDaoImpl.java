@@ -6,7 +6,6 @@ package fr.adaming.dao;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -73,7 +72,6 @@ public class ClientDaoImpl implements IClientDao{
 	}
 
 	public int saveClient(Client cl) {
-		//Application de la méthode persist
 		try {
 			em.persist(cl);
 			return 1;
@@ -83,14 +81,19 @@ public class ClientDaoImpl implements IClientDao{
 	}
 
 	public int saveCommande(Commande co) {
-		// TODO Auto-generated method stub
-		return 0;
+		//Application de la méthode persist
+		try {
+			em.persist(co);
+			return 1;
+		} catch (Exception EntityExistsException){
+			return 0;
+		}
 	}
 
 	@Override
 	public Categorie getCatByNom(String rech) {
 		//Création d'une requête JPQL
-		String req = "SELECT p FROM Produit p WHERE p.designation LIKE :pNom";
+		String req = "SELECT cat FROM Categorie cat WHERE cat.nomCategorie LIKE :pNom";
 		
 		//Récupération d'une query
 		Query query = em.createQuery(req);

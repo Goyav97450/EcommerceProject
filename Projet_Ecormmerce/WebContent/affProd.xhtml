@@ -23,7 +23,7 @@
 <h:form id="form">
     <p:dataTable var="prod" value="#{clMB.listeProd}" paginator="true" rows="10"
                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{clMB.prod}" id="prodTable" lazy="true" rendered="#{clMB.ind}">
+                 rowsPerPageTemplate="5,10,15" id="prodTable" lazy="true" rendered="#{clMB.ind}">
         
         <p:column headerText="Id" sortBy="#{prod.idProduit}" filterBy="#{prod.idProduit}">
             <h:outputText value="#{prod.idProduit}" />
@@ -40,8 +40,8 @@
         <p:column headerText="Quantité:" sortBy="#{prod.quantite}" filterBy="#{prod.quantite}">
             <h:outputText value="#{prod.quantite}" />
         </p:column>
-        <p:column headerText="Catégorie:" sortBy="#{prod.ca}" filterBy="#{prod.ca}">
-            <h:outputText value="#{prod.ca}" />
+        <p:column headerText="Catégorie:" sortBy="#{prod.ca.nomCategorie}" filterBy="#{prod.ca.nomCategorie}">
+            <h:outputText value="#{prod.ca.nomCategorie}" />
         </p:column>
     </p:dataTable>
 </h:form>

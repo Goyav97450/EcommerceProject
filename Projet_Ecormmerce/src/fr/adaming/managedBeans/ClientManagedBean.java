@@ -13,11 +13,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.event.SelectEvent;
-
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
+import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IClientService;
@@ -58,6 +57,10 @@ public class ClientManagedBean implements Serializable{
 	 */
 	private Categorie cat;
 	/**
+	 * Attribut lignedecommande qui va servir a remplir le panier et a passé commande.
+	 */
+	private LigneCommande lg;
+	/**
 	 * Attribut liste de catégories servant à afficher la liste des catégories
 	 */
 	private List<Categorie> listeCat;
@@ -69,6 +72,10 @@ public class ClientManagedBean implements Serializable{
 	 * Attribut qui servira a afficher ou non des tables
 	 */
 	private boolean ind;
+	/**
+	 * Attribut servant au client à choisir la quantité de produit à ajouter au panier
+	 */
+	private int q;
 	/**
 	 * Attribut correpsondant au nom de la catégorie ou le(s) mot(s) clé(s) utilisés par le client pour rechercher des produits
 	 */
@@ -184,6 +191,20 @@ public class ClientManagedBean implements Serializable{
 	}
 
 	/**
+	 * @return permet de récupérer une ligne de commande
+	 */
+	public LigneCommande getLg() {
+		return lg;
+	}
+
+	/**
+	 * @param permet de créer une ligne de commande à partir des inputs clients
+	 */
+	public void setLg(LigneCommande lg) {
+		this.lg = lg;
+	}
+
+	/**
 	 * @return un boolean qui servira a afficher ou nom des données sur la vue
 	 */
 	public boolean isInd() {
@@ -209,6 +230,20 @@ public class ClientManagedBean implements Serializable{
 	 */
 	public void setRech(String rech) {
 		this.rech = rech;
+	}
+
+	/**
+	 * @return affiche la quantité de produit d'une ligne d ecommande
+	 */
+	public int getQ() {
+		return q;
+	}
+
+	/**
+	 * @param permet de set la quantité de produit d'une ligne de commande
+	 */
+	public void setQ(int q) {
+		this.q = q;
 	}
 
 	/**
@@ -284,5 +319,12 @@ public class ClientManagedBean implements Serializable{
 			
 			return "ajoutCl";
 		}
+	}
+	
+	public String AjoutProdPanier() {
+		
+		
+		
+		return "affPanier";
 	}
 }

@@ -10,6 +10,7 @@ import javax.ejb.Local;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
+import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 
 /**
@@ -60,4 +61,19 @@ public interface IClientService {
 	 * @return la catégorie correspondant
 	 */
 	public Categorie getCatByNom(String rech);
+	
+	/**<b>ajoutProdPanier</b>
+	 * Cette méthode permet au client d'ajouter des produits à son panier
+	 * @param prod : le produit à ajouter
+	 * @param q : la quantité de produit à ajouter
+	 * @return un entier qui vaut 1 si l'ajout a fonctionné et 0 sinon
+	 */
+	public Panier ajoutProdPanier (Produit prod, int q, Panier panier);
+	
+	/**<b>supprProdPanier</b>
+	 * Cette méthode permet de supprimer un produit du panier
+	 * @param prod : le produit a supprimé
+	 * @return une entier qui vaut 1 si la suppression a réussi 0 sinon
+	 */
+	public int supprProdPanier (Produit prod);
 }

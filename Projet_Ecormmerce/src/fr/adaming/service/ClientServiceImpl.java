@@ -9,6 +9,8 @@ import fr.adaming.dao.IClientDao;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
+import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 
 /**
@@ -51,13 +53,32 @@ public class ClientServiceImpl implements IClientService{
 
 	@Override
 	public int saveCommande(Commande co) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return clDao.saveCommande(co);
 	}
 
 	@Override
 	public Categorie getCatByNom(String rech) {
 		
 		return clDao.getCatByNom(rech);
+	}
+
+	@Override
+	public Panier ajoutProdPanier(Produit prod, int q, Panier panier) {
+		
+		LigneCommande LC = new LigneCommande();
+		LC.setPr(prod);
+		LC.setQuantite(q);
+		LC.setPrix(prod.getPrix()*q);
+		
+		panier.getListeCom().add(LC);
+		
+		return panier;
+	}
+
+	@Override
+	public int supprProdPanier(Produit prod) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

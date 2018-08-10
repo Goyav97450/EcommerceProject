@@ -26,7 +26,7 @@ public class LigneCommande implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCommande;
 	private int quantite;
-	private int prix;
+	private double prix;
 
 	// Transformation de l'association UML en JAVA
 	/**
@@ -123,7 +123,7 @@ public class LigneCommande implements Serializable {
 	 * 
 	 * @return le prix
 	 */
-	public int getPrix() {
+	public double getPrix() {
 		return prix;
 	}
 
@@ -133,7 +133,7 @@ public class LigneCommande implements Serializable {
 	 * @param le
 	 *            prix à modifier
 	 */
-	public void setPrix(int prix) {
+	public void setPrix(double prix) {
 		this.prix = prix;
 	}
 
