@@ -24,6 +24,7 @@
 			<p:menuitem value="Rechercher Categorie"
 				url="rechercherCategorie.xhtml" />
 			<p:menuitem value="Modifier Categorie" url="updateCategorie.xhtml" />
+			<p:menuitem value="Afficher produits par Catégorie" url="listeProduitByCat.xhtml" />
 		</p:menubar>
 	</h:form>
 
@@ -36,12 +37,12 @@
 		<h:inputText value="#{prMB.rech}" />
 		<h:commandButton value="Rechercher" action="#{prMB.rechercherProduit}" />
 	</h:form>
-	
+
 	<h:form id="form">
 		<p:dataTable var="prod" value="#{prMB.listeProd}" paginator="true"
 			rows="10"
 			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-			rowsPerPageTemplate="5,10,15" id="prodTable" lazy="true"
+			rowsPerPageTemplate="5,10,15" id="tableProdAdmin" lazy="true"
 			rendered="#{prMB.indice}">
 
 			<p:column headerText="Id">
@@ -65,9 +66,13 @@
 			<p:column headerText="Catégorie:">
 				<h:outputText value="#{prod.ca.nomCategorie}" />
 			</p:column>
-			<p:column headerText="">
-				<h:commandLink value="Ajouter aux paniers" action="ajoutPanier">
-					<f:setPropertyActionListener value="#{prod}" target="#{paMB.prod}" />
+			<p:column headerText="Gestion">
+				<h:commandLink value="Supprimer" action="#{prMB.deleteProduit}">
+					<f:setPropertyActionListener value="#{prod.idProduit}" target="#{prMB.pr.idProduit}" />
+				</h:commandLink>
+				<br />
+				<h:commandLink value="Modifier" action="updateProduit">
+					<f:setPropertyActionListener value="#{prod}" target="#{prMB.pr}" />
 				</h:commandLink>
 			</p:column>
 		</p:dataTable>

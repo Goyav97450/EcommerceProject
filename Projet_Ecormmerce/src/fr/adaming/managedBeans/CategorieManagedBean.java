@@ -263,6 +263,17 @@ public class CategorieManagedBean implements Serializable {
 		}
 	}
 
+	public String rechercherProduitsByCat() {
+		// Récupération de la catégorie à partir de la DB
+		cat = caService.getByIdCategorieService(this.cat);
+		// Appel de la méthode
+		this.listeProd = prService.getProdByCategorie(cat);
+		this.indice = true;
+		
+		return "listeProduitByCat";
+		
+	}
+
 	public void changeType(ValueChangeEvent e) {
 		this.catSelector = true;
 		this.idSelector = false;

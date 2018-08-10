@@ -24,6 +24,7 @@
 			<p:menuitem value="Rechercher Categorie"
 				url="rechercherCategorie.xhtml" />
 			<p:menuitem value="Modifier Categorie" url="updateCategorie.xhtml" />
+			<p:menuitem value="Afficher produits par Catégorie" url="listeProduitByCat.xhtml" />
 		</p:menubar>
 	</h:form>
 	
@@ -74,17 +75,16 @@
 			<p:column headerText="Photo">
 				<h:graphicImage value="#{cat.image}" width="100px" height="100px" />
 			</p:column>
-
 			<p:column headerText="Gestion">
-				<p:commandLink value="Supprimer" action="#{cAMB.deleteCategorie}"
+				<h:commandLink value="Supprimer" action="#{cAMB.deleteCategorie}"
 					update="tableCatAdmin">
 					<f:setPropertyActionListener value="#{cat.idCategorie}"
 						target="#{cAMB.cat.idCategorie}" />
-				</p:commandLink>
+				</h:commandLink>
 				<br/>
-				<p:commandLink value="Modifier" action="updateCategorie">
+				<h:commandLink value="Modifier" action="updateCategorie">
 					<f:setPropertyActionListener value="#{cat}" target="#{cAMB.cat}" />
-				</p:commandLink>
+				</h:commandLink>
 			</p:column>
 	</p:dataTable>
 </h:form>
