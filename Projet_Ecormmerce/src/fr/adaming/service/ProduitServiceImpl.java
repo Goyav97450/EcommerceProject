@@ -44,4 +44,14 @@ public class ProduitServiceImpl implements IProduitService {
 		return prDao.updateProduit(pr);
 	}
 
+	@Override
+	public List<Produit> getProdByCategorie(Categorie cat) {
+		return prDao.getProdByCategorie(cat);
+	}
+
+	@Override
+	public List<Produit> getProdByKeyWord(String keyWord) {
+		return prDao.getProdByKeyWord(keyWord);
+	}
+
 }

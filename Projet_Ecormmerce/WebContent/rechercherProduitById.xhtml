@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Rechercher Produit</title>
+	<title>Rechercher Produit Par ID</title>
 </h:head>
 <h:body>
 	<h:form>
@@ -28,16 +28,18 @@
 	</h:form>
 
 	<h:form>
-		<p:outputLabel for="type" value="Rechercher par :" />
-		<p:selectOneRadio id="type" value="#{prMB.type}" required="true">
-			<f:selectItem itemLabel="Mots Clés" itemValue="mot" />
-			<f:selectItem itemLabel="Catégorie" itemValue="cat" />
-		</p:selectOneRadio>
-		<h:inputText value="#{prMB.rech}" />
-		<h:commandButton value="Rechercher" action="#{prMB.rechercherProduit}" />
+		<h:panelGrid columns="2">
+		ID produit: <h:inputText value="#{prMB.pr.idProduit}"></h:inputText>
+			<h:commandButton value="Rechercher"
+				action="#{prMB.rechercherProduitById}"></h:commandButton>
+		</h:panelGrid>
 	</h:form>
-	
-	<h:form id="form">
+
+
+	<h1 class="titreliste2">
+		<h:outputText rendered="#{prMB.indice}" value="Produit Trouvée"></h:outputText>
+	</h1>
+	<h:form id="form" rendered="#{prMB.indice}">
 		<p:dataTable var="prod" value="#{prMB.listeProd}" paginator="true"
 			rows="10"
 			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
@@ -72,9 +74,11 @@
 			</p:column>
 		</p:dataTable>
 	</h:form>
-	<h1 style="color: red; text-align: center;">
+
+	<h1 style="color: red; text-align: right">
 		<h:messages />
 	</h1>
+
 </h:body>
 
 </html>

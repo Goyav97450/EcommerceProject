@@ -9,6 +9,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 
 import org.primefaces.model.UploadedFile;
 
@@ -27,13 +28,16 @@ public class CategorieManagedBean implements Serializable {
 
 	@EJB
 	private IProduitService prService;
-	
+
 	// Attributs
 	private Categorie cat;
 	private UploadedFile file;
 	private List<Categorie> listeCat;
 	private List<Produit> listeProd;
-	private boolean indice;
+	private boolean indice = false;
+	private boolean catSelector = false;
+	private boolean idSelector = true;
+	private String rech;
 
 	public CategorieManagedBean() {
 		this.cat = new Categorie();
@@ -117,10 +121,60 @@ public class CategorieManagedBean implements Serializable {
 	}
 
 	/**
-	 * @param listeProd the listeProd to set
+	 * @param listeProd
+	 *            the listeProd to set
 	 */
 	public void setListeProd(List<Produit> listeProd) {
 		this.listeProd = listeProd;
+	}
+
+	/**
+	 * @return the type
+	 */
+
+	/**
+	 * @return the rech
+	 */
+	public String getRech() {
+		return rech;
+	}
+
+	/**
+	 * @param rech
+	 *            the rech to set
+	 */
+	public void setRech(String rech) {
+		this.rech = rech;
+	}
+
+	/**
+	 * @return the catSelector
+	 */
+	public boolean isCatSelector() {
+		return catSelector;
+	}
+
+	/**
+	 * @param catSelector
+	 *            the catSelector to set
+	 */
+	public void setCatSelector(boolean catSelector) {
+		this.catSelector = catSelector;
+	}
+
+	/**
+	 * @return the idSelector
+	 */
+	public boolean isIdSelector() {
+		return idSelector;
+	}
+
+	/**
+	 * @param idSelector
+	 *            the idSelector to set
+	 */
+	public void setIdSelector(boolean idSelector) {
+		this.idSelector = idSelector;
 	}
 
 	// Méthodes
@@ -171,7 +225,23 @@ public class CategorieManagedBean implements Serializable {
 			return "rechercherCategorie";
 
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produit introuvable"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Categorie introuvable"));
+			return "rechercherCategorie";
+		}
+
+	}
+
+	public String rechercherCategorieParNom() {
+		// Récupération de la catégorie à partir de la DB
+		Categorie catFound = caService.getCatByNom(rech);
+
+		if (catFound != null) {
+			this.cat = catFound;
+			this.indice = true;
+			return "rechercherCategorie";
+
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Categorie introuvable"));
 			return "rechercherCategorie";
 		}
 
@@ -180,7 +250,7 @@ public class CategorieManagedBean implements Serializable {
 	public String updateCategorie() {
 		this.cat.setPhoto(file.getContents());
 		Categorie caOut = caService.updateCategorieService(this.cat);
-		if (caOut!=null) {
+		if (caOut != null) {
 			// récupérer la nouvelle liste de la BD
 			List<Categorie> newListeCat = caService.getAllCategorieService();
 
@@ -191,6 +261,11 @@ public class CategorieManagedBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La mise à jour a échoué."));
 			return "updateCategorie";
 		}
+	}
+
+	public void changeType(ValueChangeEvent e) {
+		this.catSelector = true;
+		this.idSelector = false;
 	}
 
 }

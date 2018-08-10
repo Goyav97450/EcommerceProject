@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import org.apache.commons.codec.binary.Base64;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Stateless
@@ -96,6 +97,42 @@ public class ProduitDaoImpl implements IProduitDao {
 
 		int verif = query.executeUpdate();
 		return verif;
+	}
+
+	public List<Produit> getProdByCategorie(Categorie cat) {
+		try {// Création d'une requête JPQL
+			String req = "SELECT p FROM Produit p WHERE p.ca.idCategorie=:pCat";
+
+			// Récupération d'une query
+			Query query = em.createQuery(req);
+
+			// Paramétrage de la query
+			query.setParameter("pCat", cat.getIdCategorie());
+
+			// Récupération de la liste
+			return query.getResultList();
+		} catch (NullPointerException ex) {
+
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<Produit> getProdByKeyWord(String keyWord) {
+		// Création d'une requête JPQL
+		String req = "SELECT p FROM Produit p WHERE p.designation LIKE ?1 OR p.description LIKE ?2";
+
+		// Récupération d'une query
+		Query query = em.createQuery(req);
+
+		// Paramétrage de la query
+		// Passage de l'entrée en expression like
+		String rech = '%' + keyWord + '%';
+		query.setParameter(1, rech);
+		query.setParameter(2, rech);
+
+		// Récupération de la liste
+		return query.getResultList();
 	}
 
 }

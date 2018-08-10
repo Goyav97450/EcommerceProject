@@ -10,11 +10,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 
 import org.primefaces.model.UploadedFile;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "prMB")
@@ -25,12 +27,17 @@ public class ProduitManagedBean implements Serializable {
 	@EJB
 	private IProduitService prService;
 
+	@EJB
+	private ICategorieService caService;
+
 	// Attributs
 	private Produit pr;
 	private Categorie cat;
 	private List<Produit> listeProd;
 	private boolean indice = false;
 	private UploadedFile file;
+	private String rech;
+	private String type;
 
 	public ProduitManagedBean() {
 		this.pr = new Produit();
@@ -121,6 +128,36 @@ public class ProduitManagedBean implements Serializable {
 		this.file = file;
 	}
 
+	/**
+	 * @return the rech
+	 */
+	public String getRech() {
+		return rech;
+	}
+
+	/**
+	 * @param rech
+	 *            the rech to set
+	 */
+	public void setRech(String rech) {
+		this.rech = rech;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * @param type
+	 *            the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	// Méthodes
 	public String addProduit() {
 		this.pr.setPhoto(file.getContents());
@@ -158,26 +195,51 @@ public class ProduitManagedBean implements Serializable {
 
 	}
 
-	public String rechercherProduit() {
+	public String rechercherProduitById() {
 		Produit prFound = prService.getByIdProduitService(this.pr);
 
 		if (prFound != null) {
 			this.pr = prFound;
 			this.indice = true;
-			return "accueilAdmin";
+			return "rechercherProduitById";
 
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Categorie introuvable"));
-			return "rechercherProduit";
+			return "rechercherProduitById";
 		}
 
+	}
+
+	public String rechercherProduit() {
+
+		switch (type) {
+		case "mot":
+			// Appel de la méthode
+			listeProd = prService.getProdByKeyWord(rech);
+			this.indice = true;
+			break;
+		case "cat":
+			// Récupération de la catégorie à partir de la DB
+			cat = caService.getCatByNom(rech);
+			// Appel de la méthode
+			listeProd = prService.getProdByCategorie(cat);
+			this.indice = true;
+			break;
+		default:
+			// Envoie d'un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Vous n'avez pas sélectionné le type de recherche que vous voulez faire"));
+			this.indice = false;
+			break;
+		}
+		return "rechercherProduit";
 	}
 
 	public String updateProduit() {
 		this.pr.setPhoto(file.getContents());
 		int verif = prService.updateProduitService(this.pr);
 
-		if (verif!=0) {
+		if (verif != 0) {
 			// récupérer la nouvelle liste de la BD
 			List<Produit> newListeProd = prService.getAllProduitService();
 

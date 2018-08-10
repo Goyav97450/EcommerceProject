@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Rechercher Produit</title>
+	<title>Rechercher Catégorie</title>
 </h:head>
 <h:body>
 	<h:form>
@@ -17,6 +17,7 @@
 			<p:menuitem value="Ajouter Produit" url="ajoutProduit.xhtml" />
 			<p:menuitem value="Supprimer Produit" url="deleteProduit.xhtml" />
 			<p:menuitem value="Rechercher Produit" url="rechercherProduit.xhtml" />
+			<p:menuitem value="Rechercher Produit par ID" url="rechercherProduitById.xhtml" />
 			<p:menuitem value="Modifier Produit" url="updateProduit.xhtml" />
 			<p:menuitem value="Ajouter Categorie" url="ajoutCategorie.xhtml" />
 			<p:menuitem value="Supprimer Categorie" url="deleteCategorie.xhtml" />
@@ -25,14 +26,33 @@
 			<p:menuitem value="Modifier Categorie" url="updateCategorie.xhtml" />
 		</p:menubar>
 	</h:form>
-
-	<h:form>
+	
+<h1 class="titreliste">
+		<h:outputText value="Sélection du mode de recherche" />
+	</h1>
+	
+	<h:form styleClass="form-horizontal">
+		<p:selectOneRadio value="#{cAMB.idSelector}" onchange="submit()"
+			valueChangeListener="#{cAMB.changeType}">
+			<f:selectItem itemValue="false" itemLabel="Recherche par nom" />
+			<f:selectItem itemValue="true" itemLabel="Recherche par ID" />
+		</p:selectOneRadio>
+	</h:form>	
+	
+	<h:form rendered="#{cAMB.idSelector}">
 		<h:panelGrid columns="2">
-		ID Categorie: <h:inputText value="#{cAMB.cat.idCategorie}"></h:inputText>
-			<h:commandButton value="Rechercher"
-				action="#{cAMB.rechercherCategorie}"></h:commandButton>
+		ID categorie: <h:inputText value="#{cAMB.cat.idCategorie}"></h:inputText>
+			<h:commandButton value="Rechercher" action="#{cAMB.rechercherCategorie}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>
+
+	<h:form rendered="#{cAMB.catSelector}">
+		<h:panelGrid columns="2">
+		Nom Categorie: <h:inputText value="#{cAMB.rech}"/>
+			<h:commandButton value="Rechercher" action="#{cAMB.rechercherCategorieParNom}"></h:commandButton>
+		</h:panelGrid>
+	</h:form>
+
 
 	<h1 class="titreliste2">
 		<h:outputText rendered="#{cAMB.indice}" value="Categorie Trouvée"></h:outputText>

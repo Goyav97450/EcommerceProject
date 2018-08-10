@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -59,21 +60,19 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public int deleteCategorie(Categorie ca) {
-		try {
 			em.remove(ca);
-			return 1;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return 0;
-
+		return 1;
 	}
 
 	@Override
 	public Categorie getByIdCategorie(Categorie ca) {
-		Categorie caFound = em.find(Categorie.class, ca.getIdCategorie());
-		caFound.setImage("data:image/png;base64," + Base64.encodeBase64String(ca.getPhoto()));
-		return caFound;
+		try{
+			return em.find(Categorie.class, ca.getIdCategorie());
+		}catch (NullPointerException ex) {
+			
+			ex.printStackTrace();
+		}	
+		return null;
 	}
 
 	@Override
@@ -91,7 +90,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public Categorie getCatByNom(String rech) {
-		// Création d'une requête JPQL
+		try{// Création d'une requête JPQL
 		String req = "SELECT cat FROM Categorie cat WHERE cat.nomCategorie LIKE :pNom";
 
 		// Récupération d'une query
@@ -100,10 +99,14 @@ public class CategorieDaoImpl implements ICategorieDao {
 		// Paramétrages
 		String nom = '%' + rech + '%';
 		query.setParameter("pNom", nom);
-		Categorie ca = (Categorie) query.getSingleResult();
-		ca.setImage("data:image/png);base64," + Base64.encodeBase64String(ca.getPhoto()));
 
-		return ca;
+		return (Categorie) query.getSingleResult();
+		
+		}catch (NoResultException ex) {
+			
+			ex.printStackTrace();
+		}	
+		return null;
 	}
 
 }

@@ -43,17 +43,45 @@ public interface IProduitService {
 	 */
 	public int deleteProduitService(Produit pr);
 
-	/**<b>getByIdProduit</b>
-	 * Cette méthode permet à un admin de chercher un produit spécifique dans la base de donnée par son identifiant
-	 * @param le produit qu'on recherche
+	/**
+	 * <b>getByIdProduit</b> Cette méthode permet à un admin de chercher un
+	 * produit spécifique dans la base de donnée par son identifiant
+	 * 
+	 * @param le
+	 *            produit qu'on recherche
 	 * @return le produit correspondant à notre paramètre de recherche
 	 */
 	public Produit getByIdProduitService(Produit pr);
-	
-	/**<b>updateProduit</b>
-	 * Cette méthode permet à un admin de mettre à jour un produit de la base de données
-	 * @param le produit qu'on veut mettre à jour dans la base de données
-	 * @return le produit qu'on a mis à jour dans la base, pour confirmer la mise à jour
+
+	/**
+	 * <b>updateProduit</b> Cette méthode permet à un admin de mettre à jour un
+	 * produit de la base de données
+	 * 
+	 * @param le
+	 *            produit qu'on veut mettre à jour dans la base de données
+	 * @return le produit qu'on a mis à jour dans la base, pour confirmer la
+	 *         mise à jour
 	 */
 	public int updateProduitService(Produit pr);
+
+	/**
+	 * <b>getProdByCategorie</b> Cette méthode permet à un Client de récupérer
+	 * la liste de produits filtrés d'après une catégorie depuis la DB
+	 * 
+	 * @param la
+	 *            catégorie choisie pour filtrer la recherche
+	 * @return la liste des produits appartenant à la catégorie
+	 */
+	public List<Produit> getProdByCategorie(Categorie cat);
+
+	/**
+	 * <b>getProdByKeyWord</b> Cette méthode permet à un Client de récupérer la
+	 * liste des produits filtrés par mots clés
+	 * 
+	 * @param le
+	 *            mot clé utilisé pour filtrer la recherche
+	 * @return la liste de produits contenant les mots clés
+	 */
+	public List<Produit> getProdByKeyWord(String keyWord);
+
 }
