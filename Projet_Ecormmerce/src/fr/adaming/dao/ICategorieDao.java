@@ -62,4 +62,11 @@ public interface ICategorieDao {
 	 * @return le produit correspondant à notre paramètre de recherche
 	 */
 	public Categorie getByIdCategorie(Categorie ca);
+	
+	/**<b>getCatByNom</b>
+	 * Cette méthode permet de récupérer un catégorie par son nom
+	 * @param Nom de la catégorie recherchée
+	 * @return la catégorie correspondant
+	 */
+	public Categorie getCatByNom(String rech);
 }

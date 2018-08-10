@@ -32,8 +32,7 @@
 		Description: <h:inputText value="#{prMB.pr.description}"></h:inputText>
 		Quantite: <h:inputText value="#{prMB.pr.quantite}"></h:inputText>
 		Prix: <h:inputText value="#{prMB.pr.prix}"></h:inputText>
-		Categorie: <h:inputText value="#{prMB.ca.idCategorie}"></h:inputText>
-			<p:fileUpload value="#{prMB.file}" mode="simple" skinSimple="true" />
+		Image:<p:fileUpload value="#{prMB.file}" mode="simple" skinSimple="true" />
 
 			<h:commandButton value="Modifier" action="#{prMB.updateProduit}"></h:commandButton>
 		</h:panelGrid>

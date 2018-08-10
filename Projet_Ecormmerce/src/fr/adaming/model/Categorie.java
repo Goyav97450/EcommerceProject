@@ -3,6 +3,7 @@ package fr.adaming.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,7 +55,7 @@ public class Categorie implements Serializable {
 	 * On indique grâce à OneToMany la relation entre la Classe Ligne Categorie
 	 * et la classe Produit.
 	 */
-	@OneToMany(mappedBy = "ca")
+	@OneToMany(mappedBy = "ca", cascade=CascadeType.REMOVE)
 	private List<Produit> listeProduits;
 
 	// Constructeurs

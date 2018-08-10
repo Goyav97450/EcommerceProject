@@ -15,6 +15,7 @@ import org.primefaces.model.UploadedFile;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "cAMB")
 @RequestScoped
@@ -24,10 +25,14 @@ public class CategorieManagedBean implements Serializable {
 	@EJB
 	private ICategorieService caService;
 
+	@EJB
+	private IProduitService prService;
+	
 	// Attributs
 	private Categorie cat;
 	private UploadedFile file;
 	private List<Categorie> listeCat;
+	private List<Produit> listeProd;
 	private boolean indice;
 
 	public CategorieManagedBean() {
@@ -40,6 +45,7 @@ public class CategorieManagedBean implements Serializable {
 
 		// récupérer la liste des categories
 		listeCat = caService.getAllCategorieService();
+		listeProd = prService.getAllProduitService();
 
 	}
 
@@ -103,6 +109,20 @@ public class CategorieManagedBean implements Serializable {
 		this.indice = indice;
 	}
 
+	/**
+	 * @return the listeProd
+	 */
+	public List<Produit> getListeProd() {
+		return listeProd;
+	}
+
+	/**
+	 * @param listeProd the listeProd to set
+	 */
+	public void setListeProd(List<Produit> listeProd) {
+		this.listeProd = listeProd;
+	}
+
 	// Méthodes
 	public String addCategorie() {
 		this.cat.setPhoto(file.getContents());
@@ -129,8 +149,10 @@ public class CategorieManagedBean implements Serializable {
 		if (verif != 0) {
 			// récupérer la nouvelle liste de la BD
 			List<Categorie> newListeCat = caService.getAllCategorieService();
+			List<Produit> newListeProd = prService.getAllProduitService();
 
 			// mettre à jour la liste dans l'attribut du MB
+			listeProd = newListeProd;
 			listeCat = newListeCat;
 			return "accueilAdmin";
 		} else {
@@ -146,11 +168,11 @@ public class CategorieManagedBean implements Serializable {
 		if (catFound != null) {
 			this.cat = catFound;
 			this.indice = true;
-			return "accueilAdmin";
+			return "rechercherCategorie";
 
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produit introuvable"));
-			return "rechercherProduit";
+			return "rechercherCategorie";
 		}
 
 	}

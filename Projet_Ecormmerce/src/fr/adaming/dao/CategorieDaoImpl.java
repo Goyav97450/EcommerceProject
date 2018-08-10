@@ -59,33 +59,51 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public int deleteCategorie(Categorie ca) {
-		String req = "DELETE FROM Categorie as ca WHERE ca.idCategorie=:pIdca";
+		try {
+			em.remove(ca);
+			return 1;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return 0;
 
-		Query query = em.createQuery(req);
-		
-		query.setParameter("pIdca", ca.getIdCategorie());
-
-		return query.executeUpdate();
 	}
-
-
 
 	@Override
 	public Categorie getByIdCategorie(Categorie ca) {
-		return em.find(Categorie.class , ca.getIdCategorie());
+		Categorie caFound = em.find(Categorie.class, ca.getIdCategorie());
+		caFound.setImage("data:image/png;base64," + Base64.encodeBase64String(ca.getPhoto()));
+		return caFound;
 	}
 
 	@Override
 	public Categorie updateCategorie(Categorie ca) {
-		Categorie caDB=em.find(Categorie.class, ca.getIdCategorie());
-		
+		Categorie caDB = em.find(Categorie.class, ca.getIdCategorie());
+
 		caDB = ca;
-		
+
 		em.merge(caDB);
-		
-		Categorie caOut=em.find(Categorie.class, caDB.getIdCategorie());
-		
+
+		Categorie caOut = em.find(Categorie.class, caDB.getIdCategorie());
+
 		return caOut;
+	}
+
+	@Override
+	public Categorie getCatByNom(String rech) {
+		// Création d'une requête JPQL
+		String req = "SELECT cat FROM Categorie cat WHERE cat.nomCategorie LIKE :pNom";
+
+		// Récupération d'une query
+		Query query = em.createQuery(req);
+
+		// Paramétrages
+		String nom = '%' + rech + '%';
+		query.setParameter("pNom", nom);
+		Categorie ca = (Categorie) query.getSingleResult();
+		ca.setImage("data:image/png);base64," + Base64.encodeBase64String(ca.getPhoto()));
+
+		return ca;
 	}
 
 }

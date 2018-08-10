@@ -20,7 +20,8 @@
 			<p:menuitem value="Modifier Produit" url="updateProduit.xhtml" />
 			<p:menuitem value="Ajouter Categorie" url="ajoutCategorie.xhtml" />
 			<p:menuitem value="Supprimer Categorie" url="deleteCategorie.xhtml" />
-			<p:menuitem value="Rechercher Categorie" url="rechercherCategorie.xhtml" />
+			<p:menuitem value="Rechercher Categorie"
+				url="rechercherCategorie.xhtml" />
 			<p:menuitem value="Modifier Categorie" url="updateCategorie.xhtml" />
 		</p:menubar>
 	</h:form>
@@ -28,13 +29,49 @@
 	<h:form>
 		<h:panelGrid columns="2">
 		ID Categorie: <h:inputText value="#{cAMB.cat.idCategorie}"></h:inputText>
-			<h:commandButton value="Connexion" action="#{cAMB.rechercherCategorie}"></h:commandButton>
+			<h:commandButton value="Rechercher"
+				action="#{cAMB.rechercherCategorie}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>
 
-<h1 style="color: red; text-align: right">
-<h:messages/>
-</h1>
+	<h1 class="titreliste2">
+		<h:outputText rendered="#{cAMB.indice}" value="Categorie Trouvée"></h:outputText>
+	</h1>
+<h:form>
+	<p:dataTable var="cat" value="#{cAMB.cat}" rendered="#{cAMB.indice}" id="tableCatAdmin">
+			<p:column headerText="Id">
+				<h:outputText value="#{cat.idCategorie}" />
+			</p:column>
+
+			<p:column headerText="Description">
+				<h:outputText value="#{cat.description}" />
+			</p:column>
+
+			<p:column headerText="Nom">
+				<h:outputText value="#{cat.nomCategorie}" />
+			</p:column>
+
+			<p:column headerText="Photo">
+				<h:graphicImage value="#{cat.image}" width="100px" height="100px" />
+			</p:column>
+
+			<p:column headerText="Gestion">
+				<p:commandLink value="Supprimer" action="#{cAMB.deleteCategorie}"
+					update="tableCatAdmin">
+					<f:setPropertyActionListener value="#{cat.idCategorie}"
+						target="#{cAMB.cat.idCategorie}" />
+				</p:commandLink>
+				<br/>
+				<p:commandLink value="Modifier" action="updateCategorie">
+					<f:setPropertyActionListener value="#{cat}" target="#{cAMB.cat}" />
+				</p:commandLink>
+			</p:column>
+	</p:dataTable>
+</h:form>
+
+	<h1 style="color: red; text-align: right">
+		<h:messages />
+	</h1>
 
 </h:body>
 

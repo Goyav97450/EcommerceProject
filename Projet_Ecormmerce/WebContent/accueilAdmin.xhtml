@@ -10,6 +10,12 @@
 	<title>Accueil Admin</title>
 </h:head>
 <h:body>
+	<h1 style="color: red; text-align: left">
+		<h:outputText
+			value="Connecté en tant qu'Admin n°#{sessionScope.aMB.a.idAdmin}"
+			rendered="#{sessionScope.aMB.loggedIn}" />
+	</h1>
+
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Accueil" url="accueil.xhtml" />
@@ -20,61 +26,90 @@
 			<p:menuitem value="Modifier Produit" url="updateProduit.xhtml" />
 			<p:menuitem value="Ajouter Categorie" url="ajoutCategorie.xhtml" />
 			<p:menuitem value="Supprimer Categorie" url="deleteCategorie.xhtml" />
-			<p:menuitem value="Rechercher Categorie" url="rechercherCategorie.xhtml" />
+			<p:menuitem value="Rechercher Categorie"
+				url="rechercherCategorie.xhtml" />
 			<p:menuitem value="Modifier Categorie" url="updateCategorie.xhtml" />
 		</p:menubar>
 	</h:form>
 
 	<h1 style="text-align: center">Liste des catégories</h1>
-	<p:dataTable var="ca" value="#{cAMB.listeCat}">
-		<p:column headerText="Id">
-			<h:outputText value="#{ca.idCategorie}" />
-		</p:column>
+	<h:form>
+		<p:dataTable var="cat" value="#{cAMB.listeCat}" id="tableCatAdmin">
+			<p:column headerText="Id">
+				<h:outputText value="#{cat.idCategorie}" />
+			</p:column>
 
-		<p:column headerText="Description">
-			<h:outputText value="#{ca.description}" />
-		</p:column>
+			<p:column headerText="Description">
+				<h:outputText value="#{cat.description}" />
+			</p:column>
 
-		<p:column headerText="Nom">
-			<h:outputText value="#{ca.nomCategorie}" />
-		</p:column>
+			<p:column headerText="Nom">
+				<h:outputText value="#{cat.nomCategorie}" />
+			</p:column>
 
-		<p:column headerText="Photo">
-			<h:graphicImage value="#{ca.image}" width="100px" height="100px" />
-		</p:column>
-	</p:dataTable>
+			<p:column headerText="Photo">
+				<h:graphicImage value="#{cat.image}" width="100px" height="100px" />
+			</p:column>
+
+			<p:column headerText="Gestion">
+				<p:commandLink value="Supprimer" action="#{cAMB.deleteCategorie}"
+					update="tableCatAdmin">
+					<f:setPropertyActionListener value="#{cat.idCategorie}"
+						target="#{cAMB.cat.idCategorie}" />
+				</p:commandLink>
+				<br/>
+				<p:commandLink value="Modifier" action="updateCategorie">
+					<f:setPropertyActionListener value="#{cat}" target="#{cAMB.cat}" />
+				</p:commandLink>
+			</p:column>
+		</p:dataTable>
+	</h:form>
 
 	<h1 style="text-align: center">Liste des produits</h1>
-	<p:dataTable var="pr" value="#{prMB.listeProd}">
-		<p:column headerText="Id">
-			<h:outputText value="#{pr.idProduit}" />
-		</p:column>
+	<h:form>
+		<p:dataTable var="pr" value="#{prMB.listeProd}" id="tableProdAdmin">
+			<p:column headerText="Id">
+				<h:outputText value="#{pr.idProduit}" />
+			</p:column>
 
-		<p:column headerText="Designation">
-			<h:outputText value="#{pr.designation}" />
-		</p:column>
+			<p:column headerText="Designation">
+				<h:outputText value="#{pr.designation}" />
+			</p:column>
 
-		<p:column headerText="Description">
-			<h:outputText value="#{pr.description}" />
-		</p:column>
+			<p:column headerText="Description">
+				<h:outputText value="#{pr.description}" />
+			</p:column>
 
-		<p:column headerText="Prix">
-			<h:outputText value="#{pr.prix}" />
-		</p:column>
+			<p:column headerText="Prix">
+				<h:outputText value="#{pr.prix}" />
+			</p:column>
 
-		<p:column headerText="Quantité">
-			<h:outputText value="#{pr.quantite}" />
-		</p:column>
+			<p:column headerText="Quantité">
+				<h:outputText value="#{pr.quantite}" />
+			</p:column>
 
-		<p:column headerText="Photo">
-			<h:graphicImage value="#{pr.image}" width="100px" height="100px" />
-		</p:column>
-		
-		<p:column headerText="Categorie">
-			<h:outputText value="#{pr.ca.idCategorie}"/>
-		</p:column>
-		
-	</p:dataTable>
+			<p:column headerText="Photo">
+				<h:graphicImage value="#{pr.image}" width="100px" height="100px" />
+			</p:column>
+
+			<p:column headerText="Categorie">
+				<h:outputText value="#{pr.ca.idCategorie}" />
+			</p:column>
+
+			<p:column headerText="Gestion">
+				<p:commandLink value="Supprimer" action="#{prMB.deleteProduit}"
+					update="tableProdAdmin">
+					<f:setPropertyActionListener value="#{pr.idProduit}"
+						target="#{prMB.pr.idProduit}" />
+				</p:commandLink>
+				<br/>
+				<p:commandLink value="Modifier" action="updateProduit">
+					<f:setPropertyActionListener value="#{pr}" target="#{prMB.pr}" />
+				</p:commandLink>
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
 </h:body>
 
 </html>

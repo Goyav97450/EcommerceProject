@@ -27,8 +27,8 @@
 
 	<h:form enctype="multipart/form-data">
 		<h:panelGrid columns="2">
-		Nom: <h:inputText value="#{cAMB.cat.nomCategorie}"></h:inputText>
-		Description: <h:inputText value="#{cAMB.cat.description}"></h:inputText>
+		Nom: <h:inputText value="#{cAMB.cat.nomCategorie}" required="true"></h:inputText>
+		Description: <h:inputText value="#{cAMB.cat.description}" required="true"></h:inputText>
 			<p:fileUpload value="#{cAMB.file}" mode="simple" skinSimple="true" />
 
 			<h:commandButton value="Ajouter" action="#{cAMB.addCategorie}"></h:commandButton>
