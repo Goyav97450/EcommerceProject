@@ -28,7 +28,7 @@ public class ProduitManagedBean implements Serializable {
 	// Attributs
 	private Produit pr;
 	private Categorie cat;
-	private List<Produit> listeProduit;
+	private List<Produit> listeProd;
 	private boolean indice = false;
 	private UploadedFile file;
 
@@ -42,7 +42,7 @@ public class ProduitManagedBean implements Serializable {
 	public void init() {
 
 		// récupérer la liste des produits
-		listeProduit = prService.getAllProduitService();
+		listeProd = prService.getAllProduitService();
 
 	}
 
@@ -79,16 +79,16 @@ public class ProduitManagedBean implements Serializable {
 	/**
 	 * @return the listeProduit
 	 */
-	public List<Produit> getListeProduit() {
-		return listeProduit;
+	public List<Produit> getListeProd() {
+		return listeProd;
 	}
 
 	/**
 	 * @param listeProduit
 	 *            the listeProduit to set
 	 */
-	public void setListeProduit(List<Produit> listeProduit) {
-		this.listeProduit = listeProduit;
+	public void setListeProd(List<Produit> listeProd) {
+		this.listeProd = listeProd;
 	}
 
 	/**
@@ -128,10 +128,10 @@ public class ProduitManagedBean implements Serializable {
 
 		if (verif != 0) {
 			// récupérer la nouvelle liste de la BD
-			List<Produit> newListeProduit = prService.getAllProduitService();
+			List<Produit> newListeProd = prService.getAllProduitService();
 
 			// mettre à jour la liste dans l'attribut du MB
-			listeProduit = newListeProduit;
+			listeProd = newListeProd;
 			return "accueilAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout a échoué."));
@@ -146,10 +146,10 @@ public class ProduitManagedBean implements Serializable {
 
 		if (verif != 0) {
 			// récupérer la nouvelle liste de la BD
-			List<Produit> newListeProduit = prService.getAllProduitService();
+			List<Produit> newListeProd = prService.getAllProduitService();
 
 			// mettre à jour la liste dans l'attribut du MB
-			listeProduit = newListeProduit;
+			listeProd = newListeProd;
 			return "accueilAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression a échoué."));
@@ -179,10 +179,10 @@ public class ProduitManagedBean implements Serializable {
 
 		if (verif!=0) {
 			// récupérer la nouvelle liste de la BD
-			List<Produit> newListeProduit = prService.getAllProduitService();
+			List<Produit> newListeProd = prService.getAllProduitService();
 
 			// mettre à jour la liste dans l'attribut du MB
-			listeProduit = newListeProduit;
+			listeProd = newListeProd;
 			return "accueilAdmin";
 
 		} else {

@@ -26,7 +26,7 @@
 	</h:form>
 
 	<h1 style="text-align: center">Liste des catégories</h1>
-	<p:dataTable var="ca" value="#{cAMB.listeCategorie}">
+	<p:dataTable var="ca" value="#{cAMB.listeCat}">
 		<p:column headerText="Id">
 			<h:outputText value="#{ca.idCategorie}" />
 		</p:column>
@@ -45,7 +45,7 @@
 	</p:dataTable>
 
 	<h1 style="text-align: center">Liste des produits</h1>
-	<p:dataTable var="pr" value="#{prMB.listeProduit}">
+	<p:dataTable var="pr" value="#{prMB.listeProd}">
 		<p:column headerText="Id">
 			<h:outputText value="#{pr.idProduit}" />
 		</p:column>

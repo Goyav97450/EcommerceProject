@@ -27,7 +27,7 @@ public class CategorieManagedBean implements Serializable {
 	// Attributs
 	private Categorie cat;
 	private UploadedFile file;
-	private List<Categorie> listeCategorie;
+	private List<Categorie> listeCat;
 	private boolean indice;
 
 	public CategorieManagedBean() {
@@ -39,7 +39,7 @@ public class CategorieManagedBean implements Serializable {
 	public void init() {
 
 		// récupérer la liste des categories
-		listeCategorie = caService.getAllCategorieService();
+		listeCat = caService.getAllCategorieService();
 
 	}
 
@@ -76,16 +76,16 @@ public class CategorieManagedBean implements Serializable {
 	/**
 	 * @return the listeCategorie
 	 */
-	public List<Categorie> getListeCategorie() {
-		return listeCategorie;
+	public List<Categorie> getListeCat() {
+		return listeCat;
 	}
 
 	/**
 	 * @param listeCategorie
 	 *            the listeCategorie to set
 	 */
-	public void setListeCategorie(List<Categorie> listeCategorie) {
-		this.listeCategorie = listeCategorie;
+	public void setListeCat(List<Categorie> listeCat) {
+		this.listeCat = listeCat;
 	}
 
 	/**
@@ -110,10 +110,10 @@ public class CategorieManagedBean implements Serializable {
 
 		if (verif != 0) {
 			// récupérer la nouvelle liste de la BD
-			List<Categorie> newListeCategorie = caService.getAllCategorieService();
+			List<Categorie> newListeCat = caService.getAllCategorieService();
 
 			// mettre à jour la liste dans l'attribut du MB
-			listeCategorie = newListeCategorie;
+			listeCat = newListeCat;
 			return "accueilAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout a échoué."));
@@ -128,10 +128,10 @@ public class CategorieManagedBean implements Serializable {
 
 		if (verif != 0) {
 			// récupérer la nouvelle liste de la BD
-			List<Categorie> newListeCategorie = caService.getAllCategorieService();
+			List<Categorie> newListeCat = caService.getAllCategorieService();
 
 			// mettre à jour la liste dans l'attribut du MB
-			listeCategorie = newListeCategorie;
+			listeCat = newListeCat;
 			return "accueilAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La suppression a échoué."));
@@ -160,10 +160,10 @@ public class CategorieManagedBean implements Serializable {
 		int verif = caService.updateCategorieService(this.cat);
 		if (verif != 0) {
 			// récupérer la nouvelle liste de la BD
-			List<Categorie> newListeCategorie = caService.getAllCategorieService();
+			List<Categorie> newListeCat = caService.getAllCategorieService();
 
 			// mettre à jour la liste dans l'attribut du MB
-			listeCategorie = newListeCategorie;
+			listeCat = newListeCat;
 			return "accueilAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La mise à jour a échoué."));
