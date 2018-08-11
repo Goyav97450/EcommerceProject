@@ -23,7 +23,7 @@ public class Produit implements Serializable {
 
 	// Attributs
 	/**
-	 * Les attributs de la classe produit.
+	 * L'ID du produit
 	 * 
 	 * @Id permet d'indiquer l'identifiant clé primaire du produit tel qu'il
 	 *     sera dans la base de données. La colonne est renommée id_pr.
@@ -32,9 +32,21 @@ public class Produit implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pr")
 	private long idProduit;
+	/**
+	 * Le nom du produit
+	 */
 	private String designation;
+	/**
+	 * La description du produit
+	 */
 	private String description;
+	/**
+	 * Le prix du produit
+	 */
 	private double prix;
+	/**
+	 * La quantité en stock du produit
+	 */
 	private int quantite;
 
 	/**
@@ -66,7 +78,7 @@ public class Produit implements Serializable {
 	 * classe Categorie.
 	 */
 	@ManyToOne
-	@JoinColumn(name = "ca_id",referencedColumnName = "id_ca")
+	@JoinColumn(name = "ca_id", referencedColumnName = "id_ca")
 	private Categorie ca;
 
 	@OneToMany(mappedBy = "pr")

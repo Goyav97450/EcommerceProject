@@ -12,9 +12,17 @@ import org.apache.commons.codec.binary.Base64;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
+/**
+ * @author Ewen Classe implémentant l'interface ICategorieDao
+ *         L'annotation @Stateless permet au conteneur EJB de comprendre que
+ *         c'est un EJB session de type <i>Stateless</i>
+ */
 @Stateless
 public class ProduitDaoImpl implements IProduitDao {
-
+	/**
+	 * Récupération d'un entityManager à partir de la PersistenteUnit grâce à
+	 * l'annotation @PersistenceContext
+	 */
 	@PersistenceContext(unitName = "Projet_Ecormmerce")
 	private EntityManager em;
 
@@ -23,20 +31,19 @@ public class ProduitDaoImpl implements IProduitDao {
 
 		// Requete JPQL pour obtenir la liste des produits
 		String reqListProduit = "SELECT pr FROM Produit as pr";
-
+		// Création de la requête
 		Query query = em.createQuery(reqListProduit);
-
+		// Récupération de la liste des produits
 		List<Produit> oldListProduit = query.getResultList();
-
+		// Inscription du produits dans la base de données
 		em.persist(pr);
 
 		// Requete JPQL pour obtenir la liste des produits avec l'ajout
 		String reqNewListProduit = "SELECT pr FROM Produit as pr";
-
 		Query queryNew = em.createQuery(reqNewListProduit);
-
+		// Récupération de la liste des produits
 		List<Produit> newListProduit = queryNew.getResultList();
-
+		// Comparaison des deux listes pour confirmer l'ajout
 		if (oldListProduit.size() != newListProduit.size()) {
 			return 1;
 		} else {
@@ -49,9 +56,9 @@ public class ProduitDaoImpl implements IProduitDao {
 	public List<Produit> getAllProduit() {
 		// Requete JPQL pour obtenir la liste des produits
 		String reqListProduit = "SELECT pr FROM Produit as pr";
-
+		// Création de la requête
 		Query query = em.createQuery(reqListProduit);
-
+		// Récupération de la liste des produits
 		List<Produit> listProduit = query.getResultList();
 
 		for (Produit pr : listProduit) {
@@ -63,10 +70,12 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public int deleteProduit(Produit pr) {
+		// Requete JPQL pour obtenir supprimer le produit en paramètre
 		String req = "DELETE FROM Produit as pr WHERE pr.idProduit=:pIdp";
-
+		// Création de la requête
 		Query query = em.createQuery(req);
 
+		// Paramétrages
 		query.setParameter("pIdp", pr.getIdProduit());
 
 		return query.executeUpdate();
@@ -75,8 +84,10 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public Produit getByIdProduit(Produit pr) {
-		try {
+		try {// Récupération du produit dans la base de données et stockage
+				// dans un objet
 			Produit prFound = em.find(Produit.class, pr.getIdProduit());
+			// Assignation de l'image au produit
 			prFound.setImage("data:image/png);base64," + Base64.encodeBase64String(prFound.getPhoto()));
 			return prFound;
 		} catch (NullPointerException ex) {
@@ -155,11 +166,11 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public List<String> getAllProdId() {
-		// Requete JPQL pour obtenir la liste des produits
+		// Requete JPQL pour obtenir la liste des ID produit
 		String reqListCategorie = "SELECT pr.idProduit FROM Produit as pr";
-
+		// Récupération d'une query
 		Query query = em.createQuery(reqListCategorie);
-
+		// Récupération de la liste
 		List<String> listIdProduit = query.getResultList();
 
 		return listIdProduit;

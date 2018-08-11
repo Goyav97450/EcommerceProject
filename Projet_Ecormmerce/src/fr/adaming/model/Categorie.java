@@ -22,7 +22,7 @@ public class Categorie implements Serializable {
 
 	// Attributs
 	/**
-	 * Les attributs de la classe Categorie.
+	 * L'ID de la catégorie
 	 * 
 	 * @Id permet d'indiquer l'identifiant clé primaire du produit tel qu'il
 	 *     sera dans la base de données. La colonne est renommée id_ca.
@@ -31,19 +31,26 @@ public class Categorie implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ca")
 	private long idCategorie;
+	
+	/**
+	 * Le nom de la catégorie
+	 */
 	private String nomCategorie;
 
 	/**
-	 * 
+	 * La photo de la catégorie
 	 * @Lob permet de confirmer que la photo est une blob dans la base SQL
 	 */
 	@Lob
 	private byte[] photo;
 	
+	/**
+	 * La description de la catégorie
+	 */
 	private String description;
 
 	/**
-	 * 
+	 * L'image dans laquelle on stocke la photo pour pouvoir l'afficher dans la vue.
 	 * @Transient evite que l'attribut selectionne ne soit integre a la base de
 	 *            donnees.
 	 */

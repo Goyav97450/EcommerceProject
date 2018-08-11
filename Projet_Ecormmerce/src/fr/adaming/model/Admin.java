@@ -17,7 +17,7 @@ public class Admin implements Serializable {
 
 	// Attributs
 	/**
-	 * Les attributs de la classe admin.
+	 * L'ID de l'Admin
 	 * 
 	 * @Id permet d'indiquer l'identifiant clé primaire de l'admin tel qu'il
 	 *     sera dans la base de données.
@@ -26,6 +26,10 @@ public class Admin implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_a")
 	private long idAdmin;
+	
+	/**
+	 * Le mot de passe de l'Admin
+	 */
 	private String mdp;
 
 	// Constructeurs

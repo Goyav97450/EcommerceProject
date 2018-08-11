@@ -8,8 +8,11 @@ import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 /**
- * @author Ewen Fondrillon Interface Dao des méthodes reliées aux
+ * @author Ewen Fondrillon 
+ * Interface Dao des méthodes reliées aux
  *         fonctionnalités Produits
+ * L'annotation @Local permet au conteneur EJB de comprendre que les classes implémentant cette interface
+ * seront des EJB session avec une portée <i>locale</i>
  */
 @Local
 public interface IProduitDao {
@@ -38,7 +41,7 @@ public interface IProduitDao {
 	 * 
 	 * @param le
 	 *            produit qu'on veut supprimer de la base de données
-	 * @return un int généré par la requête pour confirmer la suppression
+	 * @return un int généré par la requête pour confirmer la suppression.
 	 */
 	public int deleteProduit(Produit pr);
 
@@ -64,7 +67,7 @@ public interface IProduitDao {
 	public int updateProduit(Produit pr);
 
 	/**
-	 * <b>getProdByCategorie</b> Cette méthode permet à un Client de récupérer
+	 * <b>getProdByCategorie</b> Cette méthode permet à un Admin de récupérer
 	 * la liste de produits filtrés d'après une catégorie depuis la DB
 	 * 
 	 * @param la
@@ -74,7 +77,7 @@ public interface IProduitDao {
 	public List<Produit> getProdByCategorie(Categorie cat);
 
 	/**
-	 * <b>getProdByKeyWord</b> Cette méthode permet à un Client de récupérer la
+	 * <b>getProdByKeyWord</b> Cette méthode permet à un Admin de récupérer la
 	 * liste des produits filtrés par mots clés
 	 * 
 	 * @param le
@@ -85,8 +88,8 @@ public interface IProduitDao {
 	
 	/**<b>getAllProdId</b>
 	 * Cette méthode permet de récupérer un catégorie par son nom
-	 * @param Nom de la catégorie recherchée
-	 * @return la catégorie correspondant
+	 * Cette méthode permet de récupérer la liste des ID de tous les produits.
+	 * @return Une liste des ID de tous les produits dans la base de données.
 	 */
 	public List<String> getAllProdId();
 }

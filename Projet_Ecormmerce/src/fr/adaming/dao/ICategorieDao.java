@@ -9,6 +9,8 @@ import fr.adaming.model.Categorie;
 /**
  * @author Ewen Fondrillon Interface Dao des méthodes reliées aux
  *         fonctionnalités Categories
+ * L'annotation @Local permet au conteneur EJB de comprendre que les classes implémentant cette interface
+ * seront des EJB session avec une portée <i>locale</i>
  */
 @Local
 public interface ICategorieDao {
@@ -36,9 +38,8 @@ public interface ICategorieDao {
 	 * categorie de la base de données
 	 * 
 	 * @param la
-	 *            categorie qu'on veut supprimer de la base de données
-	 * @return la categorie qu'on a supprimé de la base, pour confirmer la
-	 *         suppression
+	 *            categorie qu'on veut supprimer de la base de données.
+	 * @return un int retourné par la requête pour confirmer la suppression.
 	 */
 	public int deleteCategorie(Categorie ca);
 
@@ -49,7 +50,7 @@ public interface ICategorieDao {
 	 * @param le
 	 *            produit qu'on veut mettre à jour dans la base de données
 	 * @return le produit qu'on a mis à jour dans la base, pour confirmer la
-	 *         mise à jour
+	 *         mise à jour.
 	 */
 	public Categorie updateCategorie(Categorie ca);
 
@@ -57,23 +58,21 @@ public interface ICategorieDao {
 	 * <b>getByIdCategorie</b> Cette méthode permet à un admin de chercher une
 	 * categorie spécifique dans la base de donnée par son identifiant
 	 * 
-	 * @param le
-	 *            produit qu'on recherche
-	 * @return le produit correspondant à notre paramètre de recherche
+	 * @param la catégorie recherchée.
+	 * @return la catégorie correspondant aux paramètres de recherche, récupérée dans la base de données.
 	 */
 	public Categorie getByIdCategorie(Categorie ca);
 	
 	/**<b>getCatByNom</b>
 	 * Cette méthode permet de récupérer un catégorie par son nom
 	 * @param Nom de la catégorie recherchée
-	 * @return la catégorie correspondant
+	 * @return la catégorie correspondant aux paramètres de recherche, récupérée dans la base de données.
 	 */
 	public Categorie getCatByNom(String rech);
 	
 	/**<b>getAllCatId</b>
-	 * Cette méthode permet de récupérer un catégorie par son nom
-	 * @param Nom de la catégorie recherchée
-	 * @return la catégorie correspondant
+	 * Cette méthode permet de récupérer la liste des ID de toutes les catégories.
+	 * @return Une liste des ID de toutes les catégories dans la base de données.
 	 */
 	public List<String> getAllCatId();
 }

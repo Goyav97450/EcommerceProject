@@ -25,7 +25,13 @@ public class LigneCommande implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCommande;
+	/**
+	 * La quantité de produit dans la ligne de commande
+	 */
 	private int quantite;
+	/**
+	 * Le prix du produit dans la ligne de commande
+	 */
 	private double prix;
 
 	// Transformation de l'association UML en JAVA
