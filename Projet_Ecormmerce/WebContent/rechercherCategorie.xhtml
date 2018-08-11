@@ -17,43 +17,48 @@
 			<p:menuitem value="Ajouter Produit" url="ajoutProduit.xhtml" />
 			<p:menuitem value="Supprimer Produit" url="deleteProduit.xhtml" />
 			<p:menuitem value="Rechercher Produit" url="rechercherProduit.xhtml" />
-			<p:menuitem value="Rechercher Produit par ID" url="rechercherProduitById.xhtml" />
+			<p:menuitem value="Rechercher Produit par ID"
+				url="rechercherProduitById.xhtml" />
 			<p:menuitem value="Modifier Produit" url="updateProduit.xhtml" />
 			<p:menuitem value="Ajouter Categorie" url="ajoutCategorie.xhtml" />
 			<p:menuitem value="Supprimer Categorie" url="deleteCategorie.xhtml" />
 			<p:menuitem value="Rechercher Categorie"
 				url="rechercherCategorie.xhtml" />
 			<p:menuitem value="Modifier Categorie" url="updateCategorie.xhtml" />
-			<p:menuitem value="Afficher produits par Catégorie" url="listeProduitByCat.xhtml" />
+			<p:menuitem value="Afficher produits par Catégorie"
+				url="listeProduitByCat.xhtml" />
 		</p:menubar>
 	</h:form>
-	
-<h1 class="titreliste">
+
+	<h1 class="titreliste">
 		<h:outputText value="Sélection du mode de recherche" />
 	</h1>
-	
+
 	<h:form styleClass="form-horizontal">
 		<p:selectOneRadio value="#{cAMB.idSelector}" onchange="submit()"
 			valueChangeListener="#{cAMB.changeType}">
 			<f:selectItem itemValue="false" itemLabel="Recherche par nom" />
 			<f:selectItem itemValue="true" itemLabel="Recherche par ID" />
 		</p:selectOneRadio>
-	</h:form>	
-	
+	</h:form>
+
 	<h:form rendered="#{cAMB.idSelector}">
 		<h:panelGrid columns="2">
-		 <p:outputLabel for="categorieSelector" value="Categorie:" />
-        <p:selectOneMenu id="categorieSelector" value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
-            <f:selectItems value="#{cAMB.listeIdCat}" />
-        </p:selectOneMenu>
-			<h:commandButton value="Rechercher" action="#{cAMB.rechercherCategorie}"></h:commandButton>
+			<p:outputLabel for="categorieSelector" value="Categorie:" />
+			<p:selectOneMenu id="categorieSelector"
+				value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
+				<f:selectItems value="#{cAMB.listeIdCat}" />
+			</p:selectOneMenu>
+			<h:commandButton value="Rechercher"
+				action="#{cAMB.rechercherCategorie}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>
 
 	<h:form rendered="#{cAMB.catSelector}">
 		<h:panelGrid columns="2">
-		Nom Categorie: <h:inputText value="#{cAMB.rech}" required="true"/>
-			<h:commandButton value="Rechercher" action="#{cAMB.rechercherCategorieParNom}"></h:commandButton>
+		Nom Categorie: <h:inputText value="#{cAMB.rech}" required="true" />
+			<h:commandButton value="Rechercher"
+				action="#{cAMB.rechercherCategorieParNom}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>
 
@@ -61,8 +66,8 @@
 	<h1 class="titreliste2">
 		<h:outputText rendered="#{cAMB.indice}" value="Categorie Trouvée"></h:outputText>
 	</h1>
-<h:form>
-	<p:dataTable var="cat" value="#{cAMB.cat}" rendered="#{cAMB.indice}" id="tableCatAdmin">
+	<h:form rendered="#{cAMB.indice}"> 
+		<p:dataTable var="cat" value="#{cAMB.listeCat}" id="tableCatAdmin">
 			<p:column headerText="Id">
 				<h:outputText value="#{cat.idCategorie}" />
 			</p:column>
@@ -78,19 +83,26 @@
 			<p:column headerText="Photo">
 				<h:graphicImage value="#{cat.image}" width="100px" height="100px" />
 			</p:column>
+
 			<p:column headerText="Gestion">
-				<h:commandLink value="Supprimer" action="#{cAMB.deleteCategorie}"
+				<p:commandLink value="Supprimer" action="#{cAMB.deleteCategorie}"
 					update="tableCatAdmin">
 					<f:setPropertyActionListener value="#{cat.idCategorie}"
 						target="#{cAMB.cat.idCategorie}" />
-				</h:commandLink>
-				<br/>
-				<h:commandLink value="Modifier" action="updateCategorie">
+				</p:commandLink>
+				<br />
+				<p:commandLink value="Modifier" action="updateCategorie">
 					<f:setPropertyActionListener value="#{cat}" target="#{cAMB.cat}" />
+				</p:commandLink>
+				<br />
+				<h:commandLink value="Afficher les produits"
+					action="#{cAMB.rechercherProduitsByCat}">
+					<f:setPropertyActionListener value="#{cat.idCategorie}"
+						target="#{cAMB.cat.idCategorie}" />
 				</h:commandLink>
 			</p:column>
-	</p:dataTable>
-</h:form>
+		</p:dataTable>
+	</h:form>
 
 	<h1 style="color: red; text-align: right">
 		<h:messages />

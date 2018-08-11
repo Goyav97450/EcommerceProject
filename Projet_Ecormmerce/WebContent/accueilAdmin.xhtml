@@ -35,28 +35,46 @@
 				url="listeProduitByCat.xhtml" />
 			<p:menuitem value="Login" url="login.xhtml" />
 			<f:facet name="options">
-			<h:commandLink value="Logout"
-					action="#{logout.executeLogout}">
-			</h:commandLink>
+				<h:commandLink value="Logout" action="#{logout.executeLogout}">
+				</h:commandLink>
 			</f:facet>
 		</p:menubar>
 	</h:form>
 
-	<h1 style="text-align: center">Liste des catégories</h1>
+	<h1 style="text-align: center">Liste Test</h1>
 	<h:form>
-		<p:dataTable var="cat" value="#{cAMB.listeCat}" id="tableCatAdmin">
-			<p:column headerText="Id">
+		<p:dataTable var="cat" value="#{cAMB.listeCat}" widgetVar="catTable"
+			id="tableCatAdmin"
+			emptyMessage="Aucune catégorie trouvée pour ce critère."
+			filteredValue="#{cAMB.listeFiltreCat}">
+
+			<f:facet name="header">
+				<p:outputPanel>
+					<h:outputText value="Rechercher:" />
+					<p:inputText id="globalFilter" onkeyup="PF('catTable').filter()"
+						style="width:150px" placeholder="Entrer mot-clé" />
+				</p:outputPanel>
+			</f:facet>
+			<p:column filterBy="#{cat.idCategorie}" headerText="ID"
+				footerText="exact" filterMatchMode="exact">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('catTable').filter()">
+						<f:selectItem itemLabel="Select One" itemValue="#{null}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cAMB.listeIdCat}" />
+					</p:selectOneMenu>
+				</f:facet>
 				<h:outputText value="#{cat.idCategorie}" />
 			</p:column>
 
-			<p:column headerText="Description">
-				<h:outputText value="#{cat.description}" />
-			</p:column>
-
-			<p:column headerText="Nom">
+			<p:column filterBy="#{cat.nomCategorie}" headerText="Nom"
+				footerText="contains" filterMatchMode="contains">
 				<h:outputText value="#{cat.nomCategorie}" />
 			</p:column>
-
+			<p:column filterBy="#{cat.description}" headerText="Description"
+				footerText="contains" filterMatchMode="contains">
+				<h:outputText value="#{cat.description}" />
+			</p:column>
 			<p:column headerText="Photo">
 				<h:graphicImage value="#{cat.image}" width="100px" height="100px" />
 			</p:column>
@@ -72,14 +90,15 @@
 					<f:setPropertyActionListener value="#{cat}" target="#{cAMB.cat}" />
 				</p:commandLink>
 				<br />
-				<h:commandLink value="Afficher les produits"
+				<p:commandLink value="Afficher les produits"
 					action="#{cAMB.rechercherProduitsByCat}">
 					<f:setPropertyActionListener value="#{cat.idCategorie}"
 						target="#{cAMB.cat.idCategorie}" />
-				</h:commandLink>
+				</p:commandLink>
 			</p:column>
 		</p:dataTable>
 	</h:form>
+
 
 	<h1 style="text-align: center">Liste des produits</h1>
 	<h:form>
@@ -125,6 +144,63 @@
 
 		</p:dataTable>
 	</h:form>
+	<h:form>
+		<p:dataTable var="cat" value="#{prMB.listeProd}" widgetVar="prodTable"
+			id="tableProdAdmin"
+			emptyMessage="Aucun produit trouvée pour ce critère."
+			filteredValue="#{cAMB.listeFiltreCat}">
+
+			<f:facet name="header">
+				<p:outputPanel>
+					<h:outputText value="Rechercher:" />
+					<p:inputText id="globalFilter" onkeyup="PF('catTable').filter()"
+						style="width:150px" placeholder="Entrer mot-clé" />
+				</p:outputPanel>
+			</f:facet>
+			<p:column filterBy="#{cat.idCategorie}" headerText="ID"
+				footerText="exact" filterMatchMode="exact">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('catTable').filter()">
+						<f:selectItem itemLabel="Select One" itemValue="#{null}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{cAMB.listeIdCat}" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{cat.idCategorie}" />
+			</p:column>
+
+			<p:column filterBy="#{cat.nomCategorie}" headerText="Nom"
+				footerText="contains" filterMatchMode="contains">
+				<h:outputText value="#{cat.nomCategorie}" />
+			</p:column>
+			<p:column filterBy="#{cat.description}" headerText="Description"
+				footerText="contains" filterMatchMode="contains">
+				<h:outputText value="#{cat.description}" />
+			</p:column>
+			<p:column headerText="Photo">
+				<h:graphicImage value="#{cat.image}" width="100px" height="100px" />
+			</p:column>
+
+			<p:column headerText="Gestion">
+				<p:commandLink value="Supprimer" action="#{cAMB.deleteCategorie}"
+					update="tableCatAdmin">
+					<f:setPropertyActionListener value="#{cat.idCategorie}"
+						target="#{cAMB.cat.idCategorie}" />
+				</p:commandLink>
+				<br />
+				<p:commandLink value="Modifier" action="updateCategorie">
+					<f:setPropertyActionListener value="#{cat}" target="#{cAMB.cat}" />
+				</p:commandLink>
+				<br />
+				<p:commandLink value="Afficher les produits"
+					action="#{cAMB.rechercherProduitsByCat}">
+					<f:setPropertyActionListener value="#{cat.idCategorie}"
+						target="#{cAMB.cat.idCategorie}" />
+				</p:commandLink>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
 </h:body>
 
 </html>

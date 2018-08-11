@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.UploadedFile;
 
 import fr.adaming.model.Categorie;
@@ -35,6 +36,7 @@ public class CategorieManagedBean implements Serializable {
 	private List<Categorie> listeCat;
 	private List<Produit> listeProd;
 	private List<String> listeIdCat;
+	private List<Categorie> listeFiltreCat;
 	private boolean indice = false;
 	private boolean catSelector = false;
 	private boolean idSelector = true;
@@ -192,6 +194,21 @@ public class CategorieManagedBean implements Serializable {
 	 */
 	public void setListeIdCat(List<String> listeIdCat) {
 		this.listeIdCat = listeIdCat;
+	}
+
+	/**
+	 * @return the listeFiltreCat
+	 */
+	public List<Categorie> getListeFiltreCat() {
+		return listeFiltreCat;
+	}
+
+	/**
+	 * @param listeFiltreCat
+	 *            the listeFiltreCat to set
+	 */
+	public void setListeFiltreCat(List<Categorie> listeFiltreCat) {
+		this.listeFiltreCat = listeFiltreCat;
 	}
 
 	// Méthodes

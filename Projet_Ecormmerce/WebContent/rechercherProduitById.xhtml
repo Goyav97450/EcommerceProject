@@ -44,46 +44,42 @@
 
 
 	<h1 class="titreliste2">
-		<h:outputText rendered="#{prMB.indice}" value="Produit Trouvée"></h:outputText>
+		<h:outputText rendered="#{prMB.indice}" value="Produit Trouvé"></h:outputText>
 	</h1>
 	<h:form id="form" rendered="#{prMB.indice}">
-		<p:dataTable var="prod" value="#{prMB.listeProd}" paginator="true"
-			rows="10"
-			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-			rowsPerPageTemplate="5,10,15" id="tableProdAdmin" lazy="true"
-			rendered="#{prMB.indice}">
+		<p:dataTable var="pr" value="#{prMB.listeProd}" id="tableProdAdmin">
 
 			<p:column headerText="Id">
-				<h:outputText value="#{prod.idProduit}" />
+				<h:outputText value="#{pr.idProduit}" />
 			</p:column>
 			<p:column headerText="Designation:">
-				<h:outputText value="#{prod.designation}" />
+				<h:outputText value="#{pr.designation}" />
 			</p:column>
 			<p:column headerText="Description:">
-				<h:outputText value="#{prod.description}" />
+				<h:outputText value="#{pr.description}" />
 			</p:column>
 			<p:column headerText="Prix:">
-				<h:outputText value="#{prod.prix}" />
+				<h:outputText value="#{pr.prix}" />
 			</p:column>
 			<p:column headerText="Quantité:">
-				<h:outputText value="#{prod.quantite}" />
+				<h:outputText value="#{pr.quantite}" />
 			</p:column>
 			<p:column headerText="Photo">
-				<h:graphicImage value="#{prod.image}" width="100px" height="100px" />
+				<h:graphicImage value="#{pr.image}" width="100px" height="100px" />
 			</p:column>
 			<p:column headerText="Catégorie:">
-				<h:outputText value="#{prod.ca.nomCategorie}" />
+				<h:outputText value="#{pr.ca.nomCategorie}" />
 			</p:column>
 			<p:column headerText="Gestion">
-				<h:commandLink value="Supprimer" action="#{prMB.deleteProduit}"
+				<p:commandLink value="Supprimer" action="#{prMB.deleteProduit}"
 					update="tableProdAdmin">
-					<f:setPropertyActionListener value="#{prod.idProduit}"
+					<f:setPropertyActionListener value="#{pr.idProduit}"
 						target="#{prMB.pr.idProduit}" />
-				</h:commandLink>
-				<br />
-				<h:commandLink value="Modifier" action="updateProduit">
-					<f:setPropertyActionListener value="#{prod}" target="#{prMB.pr}" />
-				</h:commandLink>
+				</p:commandLink>
+				<br/>
+				<p:commandLink value="Modifier" action="updateProduit">
+					<f:setPropertyActionListener value="#{pr}" target="#{prMB.pr}" />
+				</p:commandLink>
 			</p:column>
 		</p:dataTable>
 	</h:form>
