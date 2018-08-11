@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -67,7 +68,9 @@ public class CategorieDaoImpl implements ICategorieDao {
 	@Override
 	public Categorie getByIdCategorie(Categorie ca) {
 		try {
-			return em.find(Categorie.class, ca.getIdCategorie());
+			Categorie cat = em.find(Categorie.class, ca.getIdCategorie());
+			cat.setImage("data:image/png);base64," + Base64.encodeBase64String(cat.getPhoto()));
+			return cat;
 		} catch (NullPointerException ex) {
 
 			ex.printStackTrace();
@@ -100,9 +103,11 @@ public class CategorieDaoImpl implements ICategorieDao {
 			String nom = '%' + rech + '%';
 			query.setParameter("pNom", nom);
 
-			return (Categorie) query.getSingleResult();
+			Categorie cat = (Categorie) query.getSingleResult();
+			cat.setImage("data:image/png);base64," + Base64.encodeBase64String(cat.getPhoto()));
+			return cat;
 
-		} catch (NoResultException ex) {
+		} catch (NoResultException|NonUniqueResultException ex) {
 
 			ex.printStackTrace();
 		}

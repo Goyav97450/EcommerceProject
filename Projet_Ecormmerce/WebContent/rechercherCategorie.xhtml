@@ -67,7 +67,7 @@
 		<h:outputText rendered="#{cAMB.indice}" value="Categorie Trouvée"></h:outputText>
 	</h1>
 	<h:form rendered="#{cAMB.indice}"> 
-		<p:dataTable var="cat" value="#{cAMB.listeCat}" id="tableCatAdmin">
+		<p:dataTable var="cat" value="#{cAMB.cat}" id="tableCatAdmin">
 			<p:column headerText="Id">
 				<h:outputText value="#{cat.idCategorie}" />
 			</p:column>

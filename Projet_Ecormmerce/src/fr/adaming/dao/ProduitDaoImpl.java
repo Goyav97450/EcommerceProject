@@ -75,8 +75,15 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public Produit getByIdProduit(Produit pr) {
+		try {
+			Produit prFound = em.find(Produit.class, pr.getIdProduit());
+			prFound.setImage("data:image/png);base64," + Base64.encodeBase64String(prFound.getPhoto()));
+			return prFound;
+		} catch (NullPointerException ex) {
 
-		return em.find(Produit.class, pr.getIdProduit());
+			ex.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
@@ -110,7 +117,13 @@ public class ProduitDaoImpl implements IProduitDao {
 			query.setParameter("pCat", cat.getIdCategorie());
 
 			// Récupération de la liste
-			return query.getResultList();
+			List<Produit> listProduit = query.getResultList();
+
+			for (Produit pr : listProduit) {
+				pr.setImage("data:image/png);base64," + Base64.encodeBase64String(pr.getPhoto()));
+			}
+
+			return listProduit;
 		} catch (NullPointerException ex) {
 
 			ex.printStackTrace();
@@ -132,7 +145,12 @@ public class ProduitDaoImpl implements IProduitDao {
 		query.setParameter(2, rech);
 
 		// Récupération de la liste
-		return query.getResultList();
+		List<Produit> listProduit = query.getResultList();
+
+		for (Produit pr : listProduit) {
+			pr.setImage("data:image/png);base64," + Base64.encodeBase64String(pr.getPhoto()));
+		}
+		return listProduit;
 	}
 
 	@Override

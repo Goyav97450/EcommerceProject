@@ -33,6 +33,7 @@ public class ProduitManagedBean implements Serializable {
 	private Categorie cat;
 	private List<Produit> listeProd;
 	private List<String> listeIdProd;
+	private List<Produit> listeFiltreProd;
 	private boolean indice = false;
 	private UploadedFile file;
 	private String rech;
@@ -186,6 +187,21 @@ public class ProduitManagedBean implements Serializable {
 	 */
 	public void setListeIdProd(List<String> listeIdProd) {
 		this.listeIdProd = listeIdProd;
+	}
+
+	/**
+	 * @return the listeFiltreProd
+	 */
+	public List<Produit> getListeFiltreProd() {
+		return listeFiltreProd;
+	}
+
+	/**
+	 * @param listeFiltreProd
+	 *            the listeFiltreProd to set
+	 */
+	public void setListeFiltreProd(List<Produit> listeFiltreProd) {
+		this.listeFiltreProd = listeFiltreProd;
 	}
 
 	// Méthodes
