@@ -41,7 +41,7 @@
 		</p:menubar>
 	</h:form>
 
-	<h1 style="text-align: center">Liste Test</h1>
+	<h1 style="text-align: center">Liste Catégorie</h1>
 	<h:form>
 		<p:dataTable var="cat" value="#{cAMB.listeCat}" widgetVar="catTable"
 			id="tableCatAdmin"
@@ -144,8 +144,9 @@
 
 		</p:dataTable>
 	</h:form>
+	
 	<h:form>
-		<p:dataTable var="cat" value="#{prMB.listeProd}" widgetVar="prodTable"
+		<p:dataTable var="cat" value="#{cAMB.listeCat}" widgetVar="prodTable"
 			id="tableProdAdmin"
 			emptyMessage="Aucun produit trouvée pour ce critère."
 			filteredValue="#{cAMB.listeFiltreCat}">
