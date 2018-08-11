@@ -4,6 +4,7 @@
 package fr.adaming.managedBeans;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
@@ -62,6 +64,8 @@ public class PanierManagedBean {
 	 * Attribut servant au client à choisir la quantité de produit à ajouter au panier
 	 */
 	private int q;
+	private List<String> listIdProd;
+	private HttpSession sessionCl;
 		
 	/**
 	 * 
@@ -77,7 +81,8 @@ public class PanierManagedBean {
 	
 	@PostConstruct
 	public void init () {
-		
+		this.listIdProd = pService.getAllProdIdService();
+		this.sessionCl = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	}
 	/**
 	 * @return the cl
@@ -159,9 +164,23 @@ public class PanierManagedBean {
 		this.q = q;
 	}
 	
+	/**
+	 * @return the listIdProd
+	 */
+	public List<String> getListIdProd() {
+		return listIdProd;
+	}
+
+	/**
+	 * @param listIdProd the listIdProd to set
+	 */
+	public void setListIdProd(List<String> listIdProd) {
+		this.listIdProd = listIdProd;
+	}
+
 	//Autres méthodes
 	public String ajoutProdPanier() {
-		Panier panierSession = (Panier) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("panierCl");
+		Panier panierSession = (Panier) sessionCl.getAttribute("panierCl");
 		
 		List<LigneCommande> newList = new ArrayList<LigneCommande>();
 		
@@ -184,7 +203,7 @@ public class PanierManagedBean {
 			panier.setListeCom(newList);
 			
 			//Envoie d'un message d'erreur
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("panierCl", panier);
+			sessionCl.setAttribute("panierCl", panier);
 			
 			return "panier";
 		} else {
@@ -196,7 +215,7 @@ public class PanierManagedBean {
 	}
 	
 	public String supprProdPanier () {
-		Panier panierSession = (Panier) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("panierCl");
+		Panier panierSession = (Panier) sessionCl.getAttribute("panierCl");
 		
 		if (panierSession==null | panierSession.getListeCom()==null) {
 			//Envoie d'un message d'erreur
@@ -218,5 +237,56 @@ public class PanierManagedBean {
 				return "panier";
 			}
 		}
+	}
+	
+	public String enregistrerCommande() {
+		//Enregistrement du client
+		Client clOut = clService.saveClient(cl);
+		
+		if (clOut!=null) {
+			//Association du client à la commande
+			co.setClient(clOut);
+			
+			//récupération du panier de la session
+			Panier panierSession = (Panier) sessionCl.getAttribute("panierCl");
+			
+			//Transfert des lignes de commandes du panier à la commande
+			co.setListeLigne(panierSession.getListeCom());
+			
+			//Association de la commande aux ligne de commande
+			for (LigneCommande lc: panierSession.getListeCom()) {
+				lc.setCommande(co);
+			}
+			
+			//Récupération de la date du jour
+			Date date = new Date();
+			
+			//Ajout de la date à la commande
+			co.setDateCommande(date);
+			
+			//Enregistrement de la commande
+			int verif = clService.saveCommande(co);
+			
+			if (verif!=0) {
+				//Envoie d'un message de succés
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Votre commande a bien été enregistré merci pour vos achats"));
+				
+				//Fermeture de la session
+				sessionCl.invalidate();
+				
+				return "accueil";
+			} else {
+				//Envoie d'un message d'erreur
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La commande a échoué veuillez réessayer"));
+				
+				return "panier";
+			}
+		} else {
+			//Envoie d'un message d'erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'enregistrement du client a échoué"));
+			
+			return "enregistrement";
+		}
+
 	}
 }

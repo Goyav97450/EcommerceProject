@@ -23,7 +23,10 @@
 	</h:form>
 	<h:form enctype="multipart/form-data">
 		<h:panelGrid columns="2">
-		Produit: <h:inputText value="#{paMB.prod.idProduit}"/>
+		Id produit :
+		<p:selectOneMenu id="categorieSelector" value="#{paMB.prod.idProduit}" lazy="true" style="width:125px">
+            <f:selectItems value="#{paMB.listIdProd}" />
+        </p:selectOneMenu>
 		Quantité: <h:inputText value="#{paMB.q}"></h:inputText>
 
 			<h:commandButton value="Ajouter" action="#{paMB.ajoutProdPanier}"></h:commandButton>

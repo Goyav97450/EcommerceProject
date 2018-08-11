@@ -235,21 +235,21 @@ public class ClientManagedBean implements Serializable{
 		return "affProd";
 	}
 	
-	public String ajoutCl() {
-		//Appel de la méthode
-		int verif = clService.saveClient(cl);
-		
-		if (verif!=0) {
-			//Envoie d'un message d'erreur
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'enregestriment s'est bien déroulé, merci"));
-			
-			return "ajoutCl";
-		} else {
-			//Envoie d'un message d'erreur
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'enregestriment a échoué veuillez réessayer"));
-			
-			return "ajoutCl";
-		}
-	}
+//	public String ajoutCl() {
+//		//Appel de la méthode
+//		int verif = clService.saveClient(cl);
+//		
+//		if (verif!=0) {
+//			//Envoie d'un message d'erreur
+//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'enregestriment s'est bien déroulé, merci"));
+//			
+//			return "ajoutCl";
+//		} else {
+//			//Envoie d'un message d'erreur
+//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'enregestriment a échoué veuillez réessayer"));
+//			
+//			return "ajoutCl";
+//		}
+//	}
 	
 }

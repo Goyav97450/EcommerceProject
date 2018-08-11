@@ -46,7 +46,7 @@ public class ClientServiceImpl implements IClientService{
 	}
 
 	@Override
-	public int saveClient(Client cl) {
+	public Client saveClient(Client cl) {
 		
 		return clDao.saveClient(cl);
 	}

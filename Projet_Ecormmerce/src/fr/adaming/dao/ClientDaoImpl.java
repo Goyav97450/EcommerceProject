@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
+import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
 
 /**
@@ -71,19 +72,29 @@ public class ClientDaoImpl implements IClientDao{
 		return query.getResultList();
 	}
 
-	public int saveClient(Client cl) {
+	public Client saveClient(Client cl) {
 		try {
 			em.persist(cl);
-			return 1;
+			
+			return cl;
 		} catch (Exception EntityExistsException){
-			return 0;
+			return null;
 		}
 	}
 
 	public int saveCommande(Commande co) {
 		//Application de la méthode persist
 		try {
+			//enregistrement de la commande
 			em.persist(co);
+			//Mise à jour des quantités de produits disponibles
+			for (LigneCommande lc: co.getListeLigne()) {
+				Produit prodUpd = em.find(Produit.class, lc.getPr().getIdProduit());
+				
+				prodUpd.setQuantite(prodUpd.getQuantite()-lc.getPr().getQuantite());
+				
+				em.merge(prodUpd);
+			}	
 			return 1;
 		} catch (Exception EntityExistsException){
 			return 0;

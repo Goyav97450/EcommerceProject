@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,7 +44,7 @@ public class Commande implements Serializable{
 	/**
 	 * Transormation de l'association UML en JAVA entre un objet Commade et une liste de ligneCommande
 	 */
-	@OneToMany(mappedBy="commande")
+	@OneToMany(mappedBy="commande", cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<LigneCommande> listeLigne;
 	
 	//Constructeurs

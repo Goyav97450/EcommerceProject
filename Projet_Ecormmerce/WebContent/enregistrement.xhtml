@@ -23,13 +23,13 @@
 	</h:form>
 	<h:form>
 		<h:panelGrid columns="2">
-		Nom :<h:inputText value="#{clMB.cl.nomClient}"/>
-		Adresse :<h:inputText value="#{clMB.cl.adresse}"/>
-		E-Mail :<h:inputText value="#{clMB.cl.email}">
+		Nom :<h:inputText value="#{paMB.cl.nomClient}"/>
+		Adresse :<h:inputText value="#{paMB.cl.adresse}"/>
+		E-Mail :<h:inputText value="#{paMB.cl.email}">
 			<f:validator validatorId="valMail"></f:validator>
 		</h:inputText>
-		Telephone :<h:inputText value="#{clMB.cl.tel}"/>
-		<h:commandButton value="Enregistrer" action="#{clMB.ajoutCl}"/>
+		Telephone :<h:inputText value="#{paMB.cl.tel}"/>
+		<h:commandButton value="Enregistrer" action="#{paMB.enregistrerCommande}"/>
 		</h:panelGrid>
 	</h:form>
 	<h1 style="color: red; text-align: center;"><h:messages/></h1>

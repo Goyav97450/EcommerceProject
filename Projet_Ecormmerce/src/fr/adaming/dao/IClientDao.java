@@ -46,7 +46,7 @@ public interface IClientDao {
 	 * @param le Client à enregistrer
 	 * @return un entier qui vaut 1 si l'ajout a fonctionné et 0 si l'ajout a échoué
 	 */
-	public int saveClient(Client cl);
+	public Client saveClient(Client cl);
 	
 	/**<b>saveCommande</b>
 	 * Cette méthode perment d'enregistrer une commande dans la DB
