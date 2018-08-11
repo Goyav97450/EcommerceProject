@@ -135,4 +135,16 @@ public class ProduitDaoImpl implements IProduitDao {
 		return query.getResultList();
 	}
 
+	@Override
+	public List<String> getAllProdId() {
+		// Requete JPQL pour obtenir la liste des produits
+		String reqListCategorie = "SELECT pr.idProduit FROM Produit as pr";
+
+		Query query = em.createQuery(reqListCategorie);
+
+		List<String> listIdProduit = query.getResultList();
+
+		return listIdProduit;
+	}
+
 }

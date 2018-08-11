@@ -17,20 +17,26 @@
 			<p:menuitem value="Ajouter Produit" url="ajoutProduit.xhtml" />
 			<p:menuitem value="Supprimer Produit" url="deleteProduit.xhtml" />
 			<p:menuitem value="Rechercher Produit" url="rechercherProduit.xhtml" />
-			<p:menuitem value="Rechercher Produit par ID" url="rechercherProduitById.xhtml" />
+			<p:menuitem value="Rechercher Produit par ID"
+				url="rechercherProduitById.xhtml" />
 			<p:menuitem value="Modifier Produit" url="updateProduit.xhtml" />
 			<p:menuitem value="Ajouter Categorie" url="ajoutCategorie.xhtml" />
 			<p:menuitem value="Supprimer Categorie" url="deleteCategorie.xhtml" />
 			<p:menuitem value="Rechercher Categorie"
 				url="rechercherCategorie.xhtml" />
 			<p:menuitem value="Modifier Categorie" url="updateCategorie.xhtml" />
-			<p:menuitem value="Afficher produits par Catégorie" url="listeProduitByCat.xhtml" />
+			<p:menuitem value="Afficher produits par Catégorie"
+				url="listeProduitByCat.xhtml" />
 		</p:menubar>
 	</h:form>
 
 	<h:form>
 		<h:panelGrid columns="2">
-		ID produit: <h:inputText value="#{prMB.pr.idProduit}"></h:inputText>
+			<p:outputLabel for="produitSelector" value="Produit ID:" />
+			<p:selectOneMenu id="produitSelector" value="#{prMB.pr.idProduit}"
+				lazy="true" style="width:125px">
+				<f:selectItems value="#{prMB.listeIdProd}" />
+			</p:selectOneMenu>
 			<h:commandButton value="Rechercher"
 				action="#{prMB.rechercherProduitById}"></h:commandButton>
 		</h:panelGrid>

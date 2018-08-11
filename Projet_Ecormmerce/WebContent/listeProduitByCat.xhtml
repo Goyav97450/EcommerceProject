@@ -36,12 +36,15 @@
 
 	<h:form>
 		<h:panelGrid columns="2">
-		ID Catégorie: <h:inputText value="#{cAMB.cat.idCategorie}"></h:inputText>
+		 <p:outputLabel for="categorieSelector" value="Categorie:" />
+        <p:selectOneMenu id="categorieSelector" value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
+            <f:selectItems value="#{cAMB.listeIdCat}" />
+        </p:selectOneMenu>
 			<h:commandButton value="Afficher produits" action="#{cAMB.rechercherProduitsByCat}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>
 
-	<h1 style="text-align: center">Liste des produits</h1>
+	<h1 style="text-align: center" rendered="#{cAMB.indice}">Liste des produits</h1>
 	<h:form rendered="#{cAMB.indice}">
 		<p:dataTable var="pr" value="#{prMB.listeProd}" id="tableProdAdmin">
 			<p:column headerText="Id">

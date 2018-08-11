@@ -47,9 +47,14 @@ public class CategorieServiceImpl implements ICategorieService {
 	}
 
 	@Override
-	public Categorie getCatByNom(String rech) {
+	public Categorie getCatByNomService(String rech) {
 		
 		return caDao.getCatByNom(rech);
+	}
+
+	@Override
+	public List<String> getAllCatIdService() {
+		return caDao.getAllCatId();
 	}
 
 }

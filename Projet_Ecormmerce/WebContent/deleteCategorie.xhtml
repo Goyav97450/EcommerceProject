@@ -29,7 +29,10 @@
 
 	<h:form>
 		<h:panelGrid columns="2">
-		ID Catégorie: <h:inputText value="#{cAMB.cat.idCategorie}"></h:inputText>
+		 <p:outputLabel for="categorieSelector" value="Categorie:" />
+        <p:selectOneMenu id="categorieSelector" value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
+            <f:selectItems value="#{cAMB.listeIdCat}" />
+        </p:selectOneMenu>
 			<h:commandButton value="Supprimer" action="#{cAMB.deleteCategorie}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>

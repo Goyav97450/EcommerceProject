@@ -8,9 +8,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 
 import org.primefaces.model.UploadedFile;
 
@@ -34,6 +32,7 @@ public class ProduitManagedBean implements Serializable {
 	private Produit pr;
 	private Categorie cat;
 	private List<Produit> listeProd;
+	private List<String> listeIdProd;
 	private boolean indice = false;
 	private UploadedFile file;
 	private String rech;
@@ -48,8 +47,9 @@ public class ProduitManagedBean implements Serializable {
 	@PostConstruct
 	public void init() {
 
-		// récupérer la liste des produits
+		// récupérer la liste des categories
 		listeProd = prService.getAllProduitService();
+		listeIdProd = prService.getAllProdIdService();
 
 	}
 
@@ -158,6 +158,36 @@ public class ProduitManagedBean implements Serializable {
 		this.type = type;
 	}
 
+	/**
+	 * @return the cat
+	 */
+	public Categorie getCat() {
+		return cat;
+	}
+
+	/**
+	 * @param cat
+	 *            the cat to set
+	 */
+	public void setCat(Categorie cat) {
+		this.cat = cat;
+	}
+
+	/**
+	 * @return the listeIdProd
+	 */
+	public List<String> getListeIdProd() {
+		return listeIdProd;
+	}
+
+	/**
+	 * @param listeIdProd
+	 *            the listeIdProd to set
+	 */
+	public void setListeIdProd(List<String> listeIdProd) {
+		this.listeIdProd = listeIdProd;
+	}
+
 	// Méthodes
 	public String addProduit() {
 		this.pr.setPhoto(file.getContents());
@@ -220,7 +250,7 @@ public class ProduitManagedBean implements Serializable {
 			break;
 		case "cat":
 			// Récupération de la catégorie à partir de la DB
-			cat = caService.getCatByNom(rech);
+			cat = caService.getCatByNomService(rech);
 			// Appel de la méthode
 			listeProd = prService.getProdByCategorie(cat);
 			this.indice = true;

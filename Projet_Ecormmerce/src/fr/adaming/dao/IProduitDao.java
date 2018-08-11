@@ -82,4 +82,11 @@ public interface IProduitDao {
 	 * @return la liste de produits contenant les mots clés
 	 */
 	public List<Produit> getProdByKeyWord(String keyWord);
+	
+	/**<b>getAllProdId</b>
+	 * Cette méthode permet de récupérer un catégorie par son nom
+	 * @param Nom de la catégorie recherchée
+	 * @return la catégorie correspondant
+	 */
+	public List<String> getAllProdId();
 }

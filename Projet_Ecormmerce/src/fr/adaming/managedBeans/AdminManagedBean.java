@@ -11,21 +11,21 @@ import javax.faces.context.FacesContext;
 import fr.adaming.model.Admin;
 import fr.adaming.service.IAdminService;
 
-@ManagedBean(name="aMB")
+@ManagedBean(name = "aMB")
 @SessionScoped
-public class AdminManagedBean implements Serializable{
+public class AdminManagedBean implements Serializable {
 
-	//Transformation de l'association UML en Java
-		@EJB
-		private IAdminService aService;
-		
-	//Attributs
+	// Transformation de l'association UML en Java
+	@EJB
+	private IAdminService aService;
+
+	// Attributs
 	private Admin a;
-	private boolean loggedIn=false;
+	private boolean loggedIn = false;
 
-	//Constructeur
+	// Constructeur
 	public AdminManagedBean() {
-		this.a=new Admin();
+		this.a = new Admin();
 	}
 
 	/**
@@ -36,12 +36,13 @@ public class AdminManagedBean implements Serializable{
 	}
 
 	/**
-	 * @param a the a to set
+	 * @param a
+	 *            the a to set
 	 */
 	public void setA(Admin a) {
 		this.a = a;
 	}
-	
+
 	/**
 	 * @return the loggedIn
 	 */
@@ -50,24 +51,27 @@ public class AdminManagedBean implements Serializable{
 	}
 
 	/**
-	 * @param loggedIn the loggedIn to set
+	 * @param loggedIn
+	 *            the loggedIn to set
 	 */
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
 
 	// Méthodes
-	public String connexion(){
+	public String connexion() {
 		Admin aExist = aService.isExistService(a);
-		
-		if (a!=null){
-			this.loggedIn=true;
+
+		if (a != null) {
+			this.loggedIn = true;
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("aSession", aExist);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("loggedIn", loggedIn);
 			return "accueilAdmin";
-		}else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("ID ou mot de passe invalide, veuillez réessayer."));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("ID ou mot de passe invalide, veuillez réessayer."));
 			return "login";
 		}
 	}
+
 }

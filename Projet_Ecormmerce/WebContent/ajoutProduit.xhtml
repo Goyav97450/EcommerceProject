@@ -33,7 +33,12 @@
 		Description: <h:inputText value="#{prMB.pr.description}"></h:inputText>
 		Quantite: <h:inputText value="#{prMB.pr.quantite}"></h:inputText>
 		Prix: <h:inputText value="#{prMB.pr.prix}"></h:inputText>
-		Categorie: <h:inputText value="#{prMB.ca.idCategorie}"></h:inputText>
+		
+        <p:outputLabel for="categorieSelector" value="Categorie:" />
+        <p:selectOneMenu id="categorieSelector" value="#{prMB.ca.idCategorie}" lazy="true" style="width:125px">
+            <f:selectItems value="#{cAMB.listeIdCat}" />
+        </p:selectOneMenu>
+			
 			<p:fileUpload value="#{prMB.file}" mode="simple" skinSimple="true" />
 
 			<h:commandButton value="Ajouter" action="#{prMB.addProduit}"></h:commandButton>

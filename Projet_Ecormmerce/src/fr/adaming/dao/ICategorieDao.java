@@ -69,4 +69,11 @@ public interface ICategorieDao {
 	 * @return la catégorie correspondant
 	 */
 	public Categorie getCatByNom(String rech);
+	
+	/**<b>getAllCatId</b>
+	 * Cette méthode permet de récupérer un catégorie par son nom
+	 * @param Nom de la catégorie recherchée
+	 * @return la catégorie correspondant
+	 */
+	public List<String> getAllCatId();
 }

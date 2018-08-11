@@ -42,7 +42,10 @@
 	
 	<h:form rendered="#{cAMB.idSelector}">
 		<h:panelGrid columns="2">
-		ID categorie: <h:inputText value="#{cAMB.cat.idCategorie}"></h:inputText>
+		 <p:outputLabel for="categorieSelector" value="Categorie:" />
+        <p:selectOneMenu id="categorieSelector" value="#{cAMB.cat.idCategorie}" lazy="true" style="width:125px">
+            <f:selectItems value="#{cAMB.listeIdCat}" />
+        </p:selectOneMenu>
 			<h:commandButton value="Rechercher" action="#{cAMB.rechercherCategorie}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>

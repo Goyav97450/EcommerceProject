@@ -54,4 +54,9 @@ public class ProduitServiceImpl implements IProduitService {
 		return prDao.getProdByKeyWord(keyWord);
 	}
 
+	@Override
+	public List<String> getAllProdIdService() {
+		return prDao.getAllProdId();
+	}
+
 }

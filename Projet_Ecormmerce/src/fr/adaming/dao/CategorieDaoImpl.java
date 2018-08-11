@@ -60,18 +60,18 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public int deleteCategorie(Categorie ca) {
-			em.remove(ca);
+		em.remove(ca);
 		return 1;
 	}
 
 	@Override
 	public Categorie getByIdCategorie(Categorie ca) {
-		try{
+		try {
 			return em.find(Categorie.class, ca.getIdCategorie());
-		}catch (NullPointerException ex) {
-			
+		} catch (NullPointerException ex) {
+
 			ex.printStackTrace();
-		}	
+		}
 		return null;
 	}
 
@@ -90,23 +90,35 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public Categorie getCatByNom(String rech) {
-		try{// Création d'une requête JPQL
-		String req = "SELECT cat FROM Categorie cat WHERE cat.nomCategorie LIKE :pNom";
+		try {// Création d'une requête JPQL
+			String req = "SELECT cat FROM Categorie cat WHERE cat.nomCategorie LIKE :pNom";
 
-		// Récupération d'une query
-		Query query = em.createQuery(req);
+			// Récupération d'une query
+			Query query = em.createQuery(req);
 
-		// Paramétrages
-		String nom = '%' + rech + '%';
-		query.setParameter("pNom", nom);
+			// Paramétrages
+			String nom = '%' + rech + '%';
+			query.setParameter("pNom", nom);
 
-		return (Categorie) query.getSingleResult();
-		
-		}catch (NoResultException ex) {
-			
+			return (Categorie) query.getSingleResult();
+
+		} catch (NoResultException ex) {
+
 			ex.printStackTrace();
-		}	
+		}
 		return null;
+	}
+
+	@Override
+	public List<String> getAllCatId() {
+		// Requete JPQL pour obtenir la liste des produits
+		String reqListCategorie = "SELECT ca.idCategorie FROM Categorie as ca";
+
+		Query query = em.createQuery(reqListCategorie);
+
+		List<String> listIdCategorie = query.getResultList();
+
+		return listIdCategorie;
 	}
 
 }

@@ -17,7 +17,8 @@
 			<p:menuitem value="Ajouter Produit" url="ajoutProduit.xhtml" />
 			<p:menuitem value="Supprimer Produit" url="deleteProduit.xhtml" />
 			<p:menuitem value="Rechercher Produit" url="rechercherProduit.xhtml" />
-			<p:menuitem value="Rechercher Produit par ID" url="rechercherProduitById.xhtml" />
+			<p:menuitem value="Rechercher Produit par ID"
+				url="rechercherProduitById.xhtml" />
 			<p:menuitem value="Modifier Produit" url="updateProduit.xhtml" />
 			<p:menuitem value="Ajouter Categorie" url="ajoutCategorie.xhtml" />
 			<p:menuitem value="Supprimer Categorie" url="deleteCategorie.xhtml" />
@@ -29,14 +30,18 @@
 
 	<h:form>
 		<h:panelGrid columns="2">
-		ID produit: <h:inputText value="#{prMB.pr.idProduit}"></h:inputText>
+			<p:outputLabel for="produitSelector" value="Produit ID:" />
+			<p:selectOneMenu id="produitSelector"
+				value="#{prMB.pr.idProduit}" lazy="true" style="width:125px">
+				<f:selectItems value="#{prMB.listeIdProd}" />
+			</p:selectOneMenu>
 			<h:commandButton value="Supprimer" action="#{prMB.deleteProduit}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>
 
-<h1 style="color: red; text-align: right">
-<h:messages/>
-</h1>
+	<h1 style="color: red; text-align: right">
+		<h:messages />
+	</h1>
 
 </h:body>
 

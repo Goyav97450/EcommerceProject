@@ -34,6 +34,7 @@ public class CategorieManagedBean implements Serializable {
 	private UploadedFile file;
 	private List<Categorie> listeCat;
 	private List<Produit> listeProd;
+	private List<String> listeIdCat;
 	private boolean indice = false;
 	private boolean catSelector = false;
 	private boolean idSelector = true;
@@ -50,6 +51,7 @@ public class CategorieManagedBean implements Serializable {
 		// récupérer la liste des categories
 		listeCat = caService.getAllCategorieService();
 		listeProd = prService.getAllProduitService();
+		listeIdCat = caService.getAllCatIdService();
 
 	}
 
@@ -177,6 +179,21 @@ public class CategorieManagedBean implements Serializable {
 		this.idSelector = idSelector;
 	}
 
+	/**
+	 * @return the listeIdCat
+	 */
+	public List<String> getListeIdCat() {
+		return listeIdCat;
+	}
+
+	/**
+	 * @param listeIdCat
+	 *            the listeIdCat to set
+	 */
+	public void setListeIdCat(List<String> listeIdCat) {
+		this.listeIdCat = listeIdCat;
+	}
+
 	// Méthodes
 	public String addCategorie() {
 		this.cat.setPhoto(file.getContents());
@@ -233,7 +250,7 @@ public class CategorieManagedBean implements Serializable {
 
 	public String rechercherCategorieParNom() {
 		// Récupération de la catégorie à partir de la DB
-		Categorie catFound = caService.getCatByNom(rech);
+		Categorie catFound = caService.getCatByNomService(rech);
 
 		if (catFound != null) {
 			this.cat = catFound;
@@ -269,9 +286,9 @@ public class CategorieManagedBean implements Serializable {
 		// Appel de la méthode
 		this.listeProd = prService.getProdByCategorie(cat);
 		this.indice = true;
-		
+
 		return "listeProduitByCat";
-		
+
 	}
 
 	public void changeType(ValueChangeEvent e) {

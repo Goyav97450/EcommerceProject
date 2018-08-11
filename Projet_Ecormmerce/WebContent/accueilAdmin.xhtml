@@ -19,18 +19,26 @@
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Accueil" url="accueil.xhtml" />
-			<p:menuitem value="Login" url="login.xhtml" />
+			<p:menuitem value="Accueil Admin" url="accueilAdmin.xhtml" />
 			<p:menuitem value="Ajouter Produit" url="ajoutProduit.xhtml" />
 			<p:menuitem value="Supprimer Produit" url="deleteProduit.xhtml" />
 			<p:menuitem value="Rechercher Produit" url="rechercherProduit.xhtml" />
-			<p:menuitem value="Rechercher Produit par ID" url="rechercherProduitById.xhtml" />
+			<p:menuitem value="Rechercher Produit par ID"
+				url="rechercherProduitById.xhtml" />
 			<p:menuitem value="Modifier Produit" url="updateProduit.xhtml" />
 			<p:menuitem value="Ajouter Categorie" url="ajoutCategorie.xhtml" />
 			<p:menuitem value="Supprimer Categorie" url="deleteCategorie.xhtml" />
 			<p:menuitem value="Rechercher Categorie"
 				url="rechercherCategorie.xhtml" />
 			<p:menuitem value="Modifier Categorie" url="updateCategorie.xhtml" />
-			<p:menuitem value="Afficher produits par Catégorie" url="listeProduitByCat.xhtml" />
+			<p:menuitem value="Afficher produits par Catégorie"
+				url="listeProduitByCat.xhtml" />
+			<p:menuitem value="Login" url="login.xhtml" />
+			<f:facet name="options">
+			<h:commandLink value="Logout"
+					action="#{logout.executeLogout}">
+			</h:commandLink>
+			</f:facet>
 		</p:menubar>
 	</h:form>
 
@@ -66,7 +74,8 @@
 				<br />
 				<h:commandLink value="Afficher les produits"
 					action="#{cAMB.rechercherProduitsByCat}">
-					<f:setPropertyActionListener value="#{cat.idCategorie}" target="#{cAMB.cat.idCategorie}" />
+					<f:setPropertyActionListener value="#{cat.idCategorie}"
+						target="#{cAMB.cat.idCategorie}" />
 				</h:commandLink>
 			</p:column>
 		</p:dataTable>
