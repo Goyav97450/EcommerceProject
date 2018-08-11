@@ -82,7 +82,7 @@ public class ClientDaoImpl implements IClientDao{
 		}
 	}
 
-	public int saveCommande(Commande co) {
+	public Commande saveCommande(Commande co) {
 		//Application de la méthode persist
 		try {
 			//enregistrement de la commande
@@ -95,9 +95,9 @@ public class ClientDaoImpl implements IClientDao{
 				
 				em.merge(prodUpd);
 			}	
-			return 1;
+			return co;
 		} catch (Exception EntityExistsException){
-			return 0;
+			return null;
 		}
 	}
 

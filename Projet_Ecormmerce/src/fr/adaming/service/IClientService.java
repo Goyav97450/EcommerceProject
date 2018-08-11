@@ -3,9 +3,13 @@
  */
 package fr.adaming.service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.ejb.Local;
+
+import com.itextpdf.text.DocumentException;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
@@ -54,7 +58,7 @@ public interface IClientService {
 	 * @param la Commande à enregistrer
 	 * @return un entier qui vaut 1 si l'ajout a fonctionné et 0 si l'ajout a échoué
 	 */
-	public int saveCommande(Commande co);
+	public Commande saveCommande(Commande co);
 	
 	/**<b>getCatByNom</b>
 	 * Cette méthode permet de récupérer un catégorie par son nom
@@ -77,4 +81,20 @@ public interface IClientService {
 	 * @return une entier qui vaut 1 si la suppression a réussi 0 sinon
 	 */
 	public int supprProdPanier (Produit prod, Panier panier);
+	
+	/**<b>sendMail</b>
+	 * Cette méthode permet d'envoyer un email à partir de l'application
+	 * @param cl le client destinataire du mail
+	 * @param co : la commande validée
+	 */
+	public void sendMail(ByteArrayOutputStream output, Client cl, Commande co);
+	
+	/**<b>createPDF</b>
+	 * Cette méthode permet de créer un fichier PDF récapitulatif de la commande
+	 * @param output
+	 * @param co la commande validé
+	 * @param cl le client associé à la commande
+	 * @throws DocumentException
+	 */
+	public void createPDF(OutputStream output, Commande co, Client cl);
 }

@@ -3,13 +3,14 @@
  */
 package fr.adaming.managedBeans;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -265,9 +266,15 @@ public class PanierManagedBean {
 			co.setDateCommande(date);
 			
 			//Enregistrement de la commande
-			int verif = clService.saveCommande(co);
+			Commande coOut = clService.saveCommande(co);
 			
-			if (verif!=0) {
+			if (coOut!=null) {
+				ByteArrayOutputStream output = new ByteArrayOutputStream();
+				
+				clService.createPDF(output, coOut, clOut);
+				
+				clService.sendMail(output, clOut, coOut);
+				
 				//Envoie d'un message de succés
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Votre commande a bien été enregistré merci pour vos achats"));
 				
