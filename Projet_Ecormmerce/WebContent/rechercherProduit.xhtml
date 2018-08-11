@@ -34,7 +34,7 @@
 			<f:selectItem itemLabel="Mots Clés" itemValue="mot" />
 			<f:selectItem itemLabel="Catégorie" itemValue="cat" />
 		</p:selectOneRadio>
-		<h:inputText value="#{prMB.rech}" />
+		<h:inputText value="#{prMB.rech}" required="true"/>
 		<h:commandButton value="Rechercher" action="#{prMB.rechercherProduit}" />
 	</h:form>
 

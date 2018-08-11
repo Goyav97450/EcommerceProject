@@ -19,8 +19,8 @@
 
 	<h:form>
 		<h:panelGrid columns="2">
-		Login: <p:inputText placeholder="Entrez votre mot de passe" value="#{aMB.a.idAdmin}"/>
-		Password: <p:password placeholder="Entrez votre mot de passe" value="#{aMB.a.mdp}"/>
+		Login: <p:inputText placeholder="Entrez votre mot de passe" value="#{aMB.a.idAdmin}" required="true"/>
+		Password: <p:password placeholder="Entrez votre mot de passe" value="#{aMB.a.mdp}" required="true"/>
 			<h:commandButton value="Connexion" action="#{aMB.connexion}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>

@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Mise à jour produit</title>
+	<title>Mise à jour Catégorie</title>
 </h:head>
 <h:body>
 	<h:form>
@@ -35,7 +35,7 @@
         </p:selectOneMenu>
 		Nom: <h:inputText value="#{cAMB.cat.nomCategorie}"></h:inputText>
 		Description: <h:inputText value="#{cAMB.cat.description}"></h:inputText>
-			<p:fileUpload value="#{cAMB.file}" mode="simple" skinSimple="true" />
+		Image: <p:fileUpload value="#{cAMB.file}" mode="simple" skinSimple="true" />
 
 			<h:commandButton value="Modifier" action="#{cAMB.updateCategorie}"></h:commandButton>
 		</h:panelGrid>

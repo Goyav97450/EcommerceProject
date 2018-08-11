@@ -37,8 +37,14 @@
 			</p:selectOneMenu>
 		Designation: <h:inputText value="#{prMB.pr.designation}"></h:inputText>
 		Description: <h:inputText value="#{prMB.pr.description}"></h:inputText>
-		Quantite: <h:inputText value="#{prMB.pr.quantite}"></h:inputText>
-		Prix: <h:inputText value="#{prMB.pr.prix}"></h:inputText>
+		Quantite: <h:inputText value="#{prMB.pr.quantite}" label="Quantité"
+				validatorMessage="La quantité doit être comprise entre 1 et 2000">
+				<f:validateLongRange minimum="1" maximum="2000"></f:validateLongRange>
+			</h:inputText>
+		Prix: <h:inputText value="#{prMB.pr.prix}" label="Prix"
+				validatorMessage="Le prix doit être positif.">
+				<f:validateDoubleRange minimum="0.1" maximum="10000"></f:validateDoubleRange>
+			</h:inputText>
 		Image:<p:fileUpload value="#{prMB.file}" mode="simple"
 				skinSimple="true" />
 

@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Accueil</title>
+	<title>Ajouter Produit</title>
 </h:head>
 <h:body>
 	<h:form>
@@ -31,15 +31,18 @@
 		<h:panelGrid columns="2">
 		Designation: <h:inputText value="#{prMB.pr.designation}"></h:inputText>
 		Description: <h:inputText value="#{prMB.pr.description}"></h:inputText>
-		Quantite: <h:inputText value="#{prMB.pr.quantite}"></h:inputText>
-		Prix: <h:inputText value="#{prMB.pr.prix}"></h:inputText>
+		Quantite: <h:inputText value="#{prMB.pr.quantite}" label="Quantité" validatorMessage="La quantité doit être comprise entre 1 et 2000">
+		<f:validateLongRange minimum = "1" maximum = "2000"></f:validateLongRange>
+		</h:inputText>
+		Prix: <h:inputText value="#{prMB.pr.prix}" label="Prix" validatorMessage="Le prix doit être positif.">
+		<f:validateDoubleRange minimum = "0.1" maximum = "10000"></f:validateDoubleRange></h:inputText>
 		
         <p:outputLabel for="categorieSelector" value="Categorie:" />
         <p:selectOneMenu id="categorieSelector" value="#{prMB.ca.idCategorie}" lazy="true" style="width:125px">
             <f:selectItems value="#{cAMB.listeIdCat}" />
         </p:selectOneMenu>
 			
-			<p:fileUpload value="#{prMB.file}" mode="simple" skinSimple="true" />
+		Image: <p:fileUpload value="#{prMB.file}" mode="simple" skinSimple="true" />
 
 			<h:commandButton value="Ajouter" action="#{prMB.addProduit}"></h:commandButton>
 		</h:panelGrid>
