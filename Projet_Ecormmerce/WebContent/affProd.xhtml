@@ -6,62 +6,57 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<title>Affichage des produits</title>
-</h:head>
+<ui:composition template="/templates/layout.xhtml">
 
-<h:body>
-	<h:form>
-		<p:menubar>
-			<p:menuitem value="Accueil" url="accueil.xhtml" />
-			<p:menuitem value="Login" url="login.xhtml" />
-			<p:menuitem value="Afficher" url="affProd.xhtml" />
-			<p:menuitem value="S'enregistrer" url="enregistrement.xhtml" />
-			<p:menuitem value="Ajouter des produits à votre panier"
-				url="ajoutPanier.xhtml" />
-			<p:menuitem value="Votre panier" url="panier.xhtml" />
-		</p:menubar>
-	</h:form>
-	<h:form>
-		<p:outputLabel for="type" value="Rechercher par :" />
-		<p:selectOneRadio id="type" value="#{clMB.type}" required="true">
-			<f:selectItem itemLabel="Mots Clés" itemValue="mot" />
-			<f:selectItem itemLabel="Catégorie" itemValue="cat" />
-		</p:selectOneRadio>
-		<h:inputText value="#{clMB.rech}" />
-		<h:commandButton value="Rechercher" action="#{clMB.affProd}" />
-	</h:form>
+	<ui:define name="title">Afficher les produits</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+				<h:form class="form-horizontal">
+					<p:outputLabel for="type" value="Rechercher par:" />
+					<p:selectOneRadio id="type" value="#{clMB.type}" required="true"
+						style="text-align: center; margin-left: 40%">
+						<f:selectItem itemLabel="Mots Clés" itemValue="mot" />
+						<f:selectItem itemLabel="Catégorie" itemValue="cat" />
+					</p:selectOneRadio>
+					<h:inputText value="#{clMB.rech}" />
+					<h:commandButton value="Rechercher" action="#{clMB.affProd}" />
+				</h:form>
 
-	<h:form id="form" rendered="#{clMB.ind}">
-		<p:dataTable var="prod" value="#{clMB.listeProd}" id="tableProd">
-			<p:column headerText="Id">
-				<h:outputText value="#{prod.idProduit}" />
-			</p:column>
-			<p:column headerText="Designation:">
-				<h:outputText value="#{prod.designation}" />
-			</p:column>
-			<p:column headerText="Description:">
-				<h:outputText value="#{prod.description}" />
-			</p:column>
-			<p:column headerText="Prix:">
-				<h:outputText value="#{prod.prix}" />
-			</p:column>
-			<p:column headerText="Quantité:">
-				<h:outputText value="#{prod.quantite}" />
-			</p:column>
-			<p:column headerText="Catégorie:">
-				<h:outputText value="#{prod.ca.nomCategorie}" />
-			</p:column>
-			<p:column headerText="Action">
-				<p:commandLink value="Ajouter au panier" action="ajoutPanier">
-					<f:setPropertyActionListener value="#{prod}" target="#{paMB.prod}" />
-				</p:commandLink>
-			</p:column>
-		</p:dataTable>
-	</h:form>
+				<h:form id="form" rendered="#{clMB.ind}" class="form-horizontal">
+					<p:dataTable var="prod" value="#{clMB.listeProd}" id="tableProd">
+						<p:column headerText="ID">
+							<h:outputText value="#{prod.idProduit}" />
+						</p:column>
+						<p:column headerText="Designation:">
+							<h:outputText value="#{prod.designation}" />
+						</p:column>
+						<p:column headerText="Description:">
+							<h:outputText value="#{prod.description}" />
+						</p:column>
+						<p:column headerText="Prix:">
+							<h:outputText value="#{prod.prix}" />
+						</p:column>
+						<p:column headerText="Quantité:">
+							<h:outputText value="#{prod.quantite}" />
+						</p:column>
+						<p:column headerText="Catégorie:">
+							<h:outputText value="#{prod.ca.nomCategorie}" />
+						</p:column>
+						<p:column headerText="Action">
+							<h:commandLink value="Ajouter au panier" action="ajoutPanier">
+								<f:setPropertyActionListener value="#{prod}"
+									target="#{paMB.prod}" />
+							</h:commandLink>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+				<h1 class="message">
+					<h:messages />
+				</h1>
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
 
-	<h1 style="color: red; text-align: center;">
-		<h:messages />
-	</h1>
-</h:body>
 </html>

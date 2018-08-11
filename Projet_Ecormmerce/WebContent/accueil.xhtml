@@ -6,45 +6,42 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<title>Accueil</title>
-</h:head>
-<h:body>
-	<h:form>
-		<p:menubar>
-			<p:menuitem value="Accueil" url="accueil.xhtml" />
-			<p:menuitem value="Login" url="login.xhtml" />
-			<p:menuitem value="Afficher" url="affProd.xhtml" />
-			<p:menuitem value="S'enregistrer" url="enregistrement.xhtml" />
-			<p:menuitem value="Ajouter des produits à votre panier" url="ajoutPanier.xhtml" />
-			<p:menuitem value="Votre panier" url="panier.xhtml" />
-		</p:menubar>
-	</h:form>
-	<h:form>
-	<p:dataTable var="cat" value="#{cAMB.listeCat}">
-		<p:column headerText="Id">
-			<h:outputText value="#{cat.idCategorie}" />
-		</p:column>
+<ui:composition template="/templates/layout.xhtml">
 
-		<p:column headerText="Description">
-			<h:outputText value="#{cat.description}" />
-		</p:column>
+	<ui:define name="title">Accueil</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+		<h:body>
+			
+				<h:form styleClass="form-horizontal">
+					<p:dataTable var="cat" value="#{cAMB.listeCat}">
+						<p:column headerText="Id">
+							<h:outputText value="#{cat.idCategorie}" />
+						</p:column>
 
-		<p:column headerText="Nom">
-			<h:outputText value="#{cat.nomCategorie}" />
-		</p:column>
+						<p:column headerText="Description">
+							<h:outputText value="#{cat.description}" />
+						</p:column>
 
-		<p:column headerText="Categorie">
-			<h:graphicImage value="#{cat.image}" width="100px" height="100px" />
-		</p:column>
-		
-		<p:column headerText="">
-			<p:commandLink value="Afficher les produits" action="affProd">
-				<f:setPropertyActionListener value="#{cat}" target="#{clMB.cat}" />
-			</p:commandLink>
-		</p:column>
-	</p:dataTable>
-	</h:form>
-</h:body>
+						<p:column headerText="Nom">
+							<h:outputText value="#{cat.nomCategorie}" />
+						</p:column>
+
+						<p:column headerText="Categorie">
+							<h:graphicImage value="#{cat.image}" width="100px" height="100px" />
+						</p:column>
+
+						<p:column headerText="">
+							<p:commandLink value="Afficher les produits" action="affProd">
+								<f:setPropertyActionListener value="#{cat}" target="#{clMB.cat}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			
+		</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
 
 </html>

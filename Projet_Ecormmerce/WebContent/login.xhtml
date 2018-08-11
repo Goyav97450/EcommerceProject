@@ -6,29 +6,29 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<title>Login</title>
-</h:head>
-<h:body>
-	<h:form>
-		<p:breadCrumb>
-			<p:menuitem value="Accueil" url="accueil.xhtml" />
-			<p:menuitem value="Login" url="login.xhtml" />
-		</p:breadCrumb>
-	</h:form>
+<ui:composition template="/templates/layout.xhtml">
 
-	<h:form>
-		<h:panelGrid columns="2">
-		Login: <p:inputText placeholder="Entrez votre mot de passe" value="#{aMB.a.idAdmin}" required="true"/>
-		Password: <p:password placeholder="Entrez votre mot de passe" value="#{aMB.a.mdp}" required="true"/>
-			<h:commandButton value="Connexion" action="#{aMB.connexion}"></h:commandButton>
-		</h:panelGrid>
-	</h:form>
+	<ui:define name="title">Login</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+				<h:form styleClass="form-horizontal">
+					<h:panelGrid columns="2">
+		Login: <p:inputText placeholder="Entrez votre mot de passe"
+							value="#{aMB.a.idAdmin}" required="true" />
+		Password: <p:password placeholder="Entrez votre mot de passe"
+							value="#{aMB.a.mdp}" required="true" />
+						<p:commandButton value="Connexion" action="#{aMB.connexion}"></p:commandButton>
+					</h:panelGrid>
+				</h:form>
 
-<h1 style="color: red; text-align: right">
-<h:messages/>
-</h1>
+				<h1 class="message">
+					<h:messages />
+				</h1>
 
-</h:body>
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
 
 </html>

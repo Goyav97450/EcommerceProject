@@ -6,41 +6,32 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<title>Ajouter Catégorie</title>
-</h:head>
-<h:body>
-	<h:form>
-		<p:menubar>
-			<p:menuitem value="Accueil" url="accueil.xhtml" />
-			<p:menuitem value="Login" url="login.xhtml" />
-			<p:menuitem value="Ajouter Produit" url="ajoutProduit.xhtml" />
-			<p:menuitem value="Supprimer Produit" url="deleteProduit.xhtml" />
-			<p:menuitem value="Rechercher Produit" url="rechercherProduit.xhtml" />
-			<p:menuitem value="Rechercher Produit par ID" url="rechercherProduitById.xhtml" />
-			<p:menuitem value="Modifier Produit" url="updateProduit.xhtml" />
-			<p:menuitem value="Ajouter Categorie" url="ajoutCategorie.xhtml" />
-			<p:menuitem value="Supprimer Categorie" url="deleteCategorie.xhtml" />
-			<p:menuitem value="Rechercher Categorie"
-				url="rechercherCategorie.xhtml" />
-			<p:menuitem value="Modifier Categorie" url="updateCategorie.xhtml" />
-		</p:menubar>
-	</h:form>
+<ui:composition template="/templates/adminLayout.xhtml">
 
-	<h:form enctype="multipart/form-data">
-		<h:panelGrid columns="2">
-		Nom: <h:inputText value="#{cAMB.cat.nomCategorie}" required="true"></h:inputText>
-		Description: <h:inputText value="#{cAMB.cat.description}" required="true"></h:inputText>
-		Image: <p:fileUpload value="#{cAMB.file}" mode="simple" skinSimple="true" />
+	<ui:define name="title">Ajouter Catégorie</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
 
-			<h:commandButton value="Ajouter" action="#{cAMB.addCategorie}"></h:commandButton>
-		</h:panelGrid>
-	</h:form>
+				<h:form enctype="multipart/form-data" styleClass="form-horizontal">
+					<h:panelGrid columns="2">
+		Nom: <p:inputText value="#{cAMB.cat.nomCategorie}" required="true"></p:inputText>
+		Description: <p:inputText value="#{cAMB.cat.description}"
+							required="true"></p:inputText>
+		Image: <p:fileUpload value="#{cAMB.file}" mode="simple"
+							skinSimple="true" />
 
-	<h1 style="color: red; text-align: right">
-		<h:messages />
-	</h1>
+						<h:commandButton value="Ajouter" action="#{cAMB.addCategorie}"></h:commandButton>
+					</h:panelGrid>
+				</h:form>
 
-</h:body>
+				<h1 class="message">
+					<h:messages />
+				</h1>
+
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
 
 </html>

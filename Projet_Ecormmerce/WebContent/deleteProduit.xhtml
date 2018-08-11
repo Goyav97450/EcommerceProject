@@ -6,29 +6,14 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<title>Supprimer Produit</title>
-</h:head>
-<h:body>
-	<h:form>
-		<p:menubar>
-			<p:menuitem value="Accueil" url="accueil.xhtml" />
-			<p:menuitem value="Login" url="login.xhtml" />
-			<p:menuitem value="Ajouter Produit" url="ajoutProduit.xhtml" />
-			<p:menuitem value="Supprimer Produit" url="deleteProduit.xhtml" />
-			<p:menuitem value="Rechercher Produit" url="rechercherProduit.xhtml" />
-			<p:menuitem value="Rechercher Produit par ID"
-				url="rechercherProduitById.xhtml" />
-			<p:menuitem value="Modifier Produit" url="updateProduit.xhtml" />
-			<p:menuitem value="Ajouter Categorie" url="ajoutCategorie.xhtml" />
-			<p:menuitem value="Supprimer Categorie" url="deleteCategorie.xhtml" />
-			<p:menuitem value="Rechercher Categorie"
-				url="rechercherCategorie.xhtml" />
-			<p:menuitem value="Modifier Categorie" url="updateCategorie.xhtml" />
-		</p:menubar>
-	</h:form>
+<ui:composition template="/templates/adminLayout.xhtml">
 
-	<h:form>
+	<ui:define name="title">Ajouter Catégorie</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+	
+	<h:form styleClass="form-horizontal">
 		<h:panelGrid columns="2">
 			<p:outputLabel for="produitSelector" value="Produit ID:" />
 			<p:selectOneMenu id="produitSelector"
@@ -39,10 +24,13 @@
 		</h:panelGrid>
 	</h:form>
 
-	<h1 style="color: red; text-align: right">
-		<h:messages />
-	</h1>
+				<h1 class="message">
+					<h:messages />
+				</h1>
 
-</h:body>
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
 
 </html>

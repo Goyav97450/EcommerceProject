@@ -5,33 +5,32 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/layout.xhtml">
 
-<h:head>
-	<title>Ajout au panier</title>
-</h:head>
-
-<h:body>
-	<h:form>
-		<p:menubar>
-			<p:menuitem value="Accueil" url="accueil.xhtml" />
-			<p:menuitem value="Login" url="login.xhtml" />
-			<p:menuitem value="Afficher" url="affProd.xhtml" />
-			<p:menuitem value="S'enregistrer" url="enregistrement.xhtml" />
-			<p:menuitem value="Ajouter des produits à votre panier" url="ajoutPanier.xhtml" />
-			<p:menuitem value="Votre panier" url="panier.xhtml" />
-		</p:menubar>
-	</h:form>
-	<h:form enctype="multipart/form-data">
-		<h:panelGrid columns="2">
+	<ui:define name="title">Ajouter au panier</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+				
+				<h:form enctype="multipart/form-data" class="form-horizontal">
+					<h:panelGrid columns="2">
 		Id produit :
-		<p:selectOneMenu id="categorieSelector" value="#{paMB.prod.idProduit}" lazy="true" style="width:125px">
-            <f:selectItems value="#{paMB.listIdProd}" />
-        </p:selectOneMenu>
-		Quantité: <h:inputText value="#{paMB.q}"></h:inputText>
+		<p:selectOneMenu id="categorieSelector" value="#{paMB.prod.idProduit}"
+							lazy="true" style="width:125px">
+							<f:selectItems value="#{paMB.listIdProd}" />
+						</p:selectOneMenu>
+		Quantité: <p:inputText value="#{paMB.q}"></p:inputText>
 
-			<h:commandButton value="Ajouter" action="#{paMB.ajoutProdPanier}"></h:commandButton>
-		</h:panelGrid>
-	</h:form>
-	<h1 style="color: red; text-align: center;"><h:messages/></h1>
-</h:body>
+						<h:commandButton value="Ajouter" action="#{paMB.ajoutProdPanier}"></h:commandButton>
+					</h:panelGrid>
+				</h:form>
+				<h1 class="message">
+					<h:messages />
+				</h1>
+			</h:body>
+		</div>
+	</ui:define>
+
+</ui:composition>
+
 </html>

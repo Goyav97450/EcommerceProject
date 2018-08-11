@@ -6,47 +6,45 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<title>Panier</title>
-</h:head>
+<ui:composition template="/templates/layout.xhtml">
 
-<h:body>
-	<h:form>
-		<p:menubar>
-			<p:menuitem value="Accueil" url="accueil.xhtml" />
-			<p:menuitem value="Login" url="login.xhtml" />
-			<p:menuitem value="Afficher" url="affProd.xhtml" />
-			<p:menuitem value="S'enregistrer" url="enregistrement.xhtml" />
-			<p:menuitem value="Ajouter des produits à votre panier" url="ajoutPanier.xhtml" />
-			<p:menuitem value="Votre panier" url="panier.xhtml" />
-		</p:menubar>
-	</h:form>
-	<h:form enctype="multipart/form-data">
-		<h:panelGrid columns="2">
-		idProduit: <h:inputText value="#{paMB.prod.idProduit}"/>
+	<ui:define name="title">Votre Panier</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+				<h:form enctype="multipart/form-data" class="form-horizontal"> 
+					<h:panelGrid columns="2">
+		idProduit: <p:inputText value="#{paMB.prod.idProduit}" />
 
-			<h:commandButton value="Supprimer" action="#{paMB.supprProdPanier}"></h:commandButton>
-			<h:commandButton value="Finaliser la commande" action="enregistrement.xhtml"></h:commandButton>
-		</h:panelGrid>
-	</h:form>
-	<h1 style="color: red; text-align: center;"><h:messages/></h1>
-	<h:form>
-	<p:dataTable var="lc" value="#{sessionScope.panierCl.listeCom}">
-		<p:column headerText="idProduit">
-			<h:outputText value="#{lc.pr.idProduit}" />
-		</p:column>
-		<p:column headerText="Produit">
-			<h:outputText value="#{lc.pr.designation}" />
-		</p:column>
+						<h:commandButton value="Supprimer"
+							action="#{paMB.supprProdPanier}"></h:commandButton>
+						<h:commandButton value="Finaliser la commande"
+							action="enregistrement.xhtml"></h:commandButton>
+					</h:panelGrid>
+				</h:form>
+				<h1 class="message">
+					<h:messages />
+				</h1>
+				<h:form class="form-horizontal">
+					<p:dataTable var="lc" value="#{sessionScope.panierCl.listeCom}">
+						<p:column headerText="idProduit">
+							<h:outputText value="#{lc.pr.idProduit}" />
+						</p:column>
+						<p:column headerText="Produit">
+							<h:outputText value="#{lc.pr.designation}" />
+						</p:column>
 
-		<p:column headerText="Quantité">
-			<h:outputText value="#{lc.quantite}" />
-		</p:column>
+						<p:column headerText="Quantité">
+							<h:outputText value="#{lc.quantite}" />
+						</p:column>
 
-		<p:column headerText="Prix">
-			<h:outputText value="#{lc.prix}" />
-		</p:column>
-	</p:dataTable>
-	</h:form>
-</h:body>
+						<p:column headerText="Prix">
+							<h:outputText value="#{lc.prix}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
 </html>

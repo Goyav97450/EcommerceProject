@@ -6,32 +6,33 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<title>Enregistrement</title>
-</h:head>
+<ui:composition template="/templates/layout.xhtml">
 
-<h:body>
-	<h:form>
-		<p:menubar>
-			<p:menuitem value="Accueil" url="accueil.xhtml" />
-			<p:menuitem value="Login" url="login.xhtml" />
-			<p:menuitem value="Afficher" url="affProd.xhtml" />
-			<p:menuitem value="S'enregistrer" url="enregistrement.xhtml" />
-			<p:menuitem value="Ajouter des produits à votre panier" url="ajoutPanier.xhtml" />
-			<p:menuitem value="Votre panier" url="panier.xhtml" />
-		</p:menubar>
-	</h:form>
-	<h:form>
-		<h:panelGrid columns="2">
-		Nom :<h:inputText value="#{paMB.cl.nomClient}"/>
-		Adresse :<h:inputText value="#{paMB.cl.adresse}"/>
-		E-Mail :<h:inputText value="#{paMB.cl.email}">
-			<f:validator validatorId="valMail"></f:validator>
-		</h:inputText>
-		Telephone :<h:inputText value="#{paMB.cl.tel}"/>
-		<h:commandButton value="Enregistrer" action="#{paMB.enregistrerCommande}"/>
-		</h:panelGrid>
-	</h:form>
-	<h1 style="color: red; text-align: center;"><h:messages/></h1>
-</h:body>
+	<ui:define name="title">Enregistrement</ui:define>
+	<ui:define name="contenu">
+		<div class="corpsStyle">
+			<h:body>
+				<h:form class="form-horizontal">
+					<h:panelGrid columns="2">
+		Nom :<p:inputText value="#{paMB.cl.nomClient}" />
+		Adresse :<p:inputText value="#{paMB.cl.adresse}" />
+		E-Mail :<p:inputText value="#{paMB.cl.email}">
+							<f:validator validatorId="valMail"></f:validator>
+						</p:inputText>
+		Telephone :<p:inputText value="#{paMB.cl.tel}" />
+						<h:commandButton value="Enregistrer"
+							action="#{paMB.enregistrerCommande}" />
+					</h:panelGrid>
+				</h:form>
+				<h1 style="color: red; text-align: center;">
+					<h:messages />
+				</h1>
+				<h1 class="message">
+					<h:messages />
+				</h1>
+			</h:body>
+		</div>
+	</ui:define>
+
+</ui:composition>
 </html>
