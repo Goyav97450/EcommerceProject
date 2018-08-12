@@ -19,29 +19,79 @@ import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
+/**
+ * @author Ewen ManagedBean correspondant à la vue Catégorie
+ */
 @ManagedBean(name = "cAMB")
 @RequestScoped
 public class CategorieManagedBean implements Serializable {
 
-	// Transformation de l'association UML en Java
+	/**
+	 * Transformation de l'association UML en JAVA L'annotation @EJB permet
+	 * d'établir un couplage faible entre les services.
+	 */
 	@EJB
 	private ICategorieService caService;
-
+	/**
+	 * Transformation de l'association UML en JAVA L'annotation @EJB permet
+	 * d'établir un couplage faible entre les services.
+	 */
 	@EJB
 	private IProduitService prService;
 
 	// Attributs
+	/**
+	 * Attribut Catégorie qui permettra de stocker les informations d'une
+	 * catégorie
+	 */
 	private Categorie cat;
+	/**
+	 * Attribut file permettant stocker l'image pour la transmettre aux méthodes
+	 * produits
+	 */
 	private UploadedFile file;
+	/**
+	 * Attribut liste Catégorie qui permettra de stocker la liste des catégories
+	 */
 	private List<Categorie> listeCat;
+	/**
+	 * Attribut liste Produit qui permettra de stocker la liste des produits
+	 */
 	private List<Produit> listeProd;
+	/**
+	 * Attribut liste ID Catégorie qui permettra de stocker la liste des ID
+	 * catégorie
+	 */
 	private List<String> listeIdCat;
+	/**
+	 * Attribut liste Filtre Catégorie qui permettra d'utiliser la fonction
+	 * filtre de primefaces
+	 */
 	private List<Categorie> listeFiltreCat;
+	/**
+	 * Attribut indice qui permettra d'afficher les tables dynamiquement dans la
+	 * vue correspondante.
+	 */
 	private boolean indice = false;
+	/**
+	 * Attribut catégorie selectoru qui permettra d'afficher les tables
+	 * dynamiquement dans la vue correspondante.
+	 */
 	private boolean catSelector = false;
+	/**
+	 * Attribut idSelector qui permettra d'afficher les tables dynamiquement
+	 * dans la vue correspondante.
+	 */
 	private boolean idSelector = true;
+	/**
+	 * Attribut permettant de créer les critères de rechercher par nom et
+	 * mot-clé
+	 */
 	private String rech;
 
+	/**
+	 * Constructeur vide nécessaire à un ManagedBean
+	 */
 	public CategorieManagedBean() {
 		this.cat = new Categorie();
 	}
@@ -50,7 +100,7 @@ public class CategorieManagedBean implements Serializable {
 	@PostConstruct
 	public void init() {
 
-		// récupérer la liste des categories
+		// récupérer la liste des categories, des produits et des ID Catégorie
 		listeCat = caService.getAllCategorieService();
 		listeProd = prService.getAllProduitService();
 		listeIdCat = caService.getAllCatIdService();
@@ -58,160 +108,150 @@ public class CategorieManagedBean implements Serializable {
 	}
 
 	/**
-	 * @return the ca
+	 * @return la catégorie
 	 */
 	public Categorie getCat() {
 		return cat;
 	}
 
 	/**
-	 * @param ca
-	 *            the ca to set
+	 * @param la catégorie entrée
 	 */
 	public void setCat(Categorie cat) {
 		this.cat = cat;
 	}
 
 	/**
-	 * @return the file
+	 * @return l'image à enregistrer en BD
 	 */
 	public UploadedFile getFile() {
 		return file;
 	}
 
 	/**
-	 * @param file
-	 *            the file to set
+	 * @param l'image mise en ligne dans la vue
 	 */
 	public void setFile(UploadedFile file) {
 		this.file = file;
 	}
 
 	/**
-	 * @return the listeCategorie
+	 * @return la liste des catégories
 	 */
 	public List<Categorie> getListeCat() {
 		return listeCat;
 	}
 
 	/**
-	 * @param listeCategorie
-	 *            the listeCategorie to set
+	 * @return la liste des catégories entrée
 	 */
 	public void setListeCat(List<Categorie> listeCat) {
 		this.listeCat = listeCat;
 	}
 
 	/**
-	 * @return the indice
+	 * @return l'indice
 	 */
 	public boolean isIndice() {
 		return indice;
 	}
 
 	/**
-	 * @param indice
-	 *            the indice to set
+	 * @param l'indice entré
 	 */
 	public void setIndice(boolean indice) {
 		this.indice = indice;
 	}
 
 	/**
-	 * @return the listeProd
+	 * @return la liste des produits
 	 */
 	public List<Produit> getListeProd() {
 		return listeProd;
 	}
 
 	/**
-	 * @param listeProd
-	 *            the listeProd to set
+	 * @param  la liste des produits entrée
 	 */
 	public void setListeProd(List<Produit> listeProd) {
 		this.listeProd = listeProd;
 	}
 
 	/**
-	 * @return the type
-	 */
-
-	/**
-	 * @return the rech
+	 * @return le paramètre recherche
 	 */
 	public String getRech() {
 		return rech;
 	}
 
 	/**
-	 * @param rech
-	 *            the rech to set
+	 * @param le paramètre recherche qui permettra de construire des requêtes en DAO
 	 */
 	public void setRech(String rech) {
 		this.rech = rech;
 	}
 
 	/**
-	 * @return the catSelector
+	 * @return le statut sélecteur catégorie
 	 */
 	public boolean isCatSelector() {
 		return catSelector;
 	}
 
 	/**
-	 * @param catSelector
-	 *            the catSelector to set
+	 * @param le statut sélecteur catégorie choisi
 	 */
 	public void setCatSelector(boolean catSelector) {
 		this.catSelector = catSelector;
 	}
 
 	/**
-	 * @return the idSelector
+	 * @return le statut du sélecteur ID
 	 */
 	public boolean isIdSelector() {
 		return idSelector;
 	}
 
 	/**
-	 * @param idSelector
-	 *            the idSelector to set
+	 * @param le statut du sélecteur ID choisi
 	 */
 	public void setIdSelector(boolean idSelector) {
 		this.idSelector = idSelector;
 	}
 
 	/**
-	 * @return the listeIdCat
+	 * @return la liste des ID catégories
 	 */
 	public List<String> getListeIdCat() {
 		return listeIdCat;
 	}
 
 	/**
-	 * @param listeIdCat
-	 *            the listeIdCat to set
+	 * @return la liste des ID catégories entrée
 	 */
 	public void setListeIdCat(List<String> listeIdCat) {
 		this.listeIdCat = listeIdCat;
 	}
 
 	/**
-	 * @return the listeFiltreCat
+	 * @return  la liste des catégorie pour le filtrage 
 	 */
 	public List<Categorie> getListeFiltreCat() {
 		return listeFiltreCat;
 	}
 
 	/**
-	 * @param listeFiltreCat
-	 *            the listeFiltreCat to set
+	 * @param la liste des catégorie entrée pour le filtrage
 	 */
 	public void setListeFiltreCat(List<Categorie> listeFiltreCat) {
 		this.listeFiltreCat = listeFiltreCat;
 	}
 
 	// Méthodes
+	/**
+	 * Méthode pour ajouter une catégorie à la BD
+	 * @return l'adresse de l'accueil où se trouve la liste des catégorie
+	 */
 	public String addCategorie() {
 		this.cat.setPhoto(file.getContents());
 		int verif = caService.addCategorieService(this.cat);
@@ -229,7 +269,10 @@ public class CategorieManagedBean implements Serializable {
 		}
 
 	}
-
+	/**
+	 * Méthode pour supprimer une catégorie à la BD
+	 * @return l'adresse de la page à afficher
+	 */
 	public String deleteCategorie() {
 
 		int verif = caService.deleteCategorieService(this.cat);
@@ -250,6 +293,10 @@ public class CategorieManagedBean implements Serializable {
 
 	}
 
+	/**
+	 * Méthode pour chercher une catégorie par son ID dans la BD
+	 * @return l'adresse de la page à afficher
+	 */
 	public String rechercherCategorie() {
 		Categorie catFound = caService.getByIdCategorieService(this.cat);
 
@@ -265,6 +312,10 @@ public class CategorieManagedBean implements Serializable {
 
 	}
 
+	/**
+	 * Méthode pour chercher une catégorie par son nom dans la BD
+	 * @return l'adresse de la page à afficher
+	 */
 	public String rechercherCategorieParNom() {
 		// Récupération de la catégorie à partir de la DB
 		Categorie catFound = caService.getCatByNomService(rech);
@@ -280,7 +331,11 @@ public class CategorieManagedBean implements Serializable {
 		}
 
 	}
-
+	
+	/**
+	 * Méthode pour mettre une catégorie à jour dans la BD
+	 * @return l'adresse de la page à afficher
+	 */
 	public String updateCategorie() {
 		this.cat.setPhoto(file.getContents());
 		Categorie caOut = caService.updateCategorieService(this.cat);
@@ -297,6 +352,10 @@ public class CategorieManagedBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Méthode pour rechercher des produits par leur catégorie
+	 * @return l'adresse de la page à afficher
+	 */
 	public String rechercherProduitsByCat() {
 		// Récupération de la catégorie à partir de la DB
 		cat = caService.getByIdCategorieService(this.cat);
@@ -308,6 +367,10 @@ public class CategorieManagedBean implements Serializable {
 
 	}
 
+	/**
+	 * Méthode pour changer l'affichage de formulaires dans la vue recherche catégorie
+	 * @return l'adresse de la page à afficher
+	 */
 	public void changeType(ValueChangeEvent e) {
 		this.catSelector = true;
 		this.idSelector = false;

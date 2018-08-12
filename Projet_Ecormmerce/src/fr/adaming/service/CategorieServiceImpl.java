@@ -8,10 +8,16 @@ import javax.ejb.Stateful;
 import fr.adaming.dao.ICategorieDao;
 import fr.adaming.dao.IProduitDao;
 import fr.adaming.model.Categorie;
-
+/**
+ * @author Ewen L'annotation @Stateful définit la classe comme un EJB
+ *         Session qui sera istanciable plusieurs fois
+ */
 @Stateful
 public class CategorieServiceImpl implements ICategorieService {
-	// Transformation de l'association UML en Java
+	/**
+	 * Transformation de l'association entre service et dao L'annotation @EJB
+	 * sert à définir le partage des tâches
+	 */
 	@EJB
 	ICategorieDao caDao;
 

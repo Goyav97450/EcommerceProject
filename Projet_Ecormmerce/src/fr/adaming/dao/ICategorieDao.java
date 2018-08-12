@@ -8,9 +8,9 @@ import fr.adaming.model.Categorie;
 
 /**
  * @author Ewen Fondrillon Interface Dao des méthodes reliées aux
- *         fonctionnalités Categories
- * L'annotation @Local permet au conteneur EJB de comprendre que les classes implémentant cette interface
- * seront des EJB session avec une portée <i>locale</i>
+ *         fonctionnalités Categories L'annotation @Local permet au conteneur
+ *         EJB de comprendre que les classes implémentant cette interface seront
+ *         des EJB session avec une portée <i>locale</i>
  */
 @Local
 public interface ICategorieDao {
@@ -58,21 +58,29 @@ public interface ICategorieDao {
 	 * <b>getByIdCategorie</b> Cette méthode permet à un admin de chercher une
 	 * categorie spécifique dans la base de donnée par son identifiant
 	 * 
-	 * @param la catégorie recherchée.
-	 * @return la catégorie correspondant aux paramètres de recherche, récupérée dans la base de données.
+	 * @param le
+	 *            produit qu'on recherche
+	 * @return le produit correspondant à notre paramètre de recherche
 	 */
 	public Categorie getByIdCategorie(Categorie ca);
-	
-	/**<b>getCatByNom</b>
-	 * Cette méthode permet de récupérer un catégorie par son nom
-	 * @param Nom de la catégorie recherchée
-	 * @return la catégorie correspondant aux paramètres de recherche, récupérée dans la base de données.
+
+	/**
+	 * <b>getCatByNom</b> Cette méthode permet de récupérer un catégorie par son
+	 * nom
+	 * 
+	 * @param Nom
+	 *            de la catégorie recherchée
+	 * @return la catégorie correspondant
 	 */
 	public Categorie getCatByNom(String rech);
-	
-	/**<b>getAllCatId</b>
-	 * Cette méthode permet de récupérer la liste des ID de toutes les catégories.
-	 * @return Une liste des ID de toutes les catégories dans la base de données.
+
+	/**
+	 * <b>getAllCatId</b> Cette méthode permet de récupérer un catégorie par son
+	 * nom
+	 * 
+	 * @param Nom
+	 *            de la catégorie recherchée
+	 * @return la catégorie correspondant
 	 */
 	public List<String> getAllCatId();
 }

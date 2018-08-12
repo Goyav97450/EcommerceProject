@@ -8,7 +8,8 @@ import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 /**
- * @author Ewen L'annotation @Local permet au conteneur EJB de comprendre que
+ * @author Ewen 
+ * L'annotation @Local permet au conteneur EJB de comprendre que
  *         les classes implémentant cette interface seront des EJB session avec
  *         une portée <i>locale</i>
  */
@@ -65,7 +66,7 @@ public interface IProduitService {
 	public int updateProduitService(Produit pr);
 
 	/**
-	 * <b>getProdByCategorie</b> Cette méthode permet à un Client de récupérer
+	 * <b>getProdByCategorie</b> Cette méthode permet à un Admin de récupérer
 	 * la liste de produits filtrés d'après une catégorie depuis la DB
 	 * 
 	 * @param la
@@ -75,7 +76,7 @@ public interface IProduitService {
 	public List<Produit> getProdByCategorie(Categorie cat);
 
 	/**
-	 * <b>getProdByKeyWord</b> Cette méthode permet à un Client de récupérer la
+	 * <b>getProdByKeyWord</b> Cette méthode permet à un Admin de récupérer la
 	 * liste des produits filtrés par mots clés
 	 * 
 	 * @param le
@@ -86,8 +87,8 @@ public interface IProduitService {
 	
 	/**<b>getAllProdId</b>
 	 * Cette méthode permet de récupérer un catégorie par son nom
-	 * @param Nom de la catégorie recherchée
-	 * @return la catégorie correspondant
+	 * Cette méthode permet de récupérer la liste des ID de tous les produits.
+	 * @return Une liste des ID de tous les produits dans la base de données.
 	 */
 	public List<String> getAllProdIdService();
 

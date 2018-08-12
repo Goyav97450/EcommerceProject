@@ -1,7 +1,5 @@
 package fr.adaming.service;
 
-
-
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -11,9 +9,16 @@ import fr.adaming.dao.IProduitDao;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
+/**
+ * @author Ewen L'annotation @Stateful définit la classe comme un EJB Session
+ *         qui sera istanciable plusieurs fois
+ */
 @Stateful
 public class ProduitServiceImpl implements IProduitService {
-	// Transformation de l'association UML en Java
+	/**
+	 * Transformation de l'association entre service et dao L'annotation @EJB
+	 * sert à définir le partage des tâches
+	 */
 	@EJB
 	IProduitDao prDao;
 
@@ -30,7 +35,7 @@ public class ProduitServiceImpl implements IProduitService {
 
 	@Override
 	public int deleteProduitService(Produit pr) {
-		
+
 		return prDao.deleteProduit(pr);
 	}
 

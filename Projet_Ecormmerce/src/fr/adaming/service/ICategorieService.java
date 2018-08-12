@@ -7,7 +7,8 @@ import javax.ejb.Local;
 import fr.adaming.model.Categorie;
 
 /**
- * @author Ewen L'annotation @Local permet au conteneur EJB de comprendre que
+ * @author Ewen 
+ * L'annotation @Local permet au conteneur EJB de comprendre que
  *         les classes implémentant cette interface seront des EJB session avec
  *         une portée <i>locale</i>
  */
