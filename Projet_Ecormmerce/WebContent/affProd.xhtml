@@ -43,12 +43,6 @@
 						<p:column headerText="Catégorie:">
 							<h:outputText value="#{prod.ca.nomCategorie}" />
 						</p:column>
-						<p:column headerText="Action">
-							<h:commandLink value="Ajouter au panier" action="ajoutPanier">
-								<f:setPropertyActionListener value="#{prod}"
-									target="#{paMB.prod}" />
-							</h:commandLink>
-						</p:column>
 					</p:dataTable>
 				</h:form>
 				<h1 class="message">

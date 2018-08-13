@@ -91,7 +91,7 @@ public class ClientDaoImpl implements IClientDao{
 			for (LigneCommande lc: co.getListeLigne()) {
 				Produit prodUpd = em.find(Produit.class, lc.getPr().getIdProduit());
 				
-				prodUpd.setQuantite(prodUpd.getQuantite()-lc.getPr().getQuantite());
+					prodUpd.setQuantite(prodUpd.getQuantite()-lc.getQuantite());
 				
 				em.merge(prodUpd);
 			}	
