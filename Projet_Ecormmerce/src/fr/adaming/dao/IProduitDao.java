@@ -92,4 +92,6 @@ public interface IProduitDao {
 	 * @return Une liste des ID de tous les produits dans la base de données.
 	 */
 	public List<String> getAllProdId();
+	
+	public List<String> getAllProdNom();
 }

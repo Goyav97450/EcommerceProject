@@ -92,4 +92,5 @@ public interface IProduitService {
 	 */
 	public List<String> getAllProdIdService();
 
+	public List<String> getAllProdNom();
 }

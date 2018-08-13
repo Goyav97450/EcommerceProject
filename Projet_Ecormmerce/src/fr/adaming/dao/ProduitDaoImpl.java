@@ -176,4 +176,15 @@ public class ProduitDaoImpl implements IProduitDao {
 		return listIdProduit;
 	}
 
+	@Override
+	public List<String> getAllProdNom() {
+		// Requete JPQL pour obtenir la liste des ID produit
+		String reqListCategorie = "SELECT pr.designation FROM Produit as pr";
+		// Récupération d'une query
+		Query query = em.createQuery(reqListCategorie);
+		// Récupération de la liste
+		List<String> listIdProduit = query.getResultList();
+
+		return listIdProduit;
+	}
 }

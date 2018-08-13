@@ -74,9 +74,10 @@ public class ClientDaoImpl implements IClientDao{
 
 	public Client saveClient(Client cl) {
 		try {
-			em.persist(cl);
 			
-			return cl;
+				em.persist(cl);
+				return cl;
+			
 		} catch (Exception EntityExistsException){
 			return null;
 		}

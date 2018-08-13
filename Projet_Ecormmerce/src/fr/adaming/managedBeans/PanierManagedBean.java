@@ -65,8 +65,9 @@ public class PanierManagedBean {
 	 * Attribut servant au client à choisir la quantité de produit à ajouter au panier
 	 */
 	private int q;
-	private List<String> listIdProd;
+	private List<String> listNomProd;
 	private HttpSession sessionCl;
+	private String nom;
 		
 	/**
 	 * 
@@ -82,7 +83,7 @@ public class PanierManagedBean {
 	
 	@PostConstruct
 	public void init () {
-		this.listIdProd = pService.getAllProdIdService();
+		this.listNomProd = pService.getAllProdNom();
 		this.sessionCl = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	}
 	/**
@@ -168,15 +169,30 @@ public class PanierManagedBean {
 	/**
 	 * @return the listIdProd
 	 */
-	public List<String> getListIdProd() {
-		return listIdProd;
+	public List<String> getListNomProd() {
+		return listNomProd;
 	}
 
 	/**
 	 * @param listIdProd the listIdProd to set
 	 */
-	public void setListIdProd(List<String> listIdProd) {
-		this.listIdProd = listIdProd;
+	public void setListNomProd(List<String> listNomProd) {
+		this.listNomProd = listNomProd;
+	}
+
+
+	/**
+	 * @return the nom
+	 */
+	public String getNom() {
+		return nom;
+	}
+
+	/**
+	 * @param nom the nom to set
+	 */
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	//Autres méthodes
@@ -196,7 +212,7 @@ public class PanierManagedBean {
 				}
 			}
 		}
-		Produit prodOut = pService.getByIdProduitService(this.prod);
+		Produit prodOut = clService.getProdByKeyWord(nom).get(0);
 		lc = clService.ajoutProdPanier(prodOut, q);
 		
 		if (lc!=null) {

@@ -15,9 +15,9 @@
 				<h:form enctype="multipart/form-data" class="form-horizontal">
 					<h:panelGrid columns="2">
 		Id produit :
-		<p:selectOneMenu id="categorieSelector" value="#{paMB.prod.idProduit}"
+		<p:selectOneMenu id="categorieSelector" value="#{paMB.nom}"
 							lazy="true" style="width:125px">
-							<f:selectItems value="#{paMB.listIdProd}" />
+							<f:selectItems value="#{paMB.listNomProd}" />
 						</p:selectOneMenu>
 		Quantité: <p:inputText value="#{paMB.q}"></p:inputText>
 

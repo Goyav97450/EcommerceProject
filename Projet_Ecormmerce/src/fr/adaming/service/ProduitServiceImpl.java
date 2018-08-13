@@ -64,4 +64,8 @@ public class ProduitServiceImpl implements IProduitService {
 		return prDao.getAllProdId();
 	}
 
+	public List<String> getAllProdNom() {
+		return prDao.getAllProdNom();
+	}
+	
 }
